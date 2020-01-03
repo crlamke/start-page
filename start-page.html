@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+
+<style>
+:root{
+    --red-color: #f44336;
+	--purple-color: #9c27b0;
+	--pinkish-color: #e91e63;
+	--ltblue-color: #00bcd4;
+	--ltgreen-color: #4caf50;
+	--ltorange-color: #ff9800;
+	--purpleish-color: #9999ff;
+	--dkgrey-color: #404040;
+	--ltgrey-color: #e0e0e0;
+	--blackish-color: #1c0000;
+	--white-color: #ffffff;
+	--whitish-color: #fcf9ff;
+}
+
+body { 
+  background-color: #404040; 
+  font-family: 'Arial', sans-serif; font-size: 10pt; 
+}  /* background-image: url("bg.jpg"); */
+
+#greeting  { 
+  position:center; 
+  margin-left:auto; margin-right:auto; 
+  padding-bottom:8px; padding-top:8px; 
+  font-family: 'Times', sans-serif; font-size: 30pt;
+  color:var(--whitish-color); 
+}
+
+a  {
+  color:white; 
+  font-family: Tahoma, Geneva, sans-serif; font-size:16px;
+  padding-left:15px; padding-bottom:30px; padding-top:8px;
+  text-decoration:none;
+}
+
+h2 {
+  color:white; 
+  font-family: Tahoma, Geneva, sans-serif; font-size:30px;
+  padding-left:15px;
+}
+
+h3 {
+  color:white;
+  font-family: Tahoma, Geneva, sans-serif; font-size:18px;
+}
+
+p {
+  color:white;
+  font-family: Tahoma, Geneva, sans-serif; font-size:20px;
+  border:0px;
+}
+
+hr {
+  color:white; background-color:white; 
+  margin-right:10px; margin-left:10px; 
+  height:1px;
+  border:none;
+}
+
+#search {
+  padding-left:16px; padding-bottom:8px; padding-top:8px;
+  height:24px;
+  font-size:18px;
+}
+
+#rectangle0 { background-color: var(--dkgrey-color); }
+#rectangle1 { background-color: var(--dkgrey-color); }
+#rectangle3 { background-color: var(--dkgrey-color); }
+
+#square0 { background-color: var(--red-color); }
+#square1 { background-color: var(--ltgreen-color); }
+#square2 { background-color: var(--purple-color); }
+#square3 { background-color: var(--pinkish-color); }
+#square4 { background-color: var(--ltorange-color); }
+#square5 { background-color: var(--purpleish-color); }
+
+#status {
+  padding-left:16px; padding-bottom:16px; margin: 8px;
+  font-family: 'Times', sans-serif; font-size: 16px;
+  color:var(--whitish-color);
+}
+
+.statusDisplay {
+  padding-left:16px; padding-bottom:6px;
+  font-family: 'Times', sans-serif; font-size: 16px;
+  color:var(--whitish-color);
+}
+
+.alarmButton {
+  margin-left:16px;
+}
+
+.setButton {
+  align: right;
+  margin-left: 20px;
+}
+
+.clearButton {
+  align: right;
+}
+
+.rectangle-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.rectangle {
+position: relative;
+flex-basis: calc(30% - 10px);
+margin: 20px;
+border: 1px solid;
+box-sizing: border-box;
+width: 300px;
+height: 150px;
+}
+
+.rectangle::before {
+content: '';
+display: block;
+padding-top: 100%;
+}
+
+.rectangle .content {
+position: absolute;
+top: 0; left: 0;
+height: 100%;
+width: 100%;
+}
+
+.square-container {
+display: flex;
+flex-wrap: wrap;
+}
+
+.square {
+position: relative;
+flex-basis: calc(30% - 10px); 
+margin: 20px;
+border: 1px solid;
+box-sizing: border-box;
+}
+
+.square::before {
+content: '';
+display: block;
+padding-top: 100%;
+}
+
+.square .content {
+position: absolute;
+top: 0; left: 0;
+height: 100%;
+width: 100%;
+}
+</style>
+
+<body>
+
+<div class="rectangle-container">
+
+<div class="rectangle" id="rectangle0">
+<div class="content">
+  <center><h3>Time and Alarm</h3></center>
+  <hr noshade></hr>
+<div id="status">
+<div class="statusDisplay"><b>Current Time: </b> <span id="timeDisplay"></span></div>
+<div class="statusDisplay"><b>Alarm Time: </b> <span id="alarmDisplay"></span><button id="clearButton" class="alarmButton" onclick="clearAlarm()">Clear</button></div>
+<span class="statusDisplay"> <b>Set Alarm: </b> <input title="Format is HH:MM in 24 hour format, e.g. 21:12" type="text" size="5" id="alarmSetTimeInput" onchange="alarmTimeUpdate(this.value)"> <button id="setButton" class="alarmButton" onclick="setAlarm()">Set</button> </span>
+</div>
+</div>
+</div>
+
+<div class="rectangle" id="rectangle1">
+<div class="content">
+  <center><h3>Search</h3></center>
+  <hr noshade></hr>
+<form role="search" action="https://www.duckduckgo.com/?q" method="get" target="_blank">
+<div id="search" >
+    <input type="search" name="q" placeholder="Search ..." aria-label="Search ...">
+	<button>Search</button>
+</div>
+</form>
+</div>
+</div>
+
+<div class="rectangle" id="rectangle3">
+<div class="content">
+  <center><h3>Timer</h3></center>
+  <hr noshade></hr>
+<form role="search" action="https://www.duckduckgo.com/?q" method="get" target="_blank">
+<div id="search" >
+
+</div>
+</form>
+</div>
+</div>
+
+</div> <!-- end rectangle-container -->
+
+
+<!-- <div id="greeting">   <center>Good Morning</center> </div> -->
+
+
+		
+<div class="square-container">
+
+<div class="square" id="square0">
+<div class="content">
+  <center><h3>Google</h3></center>
+  <hr noshade></hr>
+  <a href="https://mail.google.com/mail/u/0/#inbox">Gmail</a><br>
+  <a href="https://messages.google.com/web">Messages</a><br>
+  <a href="https://calendar.google.com/calendar/r">Cal</a><br>
+</div>
+</div>
+
+<div class="square" id="square1">
+<div class="content spread">
+  <center><h3>dev</h3></center>
+  <hr noshade></hr>
+  <a href="https://github.com/">GitHub</a><br>
+</div>
+</div>
+
+<div class="square" id="square2">
+<div class="content column">
+  <center><h3>Reading</h3></center>
+  <hr noshade></hr>
+  <a href="https://getpocket.com/a/queue/">Pocket</a><br>
+  <a href="https://news.ycombinator.com/">Hacker News</a><br>
+</div>
+</div>
+
+<div class="square" id="square3">
+<div class="content spread">
+</div>
+</div>
+
+<div class="square" id="square4">
+<div class="content column">
+</div>
+</div>
+
+<div class="square" id="square5">
+<div class="content column">
+</div>
+</div>
+
+
+</div>
+<body>
+
+</html>
+
+<script>
+
+var AlarmState = {
+  UNSET: 0,
+  SET: 1
+}
+var alarmState = AlarmState.UNSET;
+var alarmSetHour = 0;
+var alarmSetMinute = 0;
+var alarmTimeIsValid = false;
+
+//var timeRegExp = new RegExp('([01]?\d|2[0-3]):([0-5]\d)');
+
+window.onload = initializePage;
+
+function initializePage() {
+  document.getElementById('alarmDisplay').innerHTML = "Not Set";
+  keepTime();
+}
+
+function keepTime() {
+  var currentTime = new Date();
+  
+  var currentTimeFormatted = formatTimeHMS(currentTime);
+
+  // Rather than run multiple interval timers, we'll run this one 
+  // and then call all the update functions from here. 
+  // A register/callback mechanism would be better.
+  updateClock(currentTimeFormatted);
+  if (alarmState == AlarmState.SET) { // Only calculate and display this if we're in a requery cycle.
+    //updateSecsTillRequery(currentTime);
+  }
+  // Use a 1 second (1000 millisecond) tick, good enough for our needs.
+  var t = setTimeout(keepTime, 1000);
+}
+
+function updateClock(newTime) {
+  document.getElementById('timeDisplay').innerHTML = newTime;
+}
+
+function formatTimeHMS(timeIn) {
+  var hours = timeIn.getHours();
+  var minutes = timeIn.getMinutes();
+  var seconds = timeIn.getSeconds();
+  if (hours < 10) {
+    hmsTime = "0" + hours;
+  }
+  else {
+    hmsTime = hours;
+  }
+  hmsTime += ":";
+  if (minutes < 10) {
+    hmsTime += "0" + minutes;
+  }
+  else {
+    hmsTime += minutes;
+  }
+  hmsTime += ":";
+  if (seconds < 10) {
+    hmsTime += "0" + seconds;
+  }
+  else {
+    hmsTime += seconds;
+  }
+  
+  return hmsTime;
+}
+
+function alarmTimeUpdate(newValue) {
+  var timeRegExp = /([01]?\d|2[0-3]):([0-5]\d)/;
+  if (timeRegExp.test(newValue) == true) {
+    var timeParts = newValue.split(":");
+    alarmSetHour = timeParts[0];
+    alarmSetMinute = timeParts[1];
+	alert(newValue + " breaks into Hour=" + alarmSetHour + " and Minute=" + alarmSetMinute);
+	alarmTimeIsValid = true;
+  }
+  else {
+    alert (newValue + " is not a valid time. Format is HH:MM in 24 hour format, e.g. 21:12");
+    document.getElementById("alarmSetTimeInput").value = "";
+	alarmTimeIsValid = false;
+  }
+}
+
+function setAlarm() {
+  if (alarmTimeIsValid == true) {
+    
+  }
+  else {
+    alert("Please enter a valid alarm time first.");
+  }
+}
+
+function clearAlarm() {
+
+}
+
+</script>
