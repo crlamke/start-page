@@ -80,20 +80,20 @@ hr {
     font-size:12px; 
 }
 
-#rectangle0 { background-color: var(--dkgrey-color); }
-#rectangle1 { background-color: var(--dkgrey-color); }
-#rectangle2 { background-color: var(--dkgrey-color); }
-#rectangle3 { background-color: var(--dkgrey-color); }
-#rectangle4 { background-color: var(--dkgrey-color); }
-#rectangle5 { background-color: var(--dkgrey-color); }
+#toolBox0 { background-color: var(--dkgrey-color); }
+#toolBox1 { background-color: var(--dkgrey-color); }
+#toolBox2 { background-color: var(--dkgrey-color); }
+#toolBox3 { background-color: var(--dkgrey-color); }
+#toolBox4 { background-color: var(--dkgrey-color); }
+#toolBox5 { background-color: var(--dkgrey-color); }
 
 
-#square0 { background-color: var(--red-color); }
-#square1 { background-color: var(--ltgreen-color); }
-#square2 { background-color: var(--purple-color); }
-#square3 { background-color: var(--pinkish-color); }
-#square4 { background-color: var(--ltorange-color); }
-#square5 { background-color: var(--purpleish-color); }
+#linkBox0 { background-color: var(--red-color); }
+#linkBox1 { background-color: var(--ltgreen-color); }
+#linkBox2 { background-color: var(--purple-color); }
+#linkBox3 { background-color: var(--pinkish-color); }
+#linkBox4 { background-color: var(--ltorange-color); }
+#linkBox5 { background-color: var(--purpleish-color); }
 
 #status {
     padding-left:8px; padding-bottom:16px; margin: 8px;
@@ -114,8 +114,20 @@ hr {
     /* font-weight: bold; */
 }
 
+.settingsDisplay {
+    padding-left:8px; padding-bottom:6px;
+    font-family: 'Times', sans-serif; font-size: 16px;
+    color:var(--whitish-color);
+}
+
+.settingsDisplayButton {
+    margin-left:8px;
+    font-family: 'Times', sans-serif; font-size: 16px;
+}
+
+
 .searchOptionDisplayLabel {
-/*    padding-left:8px; padding-bottom:6px;*/
+    /*    padding-left:8px; padding-bottom:6px;*/
     font-family: 'Times', sans-serif; font-size: 16px;
     color:var(--whitish-color);
     display: inline-block;
@@ -140,13 +152,13 @@ hr {
     margin-top: 8px; margin-right: 8px;
 }
 
-.rectangle-container {
+.toolBox-container {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
 }
 
-.rectangle {
+.toolBox {
     position: relative;
     flex-basis: calc(30% - 10px);
     margin-top: 12px; margin-right: 20px; margin-bottom: 12px; margin-left: 20px;
@@ -156,25 +168,25 @@ hr {
     height: 150px;
 }
 
-.rectangle::before {
+.toolBox::before {
     content: '';
     display: block;
     padding-top: 100%;
 }
 
-.rectangle .content {
+.toolBox .content {
     position: absolute;
     top: 0; left: 0;
     height: 100%;
     width: 100%;
 }
 
-.square-container {
+.linkBox-container {
     display: flex;
     flex-wrap: wrap;
 }
 
-.square {
+.linkBox {
     position: relative;
     flex-basis: calc(20% - 10px);
     margin-top: 12px; margin-right: 20px; margin-bottom: 12px; margin-left: 20px;
@@ -182,13 +194,13 @@ hr {
     box-sizing: border-box;
 }
 
-.square::before {
+.linkBox::before {
     content: '';
     display: block;
     padding-top: 100%;
 }
 
-.square .content {
+.linkBox .content {
     position: absolute;
     top: 0; left: 0;
     height: 100%;

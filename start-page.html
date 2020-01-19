@@ -10,9 +10,9 @@
     <title>Start Page</title>
     <body>
 
-        <div class="rectangle-container">
+        <div class="toolBox-container">
 
-            <div class="rectangle" id="rectangle0">
+            <div class="toolBox" id="toolBox0">
                 <div class="content">
                     <h3>Time and Alarm</h3>
                     <hr>
@@ -24,7 +24,7 @@
                 </div>
             </div>
 
-            <div class="rectangle" id="rectangle1">
+            <div class="toolBox" id="toolBox1">
                 <div class="content">
                     <h3>Search</h3>
                     <hr>
@@ -46,7 +46,7 @@
                 </div>
             </div>
 
-            <div class="rectangle" id="rectangle2">
+            <div class="toolBox" id="toolBox2">
                 <div class="content">
                     <h3>Timer</h3>
                     <hr>
@@ -63,98 +63,95 @@
                 </div>
             </div>
 
-        </div> <!-- end rectangle-container -->
+        </div> <!-- end toolBox-container -->
 
+        <div class="linkBox-container">
 
-        <div class="square-container">
-
-            <div class="square" id="square0">
+            <div class="linkBox" id="linkBox0">
                 <div class="content">
-                    <h3>Google</h3>
+                    <h3 id="linkBoxTitle0"></h3>
                     <hr>
-                    <a href="https://mail.google.com/mail/u/0/#inbox">Gmail</a><br>
-                    <a href="https://messages.google.com/web">Messages</a><br>
-                    <a href="https://calendar.google.com/calendar/r">Cal</a><br>
+                    <div id="linkBoxContent0">
+                    </div>
                 </div>
             </div>
 
-            <div class="square" id="square1">
-                <div class="content spread">
-                    <h3>dev</h3>
+            <div class="linkBox" id="linkBox1">
+                <div class="content">
+                    <h3 id="linkBoxTitle1"></h3>
                     <hr>
-                    <a href="https://github.com/">GitHub</a><br>
-                    <a href="https://rocketchat.geointservices.io/group/safehouse">Rocket Chat</a><br>
-                    <a href="https://ecds.nga.mil/glide/">GLIDE</a><br>
-                    <a href="https://gitlab.devops.geointservices.io/users/sign_in">ADAM GitLab</a><br>
-                    <a href="https://workspace.myngc.com/">NGC Workspace</a><br>
-
+                    <div id="linkBoxContent1">
+                    </div>
                 </div>
             </div>
 
-            <div class="square" id="square2">
+            <div class="linkBox" id="linkBox2">
                 <div class="content">
-                    <h3>Reading</h3>
+                    <h3 id="linkBoxTitle2"></h3>
                     <hr>
-                    <a href="https://getpocket.com/a/queue/">Pocket</a><br>
-                    <a href="https://news.ycombinator.com/">Hacker News</a><br>
-                    <a href="https://www.bbc.com/news">BBC News</a><br>
-                    <a href="https://apnews.com/">AP News</a><br>
-
+                    <div id="linkBoxContent2">
+                    </div>
                 </div>
             </div>
 
-            <div class="square" id="square3">
+            <div class="linkBox" id="linkBox3">
                 <div class="content">
+                    <h3 id="linkBoxTitle3"></h3>
+                    <hr>
+                    <div id="linkBoxContent3">
+                    </div>
                 </div>
             </div>
 
-            <div class="square" id="square4">
+            <div class="linkBox" id="linkBox4">
                 <div class="content">
-                </div>
-            </div>
+                    <h3 id="linkBoxTitle4"></h3>
+                    <hr>
+                    <div id="linkBoxContent4">
+                    </div>
+                </div>            </div>
 
-            <div class="square" id="square5">
+            <div class="linkBox" id="linkBox5">
                 <div class="content">
+                    <h3 id="linkBoxTitle5"></h3>
+                    <hr>
+                    <div id="linkBoxContent5">
+                    </div>
                 </div>
             </div>
-
 
         </div>
 
-        <div class="rectangle-container">
+        <div class="toolBox-container">
 
 
-            <div class="rectangle" id="rectangle3">
+            <div class="toolBox" id="toolBox3">
                 <div class="content">
                     <h3>Notes</h3>
                     <hr>
                 </div>
             </div>
 
-            <div class="rectangle" id="rectangle4">
+            <div class="toolBox" id="toolBox4">
                 <div class="content">
                     <h3>Etc</h3>
                     <hr>
                 </div>
             </div>
 
-            <div class="rectangle" id="rectangle5">
+            <div class="toolBox" id="toolBox5">
                 <div class="content">
                     <h3>Page Settings</h3>
                     <hr>
-<div class="statusDisplay">Load Settings File</div>
-                    <input type="file" id="fileUpload" />
-                    <input type="button" id="upload" value="Upload" onclick="Upload()" />
-                    <b>Test: </b><span id="testDisplay" class="statusDisplay"></span>
-                    <b>Status: </b><span id="statusDisplay" class="statusDisplay"></span>
-                    <b>Search: </b><input type="text" size="256" id="searchInput" onchange="search(this.value)">
-                    <hr />
-                    <div id="dvCSV"></div>
-                    <div id="testDiv">Test Content Below.</div>
+                    <div class="settingsDisplay">Load Settings File</div>
+                    <input type="file" id="fileUpload" class="settingsDisplay"/>
+                    <input type="button" id="upload" value="Load Settings" onclick="loadSettings()" 
+                           class="settingsDisplayButton"/>
+                    <div id="settingsDisplay"></div>
                 </div>
             </div>
 
-        </div> <!-- end rectangle-container -->
+        </div> <!-- end toolBox-container -->
 
     </body>
 

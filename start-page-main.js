@@ -65,20 +65,20 @@ function initializePage() {
     document.getElementById('alarmDisplay').innerHTML = alarmDisplayDefault;
     document.getElementById('elapsedDisplay').innerHTML = elapsedDisplayDefault;
     document.getElementById('splitDisplay').innerHTML = elapsedDisplayDefault;
-    document.getElementById("statusDisplay").innerHTML = "Loading";
-    document.getElementById("searchInput").focus();
+    //document.getElementById("statusDisplay").innerHTML = "Loading";
+    // document.getElementById("searchInput").focus();
     //readTextFile("./user-config.txt");
 
     var bodyStyles = window.getComputedStyle(document.body);
     var greyColor = bodyStyles.getPropertyValue('--dkgrey-color');
     for (i = 0; i < 6; i++) {
-        var square = "square" + i;
-//        document.getElementById(square).style.backgroundColor = greyColor;
+        var linkBox = "linkBox" + i;
+//        document.getElementById(linkBox).style.backgroundColor = greyColor;
     }
-    
+
     notifyMe();
     showNotification();
-    
+
     keepTime();
 }
 
@@ -167,16 +167,16 @@ function clearAlarm() {
 }
 
 function startTimer() {
-  if (timerState === TimerState.STOPPED) {
-    timerState = TimerState.RUNNING;
-  }
+    if (timerState === TimerState.STOPPED) {
+        timerState = TimerState.RUNNING;
+    }
 }
 
 function markTimerSplit() {
-  if (timerState === TimerState.RUNNING) {
+    if (timerState === TimerState.RUNNING) {
         document.getElementById('elapsedDisplay').innerHTML = elapsedDisplayDefault;
-    document.getElementById('splitDisplay').innerHTML = elapsedDisplayDefault;
-  }
+        document.getElementById('splitDisplay').innerHTML = elapsedDisplayDefault;
+    }
 
 }
 
@@ -196,7 +196,7 @@ function searchTargetSelect(selectedValue) {
     }
 }
 
-function Upload() {
+function loadSettings() {
     var fileUpload = document.getElementById("fileUpload");
     var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
     if (regex.test(fileUpload.value.toLowerCase())) {
@@ -204,13 +204,7 @@ function Upload() {
             var reader = new FileReader();
             reader.onload = function (e) {
                 var rows = e.target.result.split("\n");
-                var listDiv = document.getElementById("testDiv");
-                for (var i = 0; i < rows.length; i++) {
-                    var linkDef = rows[i].split(",");
-                    if (linkDef.length === 2) {
-                        addLinkToList(linkDef[0], linkDef[1], listDiv);
-                    }
-                }
+                parseSettings(rows);
             };
             reader.readAsText(fileUpload.files[0]);
         } else {
@@ -218,6 +212,32 @@ function Upload() {
         }
     } else {
         alert("Please upload a valid CSV file.");
+    }
+}
+
+function parseSettings(rows) {
+    var linkBoxCount = 0;
+    var linkBoxTitleDiv;
+    var linkBoxContentDiv = document.getElementById("linkBoxContent0");
+    for (var i = 0; i < rows.length; i++) {
+        if ((rows[i][0] === "#") || (rows[i].trim() === "")) {
+            continue;
+        }
+        var linkDef = rows[i].split(",");
+        if (linkDef.length === 2) {
+            if (linkDef[0] === "GROUP") {
+                linkBoxTitleDiv = document.getElementById("linkBoxTitle" + linkBoxCount);
+                linkBoxContentDiv = document.getElementById("linkBoxContent" + linkBoxCount);
+                linkBoxTitleDiv.innerHTML = linkDef[1];
+                linkBoxCount++;
+            } else {
+                if (linkDef.length === 2) {
+                    addLinkToList(linkDef[0], linkDef[1], linkBoxContentDiv);
+                } else {
+                    console.log("Ignoring malformed line: " + rows[i]);
+                }
+            }
+        }
     }
 }
 
@@ -246,10 +266,8 @@ function addLinkToList(linkText, linkRef, listDiv) {
     newContent.innerHTML = linkText;
     newDiv.appendChild(newContent);
 
-    var currentDiv = document.getElementById("testDiv");
-
     // Insert after anchor node  
-    currentDiv.parentNode.insertBefore(newDiv, currentDiv.nextSibling);
+    listDiv.parentNode.insertBefore(newDiv, listDiv.nextSibling);
 }
 
 function notifyMe() {
@@ -282,15 +300,15 @@ function showNotification() {
 
     const title = 'Time\'s Up.';
 
-/*    const options = {
-        body: 'The countdown timer has expired.\n' +
-                'Time to do the thing.',
-        icon: 'file:///C:/crl/dev/jsdev/clock-alarm-timer/img/alarm-badge.png',
-        badge: 'file:///C:/crl/dev/jsdev/clock-alarm-timer/img/alarm-badge.png',
-        image: 'file:///C:/crl/dev/jsdev/clock-alarm-timer/img/white-beach-and-blue-sky.jpg',
-        tag: 'alarm-notification'
-    };
-     */ 
+    /*    const options = {
+     body: 'The countdown timer has expired.\n' +
+     'Time to do the thing.',
+     icon: 'file:///C:/crl/dev/jsdev/clock-alarm-timer/img/alarm-badge.png',
+     badge: 'file:///C:/crl/dev/jsdev/clock-alarm-timer/img/alarm-badge.png',
+     image: 'file:///C:/crl/dev/jsdev/clock-alarm-timer/img/white-beach-and-blue-sky.jpg',
+     tag: 'alarm-notification'
+     };
+     */
     const options = {
         body: 'The countdown timer has expired.\n' + 'Time to do the thing.'
     };
