@@ -1,0 +1,44 @@
+# Config/settings file for start-page
+#
+
+GROUP, News
+TweetDeck, https://tweetdeck.twitter.com/
+Twitter, https://twitter.com/
+Hacker news, https://news.ycombinator.com/
+BBC News, https://www.bbc.com/news
+NYT, https://www.nytimes.com/
+AP News, https://apnews.com/
+
+GROUP, Multimedia
+Spotify, https://www.spotify.com/us/
+Hulu, https://www.hulu.com/welcome
+Netflix, https://www.netflix.com/
+YouTube, https://www.youtube.com/
+YT Music, https://music.youtube.com/
+PocketCasts, https://play.pocketcasts.com/web/podcasts
+
+GROUP, Dev
+GitHub, https://github.com/crlamke
+PocketCasts, https://play.pocketcasts.com/web/podcasts
+CodeChef, https://www.codechef.com/ide
+HTML Style Guide, https://google.github.io/styleguide/htmlcssguide.html
+
+GROUP, Work
+OneDrive, https://onedrive.live.com/
+LinkedIn, https://www.linkedin.com/
+KolabNow, https://kolabnow.com/
+Outlook, https://outlook.live.com
+Calendar, https://calendar.google.com/calendar/r
+RocketChat, https://rocket.chat/
+
+GROUP, Podcasts
+Return Home, http://www.returnhomepodcast.com/
+No Sleep, https://www.thenosleeppodcast.com/ 
+Mission to Zyxx, https://www.missiontozyxx.space/
+Last Podcast on the Left, https://www.lastpodcastontheleft.com/
+Alice Isn't Dead, https://www.nightvalepresents.com/aliceisntdead
+What A Time To Be Alive, https://soundcloud.com/whatatimepod
+
+GROUP, Et Cetera
+Reddit, https://www.reddit.com/
+imgur, https://imgur.com/
