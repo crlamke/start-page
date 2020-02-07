@@ -4,31 +4,26 @@
  * and open the template in the editor.
  */
 
-/*
- class LinkItem {
- constructor(link, text) {
- this.link = link;
- this.text = text;
- }
- }
- 
- class LinkSection {
- constructor(sectionName) {
- this.linkItems = [];
- this.sectionName = sectionName;
- }
- 
- this.addLink = function (linkItem) {
- this.linkItems.push(linkItem);
- }
- 
- }
- 
- 
- var linkItems = [
- new LinkItem("dev", "https://mail.google.com/", "Gmail");
- ];
- */
+class LinkGroup {
+  name = "";
+  parent;
+  constructor(name, parent) {    
+    this.name = name;
+    this.parent = parent;
+  }
+}
+
+class Link {
+  displayName = "";
+  linkHref = "";
+  groupName = "";
+  
+  constructor(displayName, linkHref, groupName) {    
+    this.displayName = displayName;
+    this.linkHref = linkHref;
+    this.groupName = groupName;
+  }
+}
 
 var SearchTargetOption = {
     DUCKDUCKGO: 0,
@@ -163,7 +158,9 @@ function setAlarm() {
 }
 
 function clearAlarm() {
-
+    alarms.pop();
+	document.getElementById('alarmDisplay').innerHTML = "";
+	alarmState = AlarmState.UNSET;
 }
 
 function startTimer() {
@@ -187,10 +184,16 @@ function stopTimer() {
 function searchTargetSelect(selectedValue) {
     if (selectedValue === "optDuckDuckGo") {
         searchTargetOption = SearchTargetOption.DUCKDUCKGO;
+		let searchForm = document.getElementById('searchForm');
+		searchForm.action = "https://www.duckduckgo.com/?q";
     } else if (selectedValue === "optGoogle") {
         urlLoadOption = SearchTargetOption.GOOGLE;
-    } else if (selectedValue === "optBing") {
+		let searchForm = document.getElementById('searchForm');
+		searchForm.action = "https://www.google.com/?q";
+	} else if (selectedValue === "optBing") {
         urlLoadOption = SearchTargetOption.BING;
+		let searchForm = document.getElementById('searchForm');
+		searchForm.action = "https://www.bing.com/?q";
     } else {
         console.log("Invalid Selection");
     }
@@ -264,6 +267,7 @@ function addLinkToList(linkText, linkRef, listDiv) {
     var newContent = document.createElement("a");
     newContent.href = linkRef;
     newContent.innerHTML = linkText;
+	newContent.setAttribute('target', '_blank');
     newDiv.appendChild(newContent);
 
     // Insert after anchor node  
