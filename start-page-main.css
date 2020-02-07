@@ -26,21 +26,26 @@ and open the template in the editor.
 body { 
     background-color: #404040; 
     font-family: 'Arial', sans-serif; font-size: 10pt; 
-}  /* background-image: url("bg.jpg"); */
-
-#greeting  { 
-    text-align: center;
-    margin-left:auto; margin-right:auto; 
-    padding-bottom:8px; padding-top:8px; 
-    font-family: 'Times', sans-serif; font-size: 30pt;
-    color:var(--whitish-color); 
+    /*height: 100%;
+    margin: 0;*/
 }
 
 a  {
     color:white; 
     font-family: Tahoma, Geneva, sans-serif; font-size:16px;
-    padding-left:15px; padding-bottom:30px; padding-top:8px;
+    padding-left:20px;
+    margin-bottom: 2px;
     text-decoration:none;
+    display: inline-block;
+}
+
+a:hover {
+    color: blue;
+}
+
+a:active {
+    color: blue;
+    text-decoration: underline;
 }
 
 h2 {
@@ -68,25 +73,12 @@ hr {
     border:none;
 }
 
-#search {
-    padding-left:16px; padding-bottom:8px; padding-top:8px;
-    height:24px;
-    font-size:18px;
-}
-
-#searchTarget {
-    padding-left:16px; padding-bottom:8px; padding-top:8px;
-    height:20px;
-    font-size:12px; 
-}
-
 #toolBox0 { background-color: var(--dkgrey-color); }
 #toolBox1 { background-color: var(--dkgrey-color); }
 #toolBox2 { background-color: var(--dkgrey-color); }
 #toolBox3 { background-color: var(--dkgrey-color); }
 #toolBox4 { background-color: var(--dkgrey-color); }
 #toolBox5 { background-color: var(--dkgrey-color); }
-
 
 #linkBox0 { background-color: var(--red-color); }
 #linkBox1 { background-color: var(--ltgreen-color); }
@@ -106,7 +98,6 @@ hr {
     font-family: 'Times', sans-serif; font-size: 16px;
     color:var(--whitish-color);
 }
-
 
 .statusDisplayLabel {
     display: inline-block;
@@ -152,6 +143,20 @@ hr {
     margin-top: 8px; margin-right: 8px;
 }
 
+/*Search tool css */
+
+#search {
+    padding-left:16px; padding-bottom:8px; padding-top:8px;
+    height:24px;
+    font-size:18px;
+}
+
+#searchTarget {
+    padding-left:16px; padding-bottom:8px; padding-top:8px;
+    height:20px;
+    font-size:12px; 
+}
+
 .toolBox-container {
     display: flex;
     flex-wrap: wrap;
@@ -184,6 +189,7 @@ hr {
 .linkBox-container {
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row;
 }
 
 .linkBox {
@@ -192,6 +198,8 @@ hr {
     margin-top: 12px; margin-right: 20px; margin-bottom: 12px; margin-left: 20px;
     border: 1px solid;
     box-sizing: border-box;
+    width: 300px;
+    height: 150px;
 }
 
 .linkBox::before {
@@ -207,6 +215,4 @@ hr {
     width: 100%;
 }
 
-.spread {
 
-}
