@@ -1,44 +1,72 @@
 # Config/settings file for start-page
 #
 
-GROUP, News
-TweetDeck, https://tweetdeck.twitter.com/
-Twitter, https://twitter.com/
-Hacker news, https://news.ycombinator.com/
-BBC News, https://www.bbc.com/news
-NYT, https://www.nytimes.com/
-AP News, https://apnews.com/
+# To define a search provider, start with the SEARCH-PROVIDER keyword,
+# followed by the name you want to call the search provider, followed by
+# the http address of the search provider. Use commas as separators.
+# See example below.
+# SEARCH-PROVIDER, DuckDuckGo, https://www.duckduckgo.com/
 
-GROUP, Multimedia
-Spotify, https://www.spotify.com/us/
-Hulu, https://www.hulu.com/welcome
-Netflix, https://www.netflix.com/
-YouTube, https://www.youtube.com/
-YT Music, https://music.youtube.com/
-PocketCasts, https://play.pocketcasts.com/web/podcasts
+SEARCH-PROVIDER, DuckDuckGo, https://www.duckduckgo.com/
+SEARCH-PROVIDER, Google, https://www.google.com/
+SEARCH-PROVIDER, Bing, https://www.bing.com/
 
-GROUP, Dev
-GitHub, https://github.com/crlamke
-PocketCasts, https://play.pocketcasts.com/web/podcasts
-CodeChef, https://www.codechef.com/ide
-HTML Style Guide, https://google.github.io/styleguide/htmlcssguide.html
+# To define a Link Group, start the group with the LINK-GROUP keyword
+# followed by the link group's display name. You then define links
+# by starting with the display name of the link followed by the link http 
+# address. To define a link subgroup, add the parent group's display name
+# to the LINK-GROUP definition, as shown below for the Podcasts link group.
+# Use commas as separators. One level of hierarchy/subgroup is supported.
+# Example below.
+# LINK-GROUP, Multimedia
+# LINK, Spotify, https://www.spotify.com/us/
+# LINK, Hulu, https://www.hulu.com/welcome
+# LINK-GROUP, Podcasts, Multimedia
+# LINK, PocketCasts, https://play.pocketcasts.com/web/podcasts
+# LINK, Return Home, http://www.returnhomepodcast.com/
+# LINK, No Sleep, https://www.thenosleeppodcast.com/ 
 
-GROUP, Work
-OneDrive, https://onedrive.live.com/
-LinkedIn, https://www.linkedin.com/
-KolabNow, https://kolabnow.com/
-Outlook, https://outlook.live.com
-Calendar, https://calendar.google.com/calendar/r
-RocketChat, https://rocket.chat/
 
-GROUP, Podcasts
-Return Home, http://www.returnhomepodcast.com/
-No Sleep, https://www.thenosleeppodcast.com/ 
-Mission to Zyxx, https://www.missiontozyxx.space/
-Last Podcast on the Left, https://www.lastpodcastontheleft.com/
-Alice Isn't Dead, https://www.nightvalepresents.com/aliceisntdead
-What A Time To Be Alive, https://soundcloud.com/whatatimepod
+LINK-GROUP, News
+LINK, TweetDeck, https://tweetdeck.twitter.com/, News
+LINK, Twitter, https://twitter.com/, News
+LINK, Hacker news, https://news.ycombinator.com/, News
+LINK, BBC News, https://www.bbc.com/news, News
+LINK, NYT, https://www.nytimes.com/, News
+LINK, AP News, https://apnews.com/, News
 
-GROUP, Et Cetera
-Reddit, https://www.reddit.com/
-imgur, https://imgur.com/
+LINK-GROUP, Multimedia
+LINK, Spotify, https://www.spotify.com/us/, Multimedia
+LINK, Hulu, https://www.hulu.com/welcome, Multimedia
+LINK, Netflix, https://www.netflix.com/, Multimedia
+LINK-GROUP, YouTube, Multimedia
+LINK, YouTube, https://www.youtube.com/, YouTube
+LINK, YT Music, https://music.youtube.com/, YouTube
+LINK-GROUP, Podcasts, Multimedia
+LINK, PocketCasts, https://play.pocketcasts.com/web/podcasts, Podcasts
+LINK, Return Home, http://www.returnhomepodcast.com/, Podcasts
+LINK, No Sleep, https://www.thenosleeppodcast.com/, Podcasts 
+LINK, Mission to Zyxx, https://www.missiontozyxx.space/, Podcasts
+LINK, Last Podcast on the Left, https://www.lastpodcastontheleft.com/, Podcasts
+LINK, Alice Isn't Dead, https://www.nightvalepresents.com/aliceisntdead, Podcasts
+LINK, What A Time To Be Alive, https://soundcloud.com/whatatimepod, Podcasts
+
+LINK-GROUP, Dev
+LINK, GitHub, https://github.com/crlamke
+LINK, PocketCasts, https://play.pocketcasts.com/web/podcasts
+LINK, CodeChef, https://www.codechef.com/ide
+LINK, HTML Style Guide, https://google.github.io/styleguide/htmlcssguide.html
+
+
+LINK-GROUP, Work
+LINK, OneDrive, https://onedrive.live.com/
+LINK, LinkedIn, https://www.linkedin.com/
+LINK, KolabNow, https://kolabnow.com/
+LINK, Outlook, https://outlook.live.com
+LINK, Calendar, https://calendar.google.com/calendar/r
+LINK, RocketChat, https://rocket.chat/
+
+LINK-GROUP, Et Cetera
+LINK, Reddit, https://www.reddit.com/
+LINK, imgur, https://imgur.com/
+
