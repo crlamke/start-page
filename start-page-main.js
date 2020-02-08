@@ -319,5 +319,3 @@ function showNotification() {
 
     var notification = new Notification(title, options);
 }
-
-
