@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href="start-page-main.css" type="text/css"/>
+    <script src="start-page-main.js"></script> 
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta name="description" content="Start Page">
+    <meta name="keywords" content="StartPage">
+    <meta name="author" content="Chris Lamke">
+    <meta name="license" content="MIT">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Page</title>
+    <body>
+
+        <div class="toolBox-container">
+
+            <div class="toolBox" id="toolBox0">
+                <div class="content">
+                    <h3>Time and Alarm</h3>
+                    <hr>
+                    <div id="status">
+                        <div class="statusDisplay"><span class="statusDisplayLabel">Current Time:</span><span id="timeDisplay"></span></div>
+                        <div class="statusDisplay"><span class="statusDisplayLabel">Alarm Time:</span><span id="alarmDisplay"></span><button id="clearButton" class="alarmButton" onclick="clearAlarm()">Clear</button></div>
+                        <span class="statusDisplay"><span class="statusDisplayLabel">Set Alarm:</span><input title="Format is HH:MM in 24 hour format, e.g. 21:12" type="text" size="5" id="alarmSetTimeInput" onchange="alarmTimeUpdate(this.value)"> <button id="setButton" class="alarmButton" onclick="setAlarm()">Set</button> </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="toolBox" id="toolBox1">
+                <div class="content">
+                    <h3>Search</h3>
+                    <hr>
+                    <form id="searchForm" role="search" action="https://www.duckduckgo.com/?q" method="get" target="_blank">
+                        <div id="searchInput" >
+                            <input type="search" name="q" placeholder="Search ..." aria-label="Search ...">
+                            <button>Search</button>
+                        </div>
+                    </form>
+                    <div id="searchTarget" >
+                        <div class="statusDisplay"><span class="searchOptionDisplayLabel">With:</span>
+                            <select id="search-target-select" onchange="searchTargetSelect(this.options[this.selectedIndex].value)">
+                                <option value="optDuckDuckGo" >DuckDuckGo</option>
+                                <option value="optGoogle" selected>Google</option>
+                                <option value="optBing">Bing</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="toolBox" id="toolBox2">
+                <div class="content">
+                    <h3>Timer</h3>
+                    <hr>
+                    <div id="status">
+                        <div class="statusDisplay"><b>Elapsed: </b> <span id="elapsedDisplay"></span></div>
+                        <div class="statusDisplay"><b>Split: </b> <span id="splitDisplay"></span></div>
+                        <div class="statusDisplay">
+                            <button id="timerStartButton" class="timerButton" onclick="startTimer()">Start</button>
+                            <button id="timerSplitButton" class="timerButton" onclick="markTimerSplit()">Split</button>
+                            <button id="timerStopButton" class="timerButton" onclick="stopTimer()">Stop</button>
+                            <button id="timerResetButton" class="timerButton" onclick="resetTimer()">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- end toolBox-container -->
+
+        <div class="linkBox-container">
+
+            <div class="linkBox" id="linkBox0">
+                <div class="content">
+                    <h3 id="linkBoxTitle0"></h3>
+                    <hr>
+                    <div id="linkBoxContent0">
+                    </div>
+                </div>
+            </div>
+
+            <div class="linkBox" id="linkBox1">
+                <div class="content">
+                    <h3 id="linkBoxTitle1"></h3>
+                    <hr>
+                    <div id="linkBoxContent1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="linkBox" id="linkBox2">
+                <div class="content">
+                    <h3 id="linkBoxTitle2"></h3>
+                    <hr>
+                    <div id="linkBoxContent2">
+                    </div>
+                </div>
+            </div>
+
+            <div class="linkBox" id="linkBox3">
+                <div class="content">
+                    <h3 id="linkBoxTitle3"></h3>
+                    <hr>
+                    <div id="linkBoxContent3">
+                    </div>
+                </div>
+            </div>
+
+            <div class="linkBox" id="linkBox4">
+                <div class="content">
+                    <h3 id="linkBoxTitle4"></h3>
+                    <hr>
+                    <div id="linkBoxContent4">
+                    </div>
+                </div>            </div>
+
+            <div class="linkBox" id="linkBox5">
+                <div class="content">
+                    <h3 id="linkBoxTitle5"></h3>
+                    <hr>
+                    <div id="linkBoxContent5">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="toolBox-container">
+
+
+            <div class="toolBox" id="toolBox3">
+                <div class="content">
+                    <h3>Notes</h3>
+                    <hr>
+                </div>
+            </div>
+
+            <div class="toolBox" id="toolBox4">
+                <div class="content">
+                    <h3>Etc</h3>
+                    <hr>
+                </div>
+            </div>
+
+            <div class="toolBox" id="toolBox5">
+                <div class="content">
+                    <h3>Page Settings</h3>
+                    <hr>
+                    <div class="settingsDisplay">Load Settings File</div>
+                    <input type="file" id="fileUpload" class="settingsDisplay"/>
+                    <input type="button" id="upload" value="Load Settings" onclick="loadSettings()" 
+                           class="settingsDisplayButton"/>
+                    <div id="settingsDisplay"></div>
+                </div>
+            </div>
+
+        </div> <!-- end toolBox-container -->
+
+    </body>
+
+</html>
+

@@ -1,0 +1,215 @@
+
+/* 
+    Created on : Jan 10, 2020, 10:38:14 AM
+    Author     : Chris Lamke <https://chris.lamke.org>
+    License    : MIT License
+*/
+
+:root{
+    --red-color: #f44336;
+    --purple-color: #9c27b0;
+    --pinkish-color: #e91e63;
+    --ltblue-color: #00bcd4;
+    --ltgreen-color: #4caf50;
+    --ltorange-color: #ff9800;
+    --purpleish-color: #9999ff;
+    --dkgrey-color: #404040;
+    --ltgrey-color: #e0e0e0;
+    --blackish-color: #1c0000;
+    --white-color: #ffffff;
+    --whitish-color: #fcf9ff;
+}
+
+body { 
+    background-color: #404040; 
+    font-family: 'Arial', sans-serif; font-size: 10pt; 
+    /*height: 100%;
+    margin: 0;*/
+}
+
+a  {
+    color:white; 
+    font-family: Tahoma, Geneva, sans-serif; font-size:16px;
+    padding-left:20px;
+    margin-bottom: 2px;
+    text-decoration:none;
+    display: inline-block;
+}
+
+a:hover {
+    color: blue;
+}
+
+a:active {
+    color: blue;
+    text-decoration: underline;
+}
+
+h2 {
+    color:white; 
+    font-family: Tahoma, Geneva, sans-serif; font-size:30px;
+    padding-left:15px;
+}
+
+h3 {
+    color:white;
+    margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px;
+    font-family: Tahoma, Geneva, sans-serif; font-size:18px; text-align: center;
+}
+
+p {
+    color:white;
+    font-family: Tahoma, Geneva, sans-serif; font-size:20px;
+    border:0px;
+}
+
+hr {
+    color:white; background-color:white; 
+    margin-top: 5px; margin-right: 10px; margin-bottom: 5px; margin-left: 10px;
+    height:1px;
+    border:none;
+}
+
+#toolBox0 { background-color: var(--dkgrey-color); }
+#toolBox1 { background-color: var(--dkgrey-color); }
+#toolBox2 { background-color: var(--dkgrey-color); }
+#toolBox3 { background-color: var(--dkgrey-color); }
+#toolBox4 { background-color: var(--dkgrey-color); }
+#toolBox5 { background-color: var(--dkgrey-color); }
+
+#linkBox0 { background-color: var(--red-color); }
+#linkBox1 { background-color: var(--ltgreen-color); }
+#linkBox2 { background-color: var(--purple-color); }
+#linkBox3 { background-color: var(--pinkish-color); }
+#linkBox4 { background-color: var(--ltorange-color); }
+#linkBox5 { background-color: var(--purpleish-color); }
+
+#status {
+    padding-left:8px; padding-bottom:16px; margin: 8px;
+    font-family: 'Times', sans-serif; font-size: 16px;
+    color:var(--whitish-color);
+}
+
+.statusDisplay {
+    padding-left:8px; padding-bottom:6px;
+    font-family: 'Times', sans-serif; font-size: 16px;
+    color:var(--whitish-color);
+}
+
+.statusDisplayLabel {
+    display: inline-block;
+    width: 110px;
+    /* font-weight: bold; */
+}
+
+.settingsDisplay {
+    padding-left:8px; padding-bottom:6px;
+    font-family: 'Times', sans-serif; font-size: 16px;
+    color:var(--whitish-color);
+}
+
+.settingsDisplayButton {
+    margin-left:8px;
+    font-family: 'Times', sans-serif; font-size: 16px;
+}
+
+
+.searchOptionDisplayLabel {
+    /*    padding-left:8px; padding-bottom:6px;*/
+    font-family: 'Times', sans-serif; font-size: 16px;
+    color:var(--whitish-color);
+    display: inline-block;
+    width: 110px;
+    /* font-weight: bold; */
+}
+
+.alarmButton {
+    margin-left:16px;
+}
+
+.setButton {
+    float: right;
+    margin-left: 20px;
+}
+
+.clearButton {
+    float: right;
+}
+
+.timerButton {
+    margin-top: 8px; margin-right: 8px;
+}
+
+/*Search tool css */
+
+#search {
+    padding-left:16px; padding-bottom:8px; padding-top:8px;
+    height:24px;
+    font-size:18px;
+}
+
+#searchTarget {
+    padding-left:16px; padding-bottom:8px; padding-top:8px;
+    height:20px;
+    font-size:12px; 
+}
+
+.toolBox-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.toolBox {
+    position: relative;
+    flex-basis: calc(30% - 10px);
+    margin-top: 12px; margin-right: 20px; margin-bottom: 12px; margin-left: 20px;
+    border: 1px solid;
+    box-sizing: border-box;
+    width: 300px;
+    height: 150px;
+}
+
+.toolBox::before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+}
+
+.toolBox .content {
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.linkBox-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.linkBox {
+    position: relative;
+    flex-basis: calc(20% - 10px);
+    margin-top: 12px; margin-right: 20px; margin-bottom: 12px; margin-left: 20px;
+    border: 1px solid;
+    box-sizing: border-box;
+    width: 300px;
+    height: 150px;
+}
+
+.linkBox::before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+}
+
+.linkBox .content {
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+
