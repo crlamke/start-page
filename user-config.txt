@@ -1,5 +1,5 @@
 # Config/settings file for start-page
-#  
+#
 
 # To define a search provider, start with the SEARCH-PROVIDER keyword,
 # followed by the name you want to call the search provider, followed by
