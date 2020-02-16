@@ -1,29 +1,40 @@
 /* 
-    Created on : Jan 10, 2020, 10:38:14 AM
-    Author     : Chris Lamke <https://chris.lamke.org>
-    License    : MIT License
-*/
+ Created on : Jan 10, 2020, 10:38:14 AM
+ Author     : Chris Lamke <https://chris.lamke.org>
+ License    : MIT License
+ */
 
 class LinkGroup {
-  name = "";
-  parent;
-  constructor(name, parent) {    
-    this.name = name;
-    this.parent = parent;
-  }
+    name = "";
+    parent;
+    constructor(name, parent) {
+        this.name = name;
+        this.parent = parent;
+    }
 }
 
 class Link {
-  displayName = "";
-  linkHref = "";
-  groupName = "";
-  
-  constructor(displayName, linkHref, groupName) {    
-    this.displayName = displayName;
-    this.linkHref = linkHref;
-    this.groupName = groupName;
-  }
+    displayName = "";
+    linkHref = "";
+    groupName = "";
+
+    constructor(displayName, linkHref, groupName) {
+        this.displayName = displayName;
+        this.linkHref = linkHref;
+        this.groupName = groupName;
+    }
 }
+
+class searchProvider {
+    displayName = "";
+    searchCommand = "";
+
+    constructor(displayName, searchCommand) {
+        this.displayName = displayName;
+        this.searchCommand = searchCommand;
+    }
+}
+
 
 var SearchTargetOption = {
     DUCKDUCKGO: 0,
@@ -53,6 +64,7 @@ var elapsedDisplayDefault = "00:00:00";
 var alarms = new Array();
 var searchTargetOption = SearchTargetOption.DUCKDUCKGO;
 //var timeRegExp = new RegExp('([01]?\d|2[0-3]):([0-5]\d)');
+var linkGroups = [] // Array to hold all LinkGroup objects
 
 window.onload = initializePage;
 
@@ -159,8 +171,8 @@ function setAlarm() {
 
 function clearAlarm() {
     alarms.pop();
-	document.getElementById('alarmDisplay').innerHTML = "";
-	alarmState = AlarmState.UNSET;
+    document.getElementById('alarmDisplay').innerHTML = "";
+    alarmState = AlarmState.UNSET;
 }
 
 function startTimer() {
@@ -184,94 +196,19 @@ function stopTimer() {
 function searchTargetSelect(selectedValue) {
     if (selectedValue === "optDuckDuckGo") {
         searchTargetOption = SearchTargetOption.DUCKDUCKGO;
-		let searchForm = document.getElementById('searchForm');
-		searchForm.action = "https://www.duckduckgo.com/?q";
+        let searchForm = document.getElementById('searchForm');
+        searchForm.action = "https://www.duckduckgo.com/?q";
     } else if (selectedValue === "optGoogle") {
         urlLoadOption = SearchTargetOption.GOOGLE;
-		let searchForm = document.getElementById('searchForm');
-		searchForm.action = "https://www.google.com/?q";
-	} else if (selectedValue === "optBing") {
+        let searchForm = document.getElementById('searchForm');
+        searchForm.action = "https://www.google.com/?q";
+    } else if (selectedValue === "optBing") {
         urlLoadOption = SearchTargetOption.BING;
-		let searchForm = document.getElementById('searchForm');
-		searchForm.action = "https://www.bing.com/?q";
+        let searchForm = document.getElementById('searchForm');
+        searchForm.action = "https://www.bing.com/?q";
     } else {
         console.log("Invalid Selection");
     }
-}
-
-function loadSettings() {
-    var fileUpload = document.getElementById("fileUpload");
-    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
-    if (regex.test(fileUpload.value.toLowerCase())) {
-        if (typeof (FileReader) !== "undefined") {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                var rows = e.target.result.split("\n");
-                parseSettings(rows);
-            };
-            reader.readAsText(fileUpload.files[0]);
-        } else {
-            alert("This browser does not support HTML5.");
-        }
-    } else {
-        alert("Please upload a valid CSV file.");
-    }
-}
-
-function parseSettings(rows) {
-    var linkBoxCount = 0;
-    var linkBoxTitleDiv;
-    var linkBoxContentDiv = document.getElementById("linkBoxContent0");
-    for (var i = 0; i < rows.length; i++) {
-        if ((rows[i][0] === "#") || (rows[i].trim() === "")) {
-            continue;
-        }
-        var linkDef = rows[i].split(",");
-        if (linkDef.length === 2) {
-            if (linkDef[0] === "GROUP") {
-                linkBoxTitleDiv = document.getElementById("linkBoxTitle" + linkBoxCount);
-                linkBoxContentDiv = document.getElementById("linkBoxContent" + linkBoxCount);
-                linkBoxTitleDiv.innerHTML = linkDef[1];
-                linkBoxCount++;
-            } else {
-                if (linkDef.length === 2) {
-                    addLinkToList(linkDef[0], linkDef[1], linkBoxContentDiv);
-                } else {
-                    console.log("Ignoring malformed line: " + rows[i]);
-                }
-            }
-        }
-    }
-}
-
-function readTextFile(file)
-{
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, false);
-    rawFile.onreadystatechange = function ()
-    {
-        if (rawFile.readyState === 4)
-        {
-            if (rawFile.status === 200 || rawFile.status === 0)
-            {
-                var allText = rawFile.responseText;
-                alert(allText);
-            }
-        }
-    };
-    rawFile.send(null);
-}
-
-function addLinkToList(linkText, linkRef, listDiv) {
-    var newDiv = document.createElement("div");
-    var newContent = document.createElement("a");
-    newContent.href = linkRef;
-    newContent.innerHTML = linkText;
-	newContent.setAttribute('target', '_blank');
-    newDiv.appendChild(newContent);
-
-    // Insert after anchor node  
-    listDiv.parentNode.insertBefore(newDiv, listDiv.nextSibling);
 }
 
 function notifyMe() {
@@ -319,3 +256,79 @@ function showNotification() {
 
     var notification = new Notification(title, options);
 }
+
+function loadSettings() {
+    var fileUpload = document.getElementById("fileUpload");
+    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+    if (regex.test(fileUpload.value.toLowerCase())) {
+        if (typeof (FileReader) !== "undefined") {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var rows = e.target.result.split("\n");
+                parseSettings(rows);
+            };
+            reader.readAsText(fileUpload.files[0]);
+        } else {
+            alert("This browser does not support HTML5.");
+        }
+    } else {
+        alert("Please upload a valid CSV file.");
+    }
+}
+
+function parseSettings(rows) {
+    var linkBoxCount = 0;
+    var linkBoxTitleDiv;
+    var linkBoxContentDiv = document.getElementById("linkBoxContent0");
+    for (var i = 0; i < rows.length; i++) {
+        if ((rows[i][0] === "#") || (rows[i].trim() === "")) {
+            continue;
+        }
+
+        var linkDef = rows[i].split(",");
+        switch (linkDef[0]) {
+            case "SEARCH-PROVIDER":
+                // code block
+                break;
+            case "LINK-GROUP":
+                // code block
+                break;
+            case "LINK":
+                // code block
+                break;
+            default:
+            // code block
+        }
+        if (linkDef.length === 2) {
+            switch
+            if (linkDef[0] === "GROUP") {
+                linkBoxTitleDiv = document.getElementById("linkBoxTitle" + linkBoxCount);
+                linkBoxContentDiv = document.getElementById("linkBoxContent" + linkBoxCount);
+                linkBoxTitleDiv.innerHTML = linkDef[1];
+                linkBoxCount++;
+            } else {
+                if (linkDef.length === 2) {
+                    addLinkToList(linkDef[0], linkDef[1], linkBoxContentDiv);
+                } else {
+                    console.log("Ignoring malformed line: " + rows[i]);
+                }
+            }
+        }
+    }
+}
+
+
+
+function addLinkToList(linkText, linkRef, listDiv) {
+    var newDiv = document.createElement("div");
+    var newContent = document.createElement("a");
+    newContent.href = linkRef;
+    newContent.innerHTML = linkText;
+    newContent.setAttribute('target', '_blank');
+    newDiv.appendChild(newContent);
+
+    // Insert after anchor node  
+    listDiv.parentNode.insertBefore(newDiv, listDiv.nextSibling);
+}
+
+
