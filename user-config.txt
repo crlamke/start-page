@@ -26,7 +26,7 @@ SEARCH-PROVIDER, Bing, https://www.bing.com/
 # LINK, No Sleep, https://www.thenosleeppodcast.com/ 
 
 
-LINK-GROUP, News
+LINK-GROUP, News, None
 LINK, TweetDeck, https://tweetdeck.twitter.com/, News
 LINK, Twitter, https://twitter.com/, News
 LINK, Hacker news, https://news.ycombinator.com/, News
@@ -34,7 +34,7 @@ LINK, BBC News, https://www.bbc.com/news, News
 LINK, NYT, https://www.nytimes.com/, News
 LINK, AP News, https://apnews.com/, News
 
-LINK-GROUP, Multimedia
+LINK-GROUP, Multimedia, None
 LINK, Spotify, https://www.spotify.com/us/, Multimedia
 LINK, Hulu, https://www.hulu.com/welcome, Multimedia
 LINK, Netflix, https://www.netflix.com/, Multimedia
@@ -50,14 +50,14 @@ LINK, Last Podcast on the Left, https://www.lastpodcastontheleft.com/, Podcasts
 LINK, Alice Isn't Dead, https://www.nightvalepresents.com/aliceisntdead, Podcasts
 LINK, What A Time To Be Alive, https://soundcloud.com/whatatimepod, Podcasts
 
-LINK-GROUP, Dev
+LINK-GROUP, Dev, None
 LINK, GitHub, https://github.com/crlamke
 LINK, PocketCasts, https://play.pocketcasts.com/web/podcasts
 LINK, CodeChef, https://www.codechef.com/ide
 LINK, HTML Style Guide, https://google.github.io/styleguide/htmlcssguide.html
 
 
-LINK-GROUP, Work
+LINK-GROUP, Work, None
 LINK, OneDrive, https://onedrive.live.com/
 LINK, LinkedIn, https://www.linkedin.com/
 LINK, KolabNow, https://kolabnow.com/
@@ -65,7 +65,7 @@ LINK, Outlook, https://outlook.live.com
 LINK, Calendar, https://calendar.google.com/calendar/r
 LINK, RocketChat, https://rocket.chat/
 
-LINK-GROUP, Et Cetera
+LINK-GROUP, Et Cetera, None
 LINK, Reddit, https://www.reddit.com/
 LINK, imgur, https://imgur.com/
 

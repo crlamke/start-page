@@ -4,14 +4,7 @@
  License    : MIT License
  */
 
-class LinkGroup {
-    name = "";
-    parent;
-    constructor(name, parent) {
-        this.name = name;
-        this.parent = parent;
-    }
-}
+
 
 class Link {
     displayName = "";
@@ -22,6 +15,22 @@ class Link {
         this.displayName = displayName;
         this.linkHref = linkHref;
         this.groupName = groupName;
+    }
+}
+
+class LinkGroup {
+    name = "";
+    parent;
+    children = new Array();
+    links = new Array();
+
+    constructor(name, parent) {
+        this.name = name;
+        this.parent = parent;
+    }
+
+    attachLink(link) {
+        links.push(link);
     }
 }
 
@@ -64,7 +73,8 @@ var elapsedDisplayDefault = "00:00:00";
 var alarms = new Array();
 var searchTargetOption = SearchTargetOption.DUCKDUCKGO;
 //var timeRegExp = new RegExp('([01]?\d|2[0-3]):([0-5]\d)');
-var linkGroups = [] // Array to hold all LinkGroup objects
+var linkGroups = []; // Array to hold all LinkGroup objects
+var orphanLinks = new LinkGroup("Orphans", "None");
 
 window.onload = initializePage;
 
@@ -257,6 +267,8 @@ function showNotification() {
     var notification = new Notification(title, options);
 }
 
+// Load the setting file from disk, break it into lines, and pass the lines
+// to another function to parse.
 function loadSettings() {
     var fileUpload = document.getElementById("fileUpload");
     var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
@@ -276,11 +288,13 @@ function loadSettings() {
     }
 }
 
+// Take the config file and parse it line by line,
+// calling functions to create new items or set options
+// as directed by each line.
 function parseSettings(rows) {
-    var linkBoxCount = 0;
-    var linkBoxTitleDiv;
-    var linkBoxContentDiv = document.getElementById("linkBoxContent0");
+
     for (var i = 0; i < rows.length; i++) {
+        // Skip comments and empty lines
         if ((rows[i][0] === "#") || (rows[i].trim() === "")) {
             continue;
         }
@@ -288,38 +302,67 @@ function parseSettings(rows) {
         var linkDef = rows[i].split(",");
         switch (linkDef[0]) {
             case "SEARCH-PROVIDER":
-                // code block
+                addSearchProvider(linkDef[1], linkDef[2]);
                 break;
             case "LINK-GROUP":
-                // code block
+                addLinkGroup(linkDef[1], linkDef[2]);
                 break;
             case "LINK":
-                // code block
+                addLinkItem(linkDef[1], linkDef[2], linkDef[3]);
                 break;
             default:
-            // code block
-        }
-        if (linkDef.length === 2) {
-            switch
-            if (linkDef[0] === "GROUP") {
-                linkBoxTitleDiv = document.getElementById("linkBoxTitle" + linkBoxCount);
-                linkBoxContentDiv = document.getElementById("linkBoxContent" + linkBoxCount);
-                linkBoxTitleDiv.innerHTML = linkDef[1];
-                linkBoxCount++;
-            } else {
-                if (linkDef.length === 2) {
-                    addLinkToList(linkDef[0], linkDef[1], linkBoxContentDiv);
-                } else {
-                    console.log("Ignoring malformed line: " + rows[i]);
-                }
-            }
+                // Handle invalid line.
+                console.log("Ignoring malformed line: " + rows[i]);
+                continue;
         }
     }
 }
 
+function addSearchProvider(providerName, providerLink) {
+    ;
+}
 
+function addLinkGroup(groupName, parentName) {
 
-function addLinkToList(linkText, linkRef, listDiv) {
+    let newGroup = new LinkGroup(groupName, groupName, parentName);
+    linkGroups.push(newGroup);
+
+    if (parentName !== "None") {
+        // Find parent link group and add this group as a child
+        let parentFound = false;
+        for (i = 0; i < linkGroups.length; i++) {
+            if (linkGroups[i].name === parentName) {
+                linkGroups[i].children.push(newGroup);
+                parentFound = true;
+            }
+        }
+
+        if (parentFound === false) {
+            console.log("Parent group " + parentName +
+                    " not found for group " + groupName);
+        }
+    }
+}
+
+function addLinkItem(linkText, linkRef, linkGroup) {
+    let groupFound = false;
+    let newLink = new Link(linkText, linkRef, linkGroup);
+    // Find link group and add link
+    for (i = 0; i < linkGroups.length; i++) {
+        if (linkGroups[i].name === linkGroup) {
+            linkGroups[i].attachLink(newLink);
+            groupFound = true;
+        }
+    }
+
+    if (groupFound === false) {
+        console.log("No group found for link " + linkText);
+        orphanLinks.attachLink(newLink);
+    }
+}
+
+function addLinksToPage(linkText, linkRef, listDiv) {
+
     var newDiv = document.createElement("div");
     var newContent = document.createElement("a");
     newContent.href = linkRef;
@@ -330,5 +373,4 @@ function addLinkToList(linkText, linkRef, listDiv) {
     // Insert after anchor node  
     listDiv.parentNode.insertBefore(newDiv, listDiv.nextSibling);
 }
-
 
