@@ -21,16 +21,18 @@ class Link {
 class LinkGroup {
     name = "";
     parent;
-    children = new Array();
-    links = new Array();
+    children;
+    links;
 
     constructor(name, parent) {
         this.name = name;
         this.parent = parent;
+        this.children = new Array();
+        this.links = new Array();
     }
 
     attachLink(link) {
-        links.push(link);
+        this.links.push(link);
     }
 }
 
@@ -75,6 +77,9 @@ var searchTargetOption = SearchTargetOption.DUCKDUCKGO;
 //var timeRegExp = new RegExp('([01]?\d|2[0-3]):([0-5]\d)');
 var linkGroups = []; // Array to hold all LinkGroup objects
 var orphanLinks = new LinkGroup("Orphans", "None");
+
+let linksDB; // Store links and link groups
+let configDB; // Store general page config 
 
 window.onload = initializePage;
 
@@ -278,6 +283,7 @@ function loadSettings() {
             reader.onload = function (e) {
                 var rows = e.target.result.split("\n");
                 parseSettings(rows);
+                printLinksToConsole();
             };
             reader.readAsText(fileUpload.files[0]);
         } else {
@@ -322,19 +328,24 @@ function addSearchProvider(providerName, providerLink) {
     ;
 }
 
-function addLinkGroup(groupName, parentName) {
-
-    let newGroup = new LinkGroup(groupName, groupName, parentName);
+function addLinkGroup(groupNameIn, parentNameIn) {
+    let groupName = groupNameIn.trim();
+    let parentName = parentNameIn.trim();
+    let newGroup = new LinkGroup(groupName, parentName);
     linkGroups.push(newGroup);
-
+    console.log("Group '" + groupName + "' created. Parent name is \'"
+            + parentName + "'");
+    console.log("linkGroups length is " + linkGroups.length);
     if (parentName !== "None") {
         // Find parent link group and add this group as a child
         let parentFound = false;
-        for (i = 0; i < linkGroups.length; i++) {
+        for (var i = 0; i < linkGroups.length; i++) {
             if (linkGroups[i].name === parentName) {
                 linkGroups[i].children.push(newGroup);
                 parentFound = true;
             }
+//            console.log("Parent group " + parentName +
+//                    " found for group " + groupName);
         }
 
         if (parentFound === false) {
@@ -344,14 +355,18 @@ function addLinkGroup(groupName, parentName) {
     }
 }
 
-function addLinkItem(linkText, linkRef, linkGroup) {
+function addLinkItem(linkTextIn, linkRefIn, linkGroupIn) {
+    let linkText = linkTextIn.trim();
+    let linkRef = linkRefIn.trim();
+    let linkGroup = linkGroupIn.trim();
     let groupFound = false;
     let newLink = new Link(linkText, linkRef, linkGroup);
     // Find link group and add link
-    for (i = 0; i < linkGroups.length; i++) {
+    for (var i = 0; i < linkGroups.length; i++) {
         if (linkGroups[i].name === linkGroup) {
             linkGroups[i].attachLink(newLink);
             groupFound = true;
+//            console.log("Group found for link " + linkText);
         }
     }
 
@@ -360,6 +375,38 @@ function addLinkItem(linkText, linkRef, linkGroup) {
         orphanLinks.attachLink(newLink);
     }
 }
+
+function printLinksToConsole() {
+    console.log("Begin printing links.");
+    console.log("linkGroups length is " + linkGroups.length);
+    for (var i = 0; i < linkGroups.length; i++) {
+        console.log("i=" + i);
+        // Link subgroups will be printed when their top level groups are
+        // printed and top level children are iterated through.
+        console.log("Found link group '" + linkGroups[i].name + "'");
+        if (linkGroups[i].parent === "None") {
+            printLinkGroupToConsole(linkGroups[i]);
+        }
+    }
+
+    console.log("End printing links.");
+}
+
+function printLinkGroupToConsole(linkGroup) {
+    console.log("Link Group - " + linkGroup.name);
+    if (linkGroup.children.length > 0) {
+        for (var j = 0; j < linkGroup.children.length; j++) {
+            printLinkGroupToConsole(linkGroup.children[j]);
+        }
+    }
+    console.log("  Links in group");
+    // Print the links in this link group
+    for (var i = 0; i < linkGroup.links.length; i++) {
+        console.log("  " + linkGroup.links[i].displayName
+                + " - " + linkGroup.links[i].linkHref);
+    }
+}
+
 
 function addLinksToPage(linkText, linkRef, listDiv) {
 

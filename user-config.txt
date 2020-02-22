@@ -17,13 +17,13 @@ SEARCH-PROVIDER, Bing, https://www.bing.com/
 # to the LINK-GROUP definition, as shown below for the Podcasts link group.
 # Use commas as separators. One level of hierarchy/subgroup is supported.
 # Example below.
-# LINK-GROUP, Multimedia
-# LINK, Spotify, https://www.spotify.com/us/
-# LINK, Hulu, https://www.hulu.com/welcome
+# LINK-GROUP, Multimedia, None
+# LINK, Spotify, https://www.spotify.com/us/, Multimedia
+# LINK, Hulu, https://www.hulu.com/welcome, Multimedia
 # LINK-GROUP, Podcasts, Multimedia
-# LINK, PocketCasts, https://play.pocketcasts.com/web/podcasts
-# LINK, Return Home, http://www.returnhomepodcast.com/
-# LINK, No Sleep, https://www.thenosleeppodcast.com/ 
+# LINK, PocketCasts, https://play.pocketcasts.com/web/podcasts, Podcasts
+# LINK, Return Home, http://www.returnhomepodcast.com/, Podcasts
+# LINK, No Sleep, https://www.thenosleeppodcast.com/, Podcasts
 
 
 LINK-GROUP, News, None
@@ -51,21 +51,21 @@ LINK, Alice Isn't Dead, https://www.nightvalepresents.com/aliceisntdead, Podcast
 LINK, What A Time To Be Alive, https://soundcloud.com/whatatimepod, Podcasts
 
 LINK-GROUP, Dev, None
-LINK, GitHub, https://github.com/crlamke
-LINK, PocketCasts, https://play.pocketcasts.com/web/podcasts
-LINK, CodeChef, https://www.codechef.com/ide
-LINK, HTML Style Guide, https://google.github.io/styleguide/htmlcssguide.html
+LINK, GitHub, https://github.com/crlamke, Dev
+LINK, PocketCasts, https://play.pocketcasts.com/web/podcasts, Dev
+LINK, CodeChef, https://www.codechef.com/ide, Dev
+LINK, HTML Style Guide, https://google.github.io/styleguide/htmlcssguide.html, Dev
 
 
 LINK-GROUP, Work, None
-LINK, OneDrive, https://onedrive.live.com/
-LINK, LinkedIn, https://www.linkedin.com/
-LINK, KolabNow, https://kolabnow.com/
-LINK, Outlook, https://outlook.live.com
-LINK, Calendar, https://calendar.google.com/calendar/r
-LINK, RocketChat, https://rocket.chat/
+LINK, OneDrive, https://onedrive.live.com/, Work
+LINK, LinkedIn, https://www.linkedin.com/, Work
+LINK, KolabNow, https://kolabnow.com/, Work
+LINK, Outlook, https://outlook.live.com, Work
+LINK, Calendar, https://calendar.google.com/calendar/r, Work
+LINK, RocketChat, https://rocket.chat/, Work
 
 LINK-GROUP, Et Cetera, None
-LINK, Reddit, https://www.reddit.com/
-LINK, imgur, https://imgur.com/
+LINK, Reddit, https://www.reddit.com/, Et Cetera
+LINK, imgur, https://imgur.com/, Et Cetera
 
