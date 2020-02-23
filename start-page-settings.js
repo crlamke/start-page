@@ -64,7 +64,7 @@ function loadSettings() {
             reader.onload = function (e) {
                 var rows = e.target.result.split("\n");
                 parseSettings(rows);
-                printLinksToConsole();
+                //printLinksToConsole();
                 addLinksToPage();
             };
             reader.readAsText(fileUpload.files[0]);
@@ -111,8 +111,8 @@ function addLinkGroup(groupNameIn, parentNameIn) {
     let parentName = parentNameIn.trim();
     let newGroup = new LinkGroup(groupName, parentName);
     linkGroups.push(newGroup);
-    console.log("Group '" + groupName + "' created. Parent name is \'"
-            + parentName + "'");
+    //console.log("Group '" + groupName + "' created. Parent name is \'"
+    //        + parentName + "'");
     if (parentName !== "None") {
         // Find parent link group and add this group as a child
         let parentFound = false;
@@ -193,7 +193,7 @@ function addLinksToPage(linkText, linkRef, listDiv) {
             // that add links and sub groups to the link box.
             let linkBoxTitleDiv = document.getElementById(
                     "linkBoxTitle" + linkBoxCurrent);
-            console.log("linkBoxTitle = '" + linkBoxTitleDiv + "'");
+            //console.log("linkBoxTitle = '" + linkBoxTitleDiv + "'");
             linkBoxTitleDiv.innerHTML = linkGroups[i].name;
             let linkBoxList = document.getElementById(
                     "linkBox" + + linkBoxCurrent + "List0" );
