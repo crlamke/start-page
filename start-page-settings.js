@@ -195,9 +195,11 @@ function addLinksToPage(linkText, linkRef, listDiv) {
                     "linkBoxTitle" + linkBoxCurrent);
             console.log("linkBoxTitle = '" + linkBoxTitleDiv + "'");
             linkBoxTitleDiv.innerHTML = linkGroups[i].name;
-            let linkBoxContentDiv = document.getElementById(
-                    "linkBoxContent" + linkBoxCurrent);
-            addLinkGroupToPage(linkGroups[i], linkBoxContentDiv);
+            let linkBoxList = document.getElementById(
+                    "linkBox" + + linkBoxCurrent + "List0" );
+            //let linkBoxContentDiv = document.getElementById(
+            //        "linkBoxContent" + linkBoxCurrent);
+            addLinkGroupToPage(linkGroups[i], linkBoxList);
             
             // Increment link box number after we've completed adding links to the
             // current one.
@@ -222,7 +224,8 @@ function addLinkGroupToPage(linkGroup, linkBoxContentDiv) {
 
 
 function addLinkToList(linkText, linkRef, listDiv) {
-    var newDiv = document.createElement("div");
+    //var newDiv = document.createElement("div");
+    var newDiv = document.createElement("li");
     var newContent = document.createElement("a");
     newContent.href = linkRef;
     newContent.innerHTML = linkText;
@@ -230,6 +233,7 @@ function addLinkToList(linkText, linkRef, listDiv) {
     newDiv.appendChild(newContent);
 
     // Insert after anchor node  
-    listDiv.parentNode.appendChild(newDiv);
+    //listDiv.parentNode.appendChild(newDiv);
+    listDiv.appendChild(newDiv);
     //listDiv.parentNode.insertBefore(newDiv, listDiv.nextSibling);
 }

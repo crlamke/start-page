@@ -69,6 +69,23 @@ hr {
     border:none;
 }
 
+ul {
+  list-style-type: none;
+}
+
+li {
+  margin: 0;
+  padding-bottom: 2px;
+}
+
+
+.linkBoxList {
+  margin: 0;
+  padding: 0;
+}
+
+
+
 #toolBox0 { background-color: var(--dkgrey-color); }
 #toolBox1 { background-color: var(--dkgrey-color); }
 #toolBox2 { background-color: var(--dkgrey-color); }
@@ -167,7 +184,8 @@ hr {
     box-sizing: border-box;
     width: 300px;
     height: 150px;
-    overflow-y: scroll;
+    overflow-y: auto;
+    overflow-x: auto;
 }
 
 .toolBox::before {
@@ -198,6 +216,7 @@ hr {
     width: 300px;
     height: 150px;
     overflow-y: auto;
+    overflow-x: auto;
 }
 
 .linkBox::before {
