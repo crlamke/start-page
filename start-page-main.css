@@ -167,6 +167,7 @@ hr {
     box-sizing: border-box;
     width: 300px;
     height: 150px;
+    overflow-y: scroll;
 }
 
 .toolBox::before {
@@ -196,6 +197,7 @@ hr {
     box-sizing: border-box;
     width: 300px;
     height: 150px;
+    overflow-y: auto;
 }
 
 .linkBox::before {

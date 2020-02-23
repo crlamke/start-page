@@ -65,6 +65,7 @@ function loadSettings() {
                 var rows = e.target.result.split("\n");
                 parseSettings(rows);
                 printLinksToConsole();
+                addLinksToPage();
             };
             reader.readAsText(fileUpload.files[0]);
         } else {
@@ -181,6 +182,46 @@ function printLinkGroupToConsole(linkGroup) {
 
 function addLinksToPage(linkText, linkRef, listDiv) {
 
+    var linkBoxCurrent = 0; // Current link box we're adding links to
+    const linkBoxTotal = 6; // Number of link boxes on web page
+
+    for (var i = 0; i < linkGroups.length; i++) {
+        // When we find a top level group, we want to add its contents,
+        // both links and sub groups, to the current link box.
+        if (linkGroups[i].parent === "None") {
+            // Set link box title and get div for link box to pass to functions
+            // that add links and sub groups to the link box.
+            let linkBoxTitleDiv = document.getElementById(
+                    "linkBoxTitle" + linkBoxCurrent);
+            console.log("linkBoxTitle = '" + linkBoxTitleDiv + "'");
+            linkBoxTitleDiv.innerHTML = linkGroups[i].name;
+            let linkBoxContentDiv = document.getElementById(
+                    "linkBoxContent" + linkBoxCurrent);
+            addLinkGroupToPage(linkGroups[i], linkBoxContentDiv);
+            
+            // Increment link box number after we've completed adding links to the
+            // current one.
+            linkBoxCurrent++;
+        }
+    }
+}
+
+function addLinkGroupToPage(linkGroup, linkBoxContentDiv) {
+    if (linkGroup.children.length > 0) {
+        for (var j = 0; j < linkGroup.children.length; j++) {
+            addLinkGroupToPage(linkGroup.children[j], linkBoxContentDiv);
+        }
+    }
+    // Add the links in this link group
+    for (var i = 0; i < linkGroup.links.length; i++) {
+        addLinkToList(linkGroup.links[i].displayName,
+                linkGroup.links[i].linkHref,
+                linkBoxContentDiv);
+    }
+}
+
+
+function addLinkToList(linkText, linkRef, listDiv) {
     var newDiv = document.createElement("div");
     var newContent = document.createElement("a");
     newContent.href = linkRef;
@@ -189,5 +230,6 @@ function addLinksToPage(linkText, linkRef, listDiv) {
     newDiv.appendChild(newContent);
 
     // Insert after anchor node  
-    listDiv.parentNode.insertBefore(newDiv, listDiv.nextSibling);
+    listDiv.parentNode.appendChild(newDiv);
+    //listDiv.parentNode.insertBefore(newDiv, listDiv.nextSibling);
 }
