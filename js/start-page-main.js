@@ -43,6 +43,8 @@ function initializePage() {
     // document.getElementById("searchInput").focus();
     //readTextFile("./user-config.txt");
 
+    document.documentElement.setAttribute('theme', 'dark')
+
     var bodyStyles = window.getComputedStyle(document.body);
     var greyColor = bodyStyles.getPropertyValue('--dkgrey-color');
     for (i = 0; i < 6; i++) {
@@ -160,12 +162,3 @@ function stopTimer() {
 
 }
 
-var toggler = document.getElementsByClassName("caret");
-var i;
-
-for (i = 0; i < toggler.length; i++) {
-  toggler[i].addEventListener("click", function() {
-    this.parentElement.querySelector(".nested").classList.toggle("active");
-    this.classList.toggle("caret-down");
-  });
-}

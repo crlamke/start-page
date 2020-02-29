@@ -24,9 +24,6 @@
 
 
 class Link {
-    displayName = "";
-    linkHref = "";
-    groupName = "";
 
     constructor(displayName, linkHref, groupName) {
         this.displayName = displayName;
@@ -36,10 +33,6 @@ class Link {
 }
 
 class LinkGroup {
-    name = "";
-    parent;
-    children;
-    links;
 
     constructor(name, parent) {
         this.name = name;
@@ -66,6 +59,7 @@ function loadSettings() {
                 parseSettings(rows);
                 //printLinksToConsole();
                 addLinksToPage();
+                addListToggle();
             };
             reader.readAsText(fileUpload.files[0]);
         } else {
@@ -196,11 +190,10 @@ function addLinksToPage(linkText, linkRef, listDiv) {
             //console.log("linkBoxTitle = '" + linkBoxTitleDiv + "'");
             linkBoxTitleDiv.innerHTML = linkGroups[i].name;
             let linkBoxList = document.getElementById(
-                    "linkBox" + + linkBoxCurrent + "List0" );
+                    "linkBox" + linkBoxCurrent + "List0");
             //let linkBoxContentDiv = document.getElementById(
             //        "linkBoxContent" + linkBoxCurrent);
             addLinkGroupToPage(linkGroups[i], linkBoxList);
-            
             // Increment link box number after we've completed adding links to the
             // current one.
             linkBoxCurrent++;
@@ -214,11 +207,24 @@ function addLinkGroupToPage(linkGroup, linkBoxContentDiv) {
             addLinkGroupToPage(linkGroup.children[j], linkBoxContentDiv);
         }
     }
+
+    // Add the group header so this becomes a toggle-able list
+    let newLI = document.createElement("li");
+    let newSpan = document.createElement("span");
+    newSpan.setAttribute('class', 'caret');
+    console.log("Setting group header to " + linkGroup.name)
+    newSpan.textContent = linkGroup.name;
+    let newUL = document.createElement("ul");
+    newUL.setAttribute('class', 'nested');
+    newLI.appendChild(newSpan);
+    newLI.appendChild(newUL);
+    linkBoxContentDiv.appendChild(newLI);
+
     // Add the links in this link group
     for (var i = 0; i < linkGroup.links.length; i++) {
         addLinkToList(linkGroup.links[i].displayName,
                 linkGroup.links[i].linkHref,
-                linkBoxContentDiv);
+                newUL);
     }
 }
 
@@ -236,4 +242,18 @@ function addLinkToList(linkText, linkRef, listDiv) {
     //listDiv.parentNode.appendChild(newDiv);
     listDiv.appendChild(newDiv);
     //listDiv.parentNode.insertBefore(newDiv, listDiv.nextSibling);
+}
+
+function addListToggle() {
+    var toggler = document.getElementsByClassName("caret");
+    var i;
+
+    for (i = 0; i < toggler.length; i++) {
+        console.log("Adding listener to " + i);
+        toggler[i].addEventListener("click", function () {
+            this.parentElement.querySelector(".nested").classList.toggle("active");
+            this.classList.toggle("caret-down");
+        });
+    }
+
 }

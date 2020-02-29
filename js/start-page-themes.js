@@ -49,3 +49,14 @@
               document.getElementById('slider').checked = true;
             }
         })();
+        
+        const toggleBtn = document.querySelector("#toggle-theme");
+toggleBtn.addEventListener('click', e => {
+  console.log("Switching theme");
+  if(document.documentElement.hasAttribute('theme')){
+    document.documentElement.removeAttribute('theme');
+  }
+  else{
+    document.documentElement.setAttribute('theme', 'dark');
+  }
+});

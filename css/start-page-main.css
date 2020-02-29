@@ -19,8 +19,33 @@
     --whitish-color: #fcf9ff;
 }
 
+:root[theme='dark'] {
+    --color-background: #404040;
+    --color-primary: #0060df;
+    --color-secondary: #fbfbfe;
+    --color-accent: #fd6f53;
+    --font-color: #000000;
+}
+
+:root[theme='light'] {
+    --color-background: #404040;
+    --color-primary: #17ed90;
+    --color-secondary: #2a2c2d;
+    --color-accent: #12cdea;
+    --font-color: #ffffff;
+}
+
+:root[theme='colorfulA'] {
+    --color-background: #404040;
+    --color-primary: #17ed90;
+    --color-secondary: #2a2c2d;
+    --color-accent: #12cdea;
+    --font-color: #ffffff;
+}
+
+
 body { 
-    background-color: #404040; 
+    background-color: var(--color-background); 
     font-family: 'Arial', sans-serif; font-size: 10pt; 
     /*height: 100%;
     margin: 0;*/
@@ -70,49 +95,49 @@ hr {
 }
 
 ul {
-  list-style-type: none;
+    list-style-type: none;
 }
 
 li {
-  margin: 0;
-  padding-bottom: 2px;
+    margin: 0;
+    padding-bottom: 2px;
 }
 
 /* CSS below taken from https://www.w3schools.com/howto/howto_js_treeview.asp */
 .caret {
-  cursor: pointer;
-  -webkit-user-select: none; /* Safari 3.1+ */
-  -moz-user-select: none; /* Firefox 2+ */
-  -ms-user-select: none; /* IE 10+ */
-  user-select: none;
+    cursor: pointer;
+    -webkit-user-select: none; /* Safari 3.1+ */
+    -moz-user-select: none; /* Firefox 2+ */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none;
 }
 
 .caret::before {
-  content: "\25B6";
-  color: black;
-  display: inline-block;
-  margin-right: 6px;
+    content: "\25B6";
+    color: black;
+    display: inline-block;
+    margin-right: 6px;
 }
 
 .caret-down::before {
-  -ms-transform: rotate(90deg); /* IE 9 */
-  -webkit-transform: rotate(90deg); /* Safari */
-  transform: rotate(90deg);  
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Safari */
+    transform: rotate(90deg);  
 }
 
 .nested {
-  display: none;
+    display: none;
 }
 
 .active {
-  display: block;
+    display: block;
 }
 
 
 
 .linkBoxList {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 
