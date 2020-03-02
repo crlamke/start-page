@@ -27,7 +27,7 @@ var elapsedDisplayDefault = "00:00:00";
 var alarms = new Array();
 var searchTargetOption = SearchTargetOption.DUCKDUCKGO;
 //var timeRegExp = new RegExp('([01]?\d|2[0-3]):([0-5]\d)');
-var linkGroups = []; // Array to hold all LinkGroup objects
+
 //var orphanLinks = new LinkGroup("Orphans", "None");
 
 let linksDB; // Store links and link groups

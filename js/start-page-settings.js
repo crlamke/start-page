@@ -46,6 +46,10 @@ class LinkGroup {
     }
 }
 
+var linkGroupsJSON = "";
+
+var linkGroups = []; // Array to hold all LinkGroup objects
+
 // Load the setting file from disk, break it into lines, and pass the lines
 // to another function to parse.
 function loadSettings() {
@@ -60,6 +64,8 @@ function loadSettings() {
                 //printLinksToConsole();
                 addLinksToPage();
                 addListToggle();
+                linksToJSON();
+                linksFromJSON();
             };
             reader.readAsText(fileUpload.files[0]);
         } else {
@@ -140,7 +146,7 @@ function addLinkItem(linkTextIn, linkRefIn, linkGroupIn) {
 
     if (groupFound === false) {
         console.log("No group found for link " + linkText);
-        orphanLinks.attachLink(newLink);
+      //  orphanLinks.attachLink(newLink);
     }
 }
 
@@ -201,47 +207,57 @@ function addLinksToPage(linkText, linkRef, listDiv) {
     }
 }
 
-function addLinkGroupToPage(linkGroup, linkBoxContentDiv) {
+function addLinkGroupToPage(linkGroup, linkBoxList) {
     if (linkGroup.children.length > 0) {
         for (var j = 0; j < linkGroup.children.length; j++) {
-            addLinkGroupToPage(linkGroup.children[j], linkBoxContentDiv);
+            addLinkGroupToPage(linkGroup.children[j], linkBoxList);
         }
     }
 
-    // Add the group header so this becomes a toggle-able list
-    let newLI = document.createElement("li");
-    let newSpan = document.createElement("span");
-    newSpan.setAttribute('class', 'caret');
-    console.log("Setting group header to " + linkGroup.name)
-    newSpan.textContent = linkGroup.name;
-    let newUL = document.createElement("ul");
-    newUL.setAttribute('class', 'nested');
-    newLI.appendChild(newSpan);
-    newLI.appendChild(newUL);
-    linkBoxContentDiv.appendChild(newLI);
+    if (linkGroup.parent !== "None") {
+        // Add the group header so this becomes a toggle-able list
+        let newLI = document.createElement("li");
+        let newSpan = document.createElement("span");
+        newSpan.setAttribute('class', 'caret');
+        console.log("Setting group header to " + linkGroup.name);
+        newSpan.textContent = linkGroup.name;
+        let newUL = document.createElement("ul");
+        newUL.setAttribute('class', 'nested');
+        newLI.appendChild(newSpan);
+        newLI.appendChild(newUL);
+        linkBoxList.appendChild(newLI);
 
-    // Add the links in this link group
-    for (var i = 0; i < linkGroup.links.length; i++) {
-        addLinkToList(linkGroup.links[i].displayName,
-                linkGroup.links[i].linkHref,
-                newUL);
+        // Add the links in this link group
+        for (var i = 0; i < linkGroup.links.length; i++) {
+            addLinkToList(linkGroup.links[i].displayName,
+                    linkGroup.links[i].linkHref,
+                    newUL, true);
+        }
+    } else {
+        // Add the links in this link group
+        for (var i = 0; i < linkGroup.links.length; i++) {
+            addLinkToList(linkGroup.links[i].displayName,
+                    linkGroup.links[i].linkHref,
+                    linkBoxList, false);
+        }
     }
+
 }
 
 
-function addLinkToList(linkText, linkRef, listDiv) {
+function addLinkToList(linkText, linkRef, list, isNested) {
     //var newDiv = document.createElement("div");
-    var newDiv = document.createElement("li");
+    var newLI = document.createElement("li");
     var newContent = document.createElement("a");
     newContent.href = linkRef;
     newContent.innerHTML = linkText;
     newContent.setAttribute('target', '_blank');
-    newDiv.appendChild(newContent);
+    //if (isNested === true) {
+    //    newContent.setAttribute('padding-left', '0px');
+    //}
+    newLI.appendChild(newContent);
 
-    // Insert after anchor node  
-    //listDiv.parentNode.appendChild(newDiv);
-    listDiv.appendChild(newDiv);
-    //listDiv.parentNode.insertBefore(newDiv, listDiv.nextSibling);
+    list.appendChild(newLI);
 }
 
 function addListToggle() {
@@ -257,3 +273,25 @@ function addListToggle() {
     }
 
 }
+
+function linksToJSON() {
+    linkGroupsJSON = JSON.stringify(linkGroups);
+    console.log("linkGroupsJSON = " + linkGroupsJSON);
+}
+
+function linksFromJSON() {
+    let linkGroupsResult = JSON.parse(linkGroupsJSON);
+    for (var i = 0; i < linkGroupsResult.length; i ++) {
+        console.log("linkGroupsResult " + i + " = " + linkGroupsResult[i]);
+    }
+    
+}
+
+function storeLinks() {
+    
+}
+
+function loadLinks() {
+    
+}
+
