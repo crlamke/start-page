@@ -64,8 +64,8 @@ function loadSettings() {
                 //printLinksToConsole();
                 addLinksToPage();
                 addListToggle();
-                linksToJSON();
-                linksFromJSON();
+               // linksToJSON();
+               // linksFromJSON();
             };
             reader.readAsText(fileUpload.files[0]);
         } else {

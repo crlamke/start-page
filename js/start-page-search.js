@@ -23,8 +23,6 @@
  */
 
 class searchProvider {
-    displayName = "";
-    searchCommand = "";
 
     constructor(displayName, searchCommand) {
         this.displayName = displayName;
