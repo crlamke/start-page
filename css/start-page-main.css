@@ -5,6 +5,7 @@
 */
 
 :root{
+    /* Some of my favorite UI colors defined for convenience */
     --red-color: #f44336;
     --purple-color: #9c27b0;
     --pinkish-color: #e91e63;
@@ -12,47 +13,35 @@
     --ltgreen-color: #4caf50;
     --ltorange-color: #ff9800;
     --purpleish-color: #9999ff;
-    --dkgrey-color: #404040;
+    --darkgrey-color: #303030;
+    --mediumdarkgrey-color: #404040;
+    --mediumgrey-color: #808080;
     --ltgrey-color: #e0e0e0;
     --blackish-color: #1c0000;
     --white-color: #ffffff;
     --whitish-color: #fcf9ff;
-}
 
-:root[theme='dark'] {
-    --color-background: #404040;
+    /* Theme color definitions and default colors */
+    --color-background: #303030;
     --color-primary: #0060df;
     --color-secondary: #fbfbfe;
     --color-accent: #fd6f53;
-    --font-color: #000000;
+    --color-font: #000000;
+    --color-text: #ffffff;
+    --color-link: #fcf9ff;
+    --color-link-hover: blue;
+    --color-list-toggle: #000000;
+    --color-toolbox-body: #404040;
+    --color-linkbox-body: #404040;
 }
-
-:root[theme='light'] {
-    --color-background: #404040;
-    --color-primary: #17ed90;
-    --color-secondary: #2a2c2d;
-    --color-accent: #12cdea;
-    --font-color: #ffffff;
-}
-
-:root[theme='colorfulA'] {
-    --color-background: #404040;
-    --color-primary: #17ed90;
-    --color-secondary: #2a2c2d;
-    --color-accent: #12cdea;
-    --font-color: #ffffff;
-}
-
 
 body { 
-    background-color: var(--color-background); 
+    background-color: var(--color-background);
     font-family: 'Arial', sans-serif; font-size: 10pt; 
-    /*height: 100%;
-    margin: 0;*/
 }
 
 a  {
-    color:white; 
+    color: var(--color-link); 
     font-family: Tahoma, Geneva, sans-serif; font-size:16px;
     padding-left:20px;
     margin-bottom: 2px;
@@ -61,34 +50,35 @@ a  {
 }
 
 a:hover {
-    color: blue;
+    color: var(--color-link-hover);
 }
 
 a:active {
-    color: blue;
+    color: var(--color-link-hover); 
     text-decoration: underline;
 }
 
 h2 {
-    color:white; 
+    color: var(--color-text); 
     font-family: Tahoma, Geneva, sans-serif; font-size:30px;
     padding-left:15px;
 }
 
 h3 {
-    color:white;
+    color: var(--color-text);
     margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px;
     font-family: Tahoma, Geneva, sans-serif; font-size:18px; text-align: center;
 }
 
 p {
-    color:white;
+    color: var(--color-text);
     font-family: Tahoma, Geneva, sans-serif; font-size:20px;
     border:0px;
 }
 
 hr {
-    color:white; background-color:white; 
+    color: var(--color-text);
+    background-color: var(--color-text);
     margin-top: 5px; margin-right: 10px; margin-bottom: 5px; margin-left: 10px;
     height:1px;
     border:none;
@@ -114,7 +104,7 @@ li {
 
 .caret::before {
     content: "\25B6";
-    color: black;
+    color: var(--color-list-toggle);
     display: inline-block;
     margin-right: 6px;
 }
@@ -133,15 +123,11 @@ li {
     display: block;
 }
 
-
-
 .linkBoxList {
     margin: 0;
     padding: 0;
 }
-
-
-
+/*
 #toolBox0 { background-color: var(--dkgrey-color); }
 #toolBox1 { background-color: var(--dkgrey-color); }
 #toolBox2 { background-color: var(--dkgrey-color); }
@@ -155,6 +141,7 @@ li {
 #linkBox3 { background-color: var(--pinkish-color); }
 #linkBox4 { background-color: var(--ltorange-color); }
 #linkBox5 { background-color: var(--purpleish-color); }
+*/
 
 #status {
     padding-left:8px; padding-bottom:16px; margin: 8px;
@@ -171,7 +158,6 @@ li {
 .statusDisplayLabel {
     display: inline-block;
     width: 110px;
-    /* font-weight: bold; */
 }
 
 .settingsDisplay {
@@ -183,16 +169,6 @@ li {
 .settingsDisplayButton {
     margin-left:8px;
     font-family: 'Times', sans-serif; font-size: 16px;
-}
-
-
-.searchOptionDisplayLabel {
-    /*    padding-left:8px; padding-bottom:6px;*/
-    font-family: 'Times', sans-serif; font-size: 16px;
-    color:var(--whitish-color);
-    display: inline-block;
-    width: 110px;
-    /* font-weight: bold; */
 }
 
 .alarmButton {
@@ -220,10 +196,26 @@ li {
     font-size:18px;
 }
 
-#searchTarget {
+#searchInput {
     padding-left:16px; padding-bottom:8px; padding-top:8px;
     height:20px;
     font-size:12px; 
+}
+
+#searchTarget {
+    padding-left:0px; padding-bottom:8px; padding-top:8px;
+    margin-left: 0px;
+    height:20px;
+    font-size:12px; 
+}
+
+.searchOptionDisplayLabel {
+    padding-left:8px; padding-bottom:6px;
+    font-family: 'Times', sans-serif; font-size: 16px;
+    color:var(--whitish-color);
+    display: inline-block;
+    width: 110px;
+    /* font-weight: bold; */
 }
 
 .toolBox-container {
@@ -233,6 +225,7 @@ li {
 }
 
 .toolBox {
+    background-color: var(--color-toolbox-body);
     position: relative;
     flex-basis: calc(30% - 10px);
     margin-top: 12px; margin-right: 20px; margin-bottom: 12px; margin-left: 20px;
@@ -262,6 +255,7 @@ li {
 }
 
 .linkBox {
+    background-color: var(--color-linkbox-body);
     position: relative;
     flex-basis: calc(20% - 10px);
     margin-top: 12px; margin-right: 20px; margin-bottom: 12px; margin-left: 20px;

@@ -26,23 +26,6 @@
  * Application global variables
  */
 
-// Alarm state
-var alarmState = AlarmState.UNSET;
-var alarmDisplayDefault = "Not Set";
-var alarmSetHour = 0;
-var alarmSetMinute = 0;
-var alarmTimeIsValid = false;
-var alarms = new Array();
-
-// Timer state
-var timerState = TimerState.STOPPED;
-var elapsedTime = 0;
-var splitTime = 0;
-var elapsedDisplayDefault = "00:00:00";
-
-// Search state
-var searchTargetOption = SearchTargetOption.DUCKDUCKGO;
-
 // Database state
 let linksDB; // Store links and link groups
 let configDB; // Store general page config 
@@ -58,7 +41,7 @@ function initializePage() {
     // document.getElementById("searchInput").focus();
     //readTextFile("./user-config.txt");
 
-    document.documentElement.setAttribute('theme', 'dark')
+    document.documentElement.setAttribute('theme', 'dark');
 
     var bodyStyles = window.getComputedStyle(document.body);
     var greyColor = bodyStyles.getPropertyValue('--dkgrey-color');

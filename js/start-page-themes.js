@@ -22,41 +22,55 @@
  * THE SOFTWARE.
  */
 
+/*
+:root[theme='dark'] {
+    --color-background: #404040;
+    --color-primary: #0060df;
+    --color-secondary: #fbfbfe;
+    --color-accent: #fd6f53;
+    --color-font: #000000;
+    --color-link: #fcf9ff;
+    --color-link-hover: blue;
+}
 
+:root[theme='light'] {
+    --color-background: #404040;
+    --color-primary: #17ed90;
+    --color-secondary: #2a2c2d;
+    --color-accent: #12cdea;
+    --color-font: #ffffff;
+    --color-link: #ffffff;
+    --color-link-hover: blue;
+}
 
- // function to set a given theme/color-scheme
-        function setTheme(themeName) {
-            localStorage.setItem('theme', themeName);
-            document.documentElement.className = themeName;
-        }
+:root[theme='colorfulA'] {
+    --color-background: #404040;
+    --color-primary: #17ed90;
+    --color-secondary: #2a2c2d;
+    --color-accent: #12cdea;
+    --color-font: #ffffff;
+    --color-link: #ffffff;
+    --color-link-hover: blue;
+}
 
-        // function to toggle between light and dark theme
-        function toggleTheme() {
-            if (localStorage.getItem('theme') === 'theme-dark') {
-                setTheme('theme-light');
-            } else {
-                setTheme('theme-dark');
-            }
-        }
+*/
 
-        // Immediately invoked function to set the theme on initial load
-        (function () {
-            if (localStorage.getItem('theme') === 'theme-dark') {
-                setTheme('theme-dark');
-                document.getElementById('slider').checked = false;
-            } else {
-                setTheme('theme-light');
-              document.getElementById('slider').checked = true;
-            }
-        })();
-        
-        const toggleBtn = document.querySelector("#toggle-theme");
-toggleBtn.addEventListener('click', e => {
-  console.log("Switching theme");
-  if(document.documentElement.hasAttribute('theme')){
-    document.documentElement.removeAttribute('theme');
-  }
-  else{
-    document.documentElement.setAttribute('theme', 'dark');
-  }
-});
+function themeOptionSelect(selectedValue) {
+    if (selectedValue === "optDark") {
+        setTheme("theme-dark");
+    } else if (selectedValue === "optLight") {
+        setTheme("theme-light");
+    } else if (selectedValue === "optColorfulA") {
+        setTheme("theme-colorful-a");
+    } else {
+        console.log("Invalid Theme Selection");
+    }
+}
+
+// function to set a given theme/color-scheme
+function setTheme(themeName) {
+    //localStorage.setItem('theme', themeName);
+    document.documentElement.setAttribute('theme', themeName);
+    //document.documentElement.setAttribute()
+}
+

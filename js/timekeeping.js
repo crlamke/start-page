@@ -21,24 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
- 
- 
- 
+
+// Timekeeping state
+var currentTime;
+
+// Alarm state
 var AlarmState = {
     UNSET: 0,
     SET: 1
 };
+var alarmState = AlarmState.UNSET;
+var alarmDisplayDefault = "Not Set";
+var alarmSetHour = 0;
+var alarmSetMinute = 0;
+var alarmTimeIsValid = false;
+var alarms = new Array();
 
+// Timer state
 var TimerState = {
     STOPPED: 0,
     RUNNING: 1
 };
-
-
- 
+var timerState = TimerState.STOPPED;
+var elapsedTime = 0;
+var splitTime = 0;
+var elapsedDisplayDefault = "00:00:00";
 
 function keepTime() {
-    var currentTime = new Date();
+    currentTime = new Date();
 
     var currentTimeFormatted = formatTimeHMS(currentTime, true);
 
@@ -53,10 +63,15 @@ function keepTime() {
             alarmState = AlarmState.UNSET;
         }
     }
+
+    if (timerState === TimerState.RUNNING) {
+        updateTimer(currentTime, currentTimeFormatted);
+    }
+
     // Use a 1 second (1000 millisecond) tick, good enough for our needs.
     var t = setTimeout(keepTime, 1000);
 }
- 
+
 
 function formatTimeHMS(timeIn, withSeconds) {
     var hours = timeIn.getHours();
@@ -93,17 +108,26 @@ function startTimer() {
 
 function markTimerSplit() {
     if (timerState === TimerState.RUNNING) {
-        document.getElementById('elapsedDisplay').innerHTML = elapsedDisplayDefault;
-        document.getElementById('splitDisplay').innerHTML = elapsedDisplayDefault;
+        let currentTimeFormatted = formatTimeHMS(currentTime, true);
+        document.getElementById('splitDisplay').innerHTML = currentTimeFormatted;
     }
-
 }
 
 function stopTimer() {
-
+    if (timerState === TimerState.RUNNING) {
+        timerState = TimerState.STOPPED;
+    }
 }
 
+function resetTimer() {
+    timerState = TimerState.STOPPED;
+    document.getElementById('elapsedDisplay').innerHTML = elapsedDisplayDefault;
+    document.getElementById('splitDisplay').innerHTML = elapsedDisplayDefault;
+}
 
+function updateTimer(currentTime, currentTimeFormatted) {
+    document.getElementById('elapsedDisplay').innerHTML = currentTimeFormatted;
+}
 
 function alarmTimeUpdate(newValue) {
     var timeRegExp = /([01]?\d|2[0-3]):([0-5]\d)/;

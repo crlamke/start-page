@@ -36,6 +36,9 @@ var SearchTargetOption = {
     BING: 2
 };
 
+// Search state
+var searchTargetOption = SearchTargetOption.DUCKDUCKGO;
+
 function addSearchProvider(providerName, providerLink) {
     ;
 }
