@@ -41,9 +41,6 @@ class LinkGroup {
         this.links = new Array();
     }
 
-    attachLink(link) {
-        this.links.push(link);
-    }
 }
 
 var linkGroupsJSON = "";
@@ -64,8 +61,8 @@ function loadSettings() {
                 //printLinksToConsole();
                 addLinksToPage();
                 addListToggle();
-               // linksToJSON();
-               // linksFromJSON();
+                //linksToJSON();
+                //linksFromJSON();
             };
             reader.readAsText(fileUpload.files[0]);
         } else {
@@ -139,7 +136,8 @@ function addLinkItem(linkTextIn, linkRefIn, linkGroupIn) {
     // Find link group and add link
     for (var i = 0; i < linkGroups.length; i++) {
         if (linkGroups[i].name === linkGroup) {
-            linkGroups[i].attachLink(newLink);
+            linkGroups[i].links.push(newLink);
+            //linkGroups[i].attachLink(newLink);
             groupFound = true;
         }
     }
@@ -275,12 +273,18 @@ function addListToggle() {
 }
 
 function linksToJSON() {
+    console.log("\n\nTo JSON\n\n");
+    for (let i = 0; i < linkGroups.length; i ++) {
+        
+        console.log("linkGroupsJSON = " + JSON.stringify(linkGroups[i]));    
+    }
     linkGroupsJSON = JSON.stringify(linkGroups);
-    console.log("linkGroupsJSON = " + linkGroupsJSON);
+    //console.log("linkGroupsJSON = " + linkGroupsJSON);
 }
 
 function linksFromJSON() {
     let linkGroupsResult = JSON.parse(linkGroupsJSON);
+    console.log("\n\nFrom JSON\n\n");
     for (var i = 0; i < linkGroupsResult.length; i ++) {
         console.log("linkGroupsResult " + i + " = " + linkGroupsResult[i]);
     }

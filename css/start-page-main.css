@@ -6,6 +6,7 @@
 
 :root{
     /* Some of my favorite UI colors defined for convenience */
+    --black-color: #000000;
     --red-color: #f44336;
     --purple-color: #9c27b0;
     --pinkish-color: #e91e63;
@@ -22,7 +23,7 @@
     --whitish-color: #fcf9ff;
 
     /* Theme color definitions and default colors */
-    --color-background: #303030;
+    --color-background: #000000;
     --color-primary: #0060df;
     --color-secondary: #fbfbfe;
     --color-accent: #fd6f53;
@@ -30,7 +31,7 @@
     --color-text: #ffffff;
     --color-link: #fcf9ff;
     --color-link-hover: blue;
-    --color-list-toggle: #000000;
+    --color-list-toggle: #fcf9ff;
     --color-toolbox-body: #404040;
     --color-linkbox-body: #404040;
 }
@@ -95,6 +96,7 @@ li {
 
 /* CSS below taken from https://www.w3schools.com/howto/howto_js_treeview.asp */
 .caret {
+    color: var(--color-list-toggle);
     cursor: pointer;
     -webkit-user-select: none; /* Safari 3.1+ */
     -moz-user-select: none; /* Firefox 2+ */

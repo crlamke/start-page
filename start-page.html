@@ -54,16 +54,17 @@
             </div>
 
             <div class="toolBox" id="toolBox2">
-                <div class="content">
-                    <h3>Settings</h3>
+                                <div class="content">
+                    <h3>Timer</h3>
                     <hr>
-                    <div id="pageTheme" >
-                        <div class="themeDisplay"><span class="themeOptionDisplayLabel">Theme:</span>
-                            <select id="theme-option-select" onchange="themeOptionSelect(this.options[this.selectedIndex].value)">
-                                <option value="optDark" >Dark</option>
-                                <option value="optLight" selected>Light</option>
-                                <option value="optColorfulA">Colorful A</option>
-                            </select>
+                    <div id="status">
+                        <div class="statusDisplay"><b>Elapsed: </b> <span id="elapsedDisplay"></span></div>
+                        <div class="statusDisplay"><b>Split: </b> <span id="splitDisplay"></span></div>
+                        <div class="statusDisplay">
+                            <button id="timerStartButton" class="timerButton" onclick="startTimer()">Start</button>
+                            <button id="timerSplitButton" class="timerButton" onclick="markTimerSplit()">Split</button>
+                            <button id="timerStopButton" class="timerButton" onclick="stopTimer()">Stop</button>
+                            <button id="timerResetButton" class="timerButton" onclick="resetTimer()">Reset</button>
                         </div>
                     </div>
                 </div>
@@ -144,19 +145,19 @@
 
             <div class="toolBox" id="toolBox3">
                 <div class="content">
-                    <h3>Timer</h3>
+                    <h3>Settings</h3>
                     <hr>
-                    <div id="status">
-                        <div class="statusDisplay"><b>Elapsed: </b> <span id="elapsedDisplay"></span></div>
-                        <div class="statusDisplay"><b>Split: </b> <span id="splitDisplay"></span></div>
-                        <div class="statusDisplay">
-                            <button id="timerStartButton" class="timerButton" onclick="startTimer()">Start</button>
-                            <button id="timerSplitButton" class="timerButton" onclick="markTimerSplit()">Split</button>
-                            <button id="timerStopButton" class="timerButton" onclick="stopTimer()">Stop</button>
-                            <button id="timerResetButton" class="timerButton" onclick="resetTimer()">Reset</button>
+                    <div id="pageTheme" >
+                        <div class="themeDisplay"><span class="themeOptionDisplayLabel">Theme:</span>
+                            <select id="theme-option-select" onchange="themeOptionSelect(this.options[this.selectedIndex].value)">
+                                <option value="optDark" >Dark</option>
+                                <option value="optLight" selected>Light</option>
+                                <option value="optColorfulA">Colorful A</option>
+                            </select>
                         </div>
                     </div>
                 </div>
+
             </div>
 
             <div class="toolBox" id="toolBox4">
