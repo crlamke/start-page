@@ -26,7 +26,7 @@ SEARCH-PROVIDER, Bing, https://www.bing.com/
 # LINK, No Sleep, https://www.thenosleeppodcast.com/, Podcasts
 
 
-LINK-GROUP, News, None
+LINK-GROUP, News, None, purple, 1
 LINK, TweetDeck, https://tweetdeck.twitter.com/, News
 LINK, Twitter, https://twitter.com/, News
 LINK, Hacker news, https://news.ycombinator.com/, News
@@ -34,7 +34,7 @@ LINK, BBC News, https://www.bbc.com/news, News
 LINK, NYT, https://www.nytimes.com/, News
 LINK, AP News, https://apnews.com/, News
 
-LINK-GROUP, Multimedia, None
+LINK-GROUP, Multimedia, None, pink, 2
 LINK, Spotify, https://www.spotify.com/us/, Multimedia
 LINK, Hulu, https://www.hulu.com/welcome, Multimedia
 LINK, Netflix, https://www.netflix.com/, Multimedia
@@ -50,14 +50,14 @@ LINK, Mission to Zyxx, https://www.missiontozyxx.space/, Podcasts
 LINK, Last Podcast on the Left, https://www.lastpodcastontheleft.com/, Podcasts
 LINK, What A Time To Be Alive, https://soundcloud.com/whatatimepod, Podcasts
 
-LINK-GROUP, Dev, None
+LINK-GROUP, Dev, None, blue, 3
 LINK, GitHub, https://github.com/crlamke, Dev
 LINK, PocketCasts, https://play.pocketcasts.com/web/podcasts, Dev
 LINK, CodeChef, https://www.codechef.com/ide, Dev
 LINK, HTML Style Guide, https://google.github.io/styleguide/htmlcssguide.html, Dev
 
 
-LINK-GROUP, Work, None
+LINK-GROUP, Work, None, green, 4
 LINK, OneDrive, https://onedrive.live.com/, Work
 LINK, LinkedIn, https://www.linkedin.com/, Work
 LINK, KolabNow, https://kolabnow.com/, Work
@@ -65,7 +65,7 @@ LINK, Outlook, https://outlook.live.com, Work
 LINK, Calendar, https://calendar.google.com/calendar/r, Work
 LINK, RocketChat, https://rocket.chat/, Work
 
-LINK-GROUP, Et Cetera, None
+LINK-GROUP, Et Cetera, None, orange, 5
 LINK, Reddit, https://www.reddit.com/, Et Cetera
 LINK, imgur, https://imgur.com/, Et Cetera
 

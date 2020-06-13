@@ -34,9 +34,11 @@ class Link {
 
 class LinkGroup {
 
-    constructor(name, parent) {
+    constructor(name, parent, color, position) {
         this.name = name;
         this.parent = parent;
+        this.color = color;
+        this.position = position;
         this.children = new Array();
         this.links = new Array();
     }
@@ -46,6 +48,28 @@ class LinkGroup {
 var linkGroupsJSON = "";
 
 var linkGroups = []; // Array to hold all LinkGroup objects
+
+
+function loadUserConfig() {
+
+    fetch('./user-config.txt')
+            .then(response => response.text())
+            .then((data) => {
+                var rows = data.split("\n");
+                //console.log(rows);
+                parseUserConfig(rows);
+            });
+}
+
+function parseUserConfig(rows) {
+    parseSettings(rows);
+    //printLinksToConsole();
+    addLinksToPage();
+    addListToggle();
+    //linksToJSON();
+    //linksFromJSON();
+}
+
 
 // Load the setting file from disk, break it into lines, and pass the lines
 // to another function to parse.
@@ -90,7 +114,7 @@ function parseSettings(rows) {
                 addSearchProvider(linkDef[1], linkDef[2]);
                 break;
             case "LINK-GROUP":
-                addLinkGroup(linkDef[1], linkDef[2]);
+                addLinkGroup(linkDef[1], linkDef[2], linkDef[3], linkDef[4]);
                 break;
             case "LINK":
                 addLinkItem(linkDef[1], linkDef[2], linkDef[3]);
@@ -103,10 +127,33 @@ function parseSettings(rows) {
     }
 }
 
-function addLinkGroup(groupNameIn, parentNameIn) {
+
+function addLinkGroup(groupNameIn, parentNameIn, groupColorIn, groupPositionIn) {
+
+    // Do error checking before building link group
+    if (!groupNameIn || 0 === groupNameIn.length) {
+        console.error("Empty link group name");
+        return;
+    }
+    if (!parentNameIn || 0 === parentNameIn.length) {
+        console.error("Empty link group parent name");
+        return;
+    }
+    if (!groupColorIn || 0 === groupColorIn.length) {
+        groupColorIn = "None";
+        return;
+    }
+    if (!groupPositionIn || 0 === groupPositionIn.length) {
+        groupPositionIn = -1;
+        return;
+    }
+
     let groupName = groupNameIn.trim();
     let parentName = parentNameIn.trim();
-    let newGroup = new LinkGroup(groupName, parentName);
+    let groupColor = groupColorIn.trim();
+    let groupPosition = groupPositionIn.trim();
+
+    let newGroup = new LinkGroup(groupName, parentName, groupColor, groupPosition);
     linkGroups.push(newGroup);
     //console.log("Group '" + groupName + "' created. Parent name is \'"
     //        + parentName + "'");
@@ -127,6 +174,7 @@ function addLinkGroup(groupNameIn, parentNameIn) {
     }
 }
 
+
 function addLinkItem(linkTextIn, linkRefIn, linkGroupIn) {
     let linkText = linkTextIn.trim();
     let linkRef = linkRefIn.trim();
@@ -144,7 +192,7 @@ function addLinkItem(linkTextIn, linkRefIn, linkGroupIn) {
 
     if (groupFound === false) {
         console.log("No group found for link " + linkText);
-      //  orphanLinks.attachLink(newLink);
+        //  orphanLinks.attachLink(newLink);
     }
 }
 
@@ -217,7 +265,7 @@ function addLinkGroupToPage(linkGroup, linkBoxList) {
         let newLI = document.createElement("li");
         let newSpan = document.createElement("span");
         newSpan.setAttribute('class', 'caret');
-        console.log("Setting group header to " + linkGroup.name);
+        //console.log("Setting group header to " + linkGroup.name);
         newSpan.textContent = linkGroup.name;
         let newUL = document.createElement("ul");
         newUL.setAttribute('class', 'nested');
@@ -232,6 +280,10 @@ function addLinkGroupToPage(linkGroup, linkBoxList) {
                     newUL, true);
         }
     } else {
+        let linkBoxDiv = document.getElementById(
+                "linkBox" + (linkGroup.position - 1));
+        linkBoxDiv.style.backgroundColor = linkGroup.color;
+
         // Add the links in this link group
         for (var i = 0; i < linkGroup.links.length; i++) {
             addLinkToList(linkGroup.links[i].displayName,
@@ -239,7 +291,6 @@ function addLinkGroupToPage(linkGroup, linkBoxList) {
                     linkBoxList, false);
         }
     }
-
 }
 
 
@@ -263,7 +314,7 @@ function addListToggle() {
     var i;
 
     for (i = 0; i < toggler.length; i++) {
-        console.log("Adding listener to " + i);
+        //console.log("Adding listener to " + i);
         toggler[i].addEventListener("click", function () {
             this.parentElement.querySelector(".nested").classList.toggle("active");
             this.classList.toggle("caret-down");
@@ -274,9 +325,9 @@ function addListToggle() {
 
 function linksToJSON() {
     console.log("\n\nTo JSON\n\n");
-    for (let i = 0; i < linkGroups.length; i ++) {
-        
-        console.log("linkGroupsJSON = " + JSON.stringify(linkGroups[i]));    
+    for (let i = 0; i < linkGroups.length; i++) {
+
+        console.log("linkGroupsJSON = " + JSON.stringify(linkGroups[i]));
     }
     linkGroupsJSON = JSON.stringify(linkGroups);
     //console.log("linkGroupsJSON = " + linkGroupsJSON);
@@ -285,17 +336,17 @@ function linksToJSON() {
 function linksFromJSON() {
     let linkGroupsResult = JSON.parse(linkGroupsJSON);
     console.log("\n\nFrom JSON\n\n");
-    for (var i = 0; i < linkGroupsResult.length; i ++) {
+    for (var i = 0; i < linkGroupsResult.length; i++) {
         console.log("linkGroupsResult " + i + " = " + linkGroupsResult[i]);
     }
-    
+
 }
 
 function storeLinks() {
-    
+
 }
 
 function loadLinks() {
-    
+
 }
 

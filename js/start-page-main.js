@@ -40,6 +40,8 @@ function initializePage() {
     //document.getElementById("statusDisplay").innerHTML = "Loading";
     // document.getElementById("searchInput").focus();
     //readTextFile("./user-config.txt");
+    
+    loadUserConfig();
 
     document.documentElement.setAttribute('theme', 'dark');
 
