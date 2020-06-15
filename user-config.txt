@@ -26,7 +26,7 @@ SEARCH-PROVIDER, Bing, https://www.bing.com/
 # LINK, No Sleep, https://www.thenosleeppodcast.com/, Podcasts
 
 
-LINK-GROUP, News, None, purple, 1
+LINK-GROUP, News, None, Crimson, 1
 LINK, TweetDeck, https://tweetdeck.twitter.com/, News
 LINK, Twitter, https://twitter.com/, News
 LINK, Hacker news, https://news.ycombinator.com/, News
@@ -34,7 +34,7 @@ LINK, BBC News, https://www.bbc.com/news, News
 LINK, NYT, https://www.nytimes.com/, News
 LINK, AP News, https://apnews.com/, News
 
-LINK-GROUP, Multimedia, None, pink, 2
+LINK-GROUP, Multimedia, None, Orchid, 2
 LINK, Spotify, https://www.spotify.com/us/, Multimedia
 LINK, Hulu, https://www.hulu.com/welcome, Multimedia
 LINK, Netflix, https://www.netflix.com/, Multimedia
@@ -65,7 +65,7 @@ LINK, Outlook, https://outlook.live.com, Work
 LINK, Calendar, https://calendar.google.com/calendar/r, Work
 LINK, RocketChat, https://rocket.chat/, Work
 
-LINK-GROUP, Et Cetera, None, orange, 5
+LINK-GROUP, Et Cetera, None, Orange, 5
 LINK, Reddit, https://www.reddit.com/, Et Cetera
 LINK, imgur, https://imgur.com/, Et Cetera
 
