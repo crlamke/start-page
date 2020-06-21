@@ -16,6 +16,7 @@ SEARCH-PROVIDER, Bing, https://www.bing.com/
 # address. To define a link subgroup, add the parent group's display name
 # to the LINK-GROUP definition, as shown below for the Podcasts link group.
 # Use commas as separators. One level of hierarchy/subgroup is supported.
+# Note that you can choose colors for a link group from the page https://www.w3schools.com/colors/colors_names.asp
 # Example below.
 # LINK-GROUP, Multimedia, None
 # LINK, Spotify, https://www.spotify.com/us/, Multimedia
@@ -25,6 +26,12 @@ SEARCH-PROVIDER, Bing, https://www.bing.com/
 # LINK, Return Home, http://www.returnhomepodcast.com/, Podcasts
 # LINK, No Sleep, https://www.thenosleeppodcast.com/, Podcasts
 
+TOOL-BOX, PageSettings, Gray, HIDE
+TOOL-BOX, Etc, Gray, HIDE
+TOOL-BOX, ThemeSelector, Gray, HIDE
+TOOL-BOX, Timer, MidnightBlue, SHOW
+TOOL-BOX, Search, DeepSkyBlue, SHOW
+TOOL-BOX, TimeAndAlarm, Gray, SHOW
 
 LINK-GROUP, News, None, Crimson, 1
 LINK, TweetDeck, https://tweetdeck.twitter.com/, News

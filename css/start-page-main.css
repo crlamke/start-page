@@ -37,8 +37,9 @@
 }
 
 body { 
-    background-color: var(--color-background);
+    /*background-color: var(--color-background);*/
     font-family: 'Arial', sans-serif; font-size: 10pt; 
+    background-color: #1f1f1f;
 }
 
 a  {
