@@ -40,7 +40,8 @@ function initializePage() {
     //document.getElementById("statusDisplay").innerHTML = "Loading";
     // document.getElementById("searchInput").focus();
     //readTextFile("./user-config.txt");
-    
+
+    alert(userConfig['linkGroups'][0].name);
     loadUserConfig();
 
     document.documentElement.setAttribute('theme', 'dark');
