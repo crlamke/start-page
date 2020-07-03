@@ -41,8 +41,7 @@ function initializePage() {
     // document.getElementById("searchInput").focus();
     //readTextFile("./user-config.txt");
 
-    alert(userConfig['linkGroups'][0].name);
-    loadUserConfig();
+    loadUserConfigFromJSON();
 
     document.documentElement.setAttribute('theme', 'dark');
 

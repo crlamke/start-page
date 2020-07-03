@@ -22,7 +22,6 @@
  * THE SOFTWARE.
  */
 
-
 class Link {
 
     constructor(displayName, linkHref, groupName) {
@@ -49,86 +48,52 @@ var linkGroupsJSON = "";
 
 var linkGroups = []; // Array to hold all LinkGroup objects
 
-
-
-
-function loadUserConfig() {
-
-    fetch('./user-config.txt')
-            .then(response => response.text())
-            .then((data) => {
-                var rows = data.split("\n");
-                //console.log(rows);
-                parseUserConfig(rows);
-            });
-}
-
-function parseUserConfig(rows) {
-    parseSettings(rows);
-    //printLinksToConsole();
+function loadUserConfigFromJSON() {
+    //alert(userConfig['linkGroups'][0].name);
+    loadSearchSettings();
+    loadLinks();
+    loadToolboxes();
     addLinksToPage();
     addListToggle();
-    //linksToJSON();
-    //linksFromJSON();
 }
 
-
-// Load the setting file from disk, break it into lines, and pass the lines
-// to another function to parse.
-function loadSettings() {
-    var fileUpload = document.getElementById("fileUpload");
-    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
-    if (regex.test(fileUpload.value.toLowerCase())) {
-        if (typeof (FileReader) !== "undefined") {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                var rows = e.target.result.split("\n");
-                parseSettings(rows);
-                //printLinksToConsole();
-                addLinksToPage();
-                addListToggle();
-                //linksToJSON();
-                //linksFromJSON();
-            };
-            reader.readAsText(fileUpload.files[0]);
-        } else {
-            alert("This browser does not support HTML5.");
-        }
-    } else {
-        alert("Please upload a valid CSV file.");
+// Populate the search control based on the settings
+// defined in user-config.js.
+function loadSearchSettings(rows) {
+    for (var i = 0; i < userConfig['searchProviders'].length; i++) {
+        addSearchProvider(userConfig['searchProviders'][i].name,
+                userConfig['searchProviders'][i].link);
     }
 }
 
 // Take the config file and parse it line by line,
 // calling functions to create new items or set options
 // as directed by each line.
-function parseSettings(rows) {
+function loadLinks(rows) {
 
-    for (var i = 0; i < rows.length; i++) {
-        // Skip comments and empty lines
-        if ((rows[i][0] === "#") || (rows[i].trim() === "")) {
-            continue;
-        }
+    for (var i = 0; i < userConfig['linkGroups'].length; i++) {
+        addLinkGroup(userConfig['linkGroups'][i].name,
+                userConfig['linkGroups'][i].parent,
+                userConfig['linkGroups'][i].color,
+                userConfig['linkGroups'][i].order);
 
-        var linkDef = rows[i].split(",");
-        switch (linkDef[0]) {
-            case "SEARCH-PROVIDER":
-                addSearchProvider(linkDef[1], linkDef[2]);
-                break;
-            case "LINK-GROUP":
-                addLinkGroup(linkDef[1], linkDef[2], linkDef[3], linkDef[4]);
-                break;
-            case "LINK":
-                addLinkItem(linkDef[1], linkDef[2], linkDef[3]);
-                break;
-            default:
-                // Handle invalid line.
-                console.log("Ignoring malformed line: " + rows[i]);
-                continue;
+        for (var j = 0; j < userConfig['linkGroups'][i].links.length; j++) {
+            addLinkItem(userConfig['linkGroups'][i].links[j].name,
+                    userConfig['linkGroups'][i].links[j].link,
+                    userConfig['linkGroups'][i].name);
         }
     }
 }
 
+// Populate the search control based on the settings
+// defined in user-config.js.
+function loadToolboxes() {
+    for (var i = 0; i < userConfig['toolboxes'].length; i++) {
+        setToolboxState(userConfig['toolboxes'][i].name,
+                userConfig['toolboxes'][i].color,
+                userConfig['toolboxes'][i].visibility);
+    }
+}
 
 function addLinkGroup(groupNameIn, parentNameIn, groupColorIn, groupPositionIn) {
 
@@ -322,33 +287,17 @@ function addListToggle() {
             this.classList.toggle("caret-down");
         });
     }
-
 }
 
-function linksToJSON() {
-    console.log("\n\nTo JSON\n\n");
-    for (let i = 0; i < linkGroups.length; i++) {
+function setToolboxState(name, color, visibility) {
+    var toggler = document.getElementsByClassName("caret");
+    var i;
 
-        console.log("linkGroupsJSON = " + JSON.stringify(linkGroups[i]));
+    for (i = 0; i < toggler.length; i++) {
+        //console.log("Adding listener to " + i);
+        toggler[i].addEventListener("click", function () {
+            this.parentElement.querySelector(".nested").classList.toggle("active");
+            this.classList.toggle("caret-down");
+        });
     }
-    linkGroupsJSON = JSON.stringify(linkGroups);
-    //console.log("linkGroupsJSON = " + linkGroupsJSON);
 }
-
-function linksFromJSON() {
-    let linkGroupsResult = JSON.parse(linkGroupsJSON);
-    console.log("\n\nFrom JSON\n\n");
-    for (var i = 0; i < linkGroupsResult.length; i++) {
-        console.log("linkGroupsResult " + i + " = " + linkGroupsResult[i]);
-    }
-
-}
-
-function storeLinks() {
-
-}
-
-function loadLinks() {
-
-}
-
