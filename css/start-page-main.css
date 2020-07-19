@@ -38,17 +38,14 @@
 
 body { 
     /*background-color: var(--color-background);*/
+    background-image: url('../img/night-city-wp.jpg');
+    background-size: cover;
     font-family: 'Arial', sans-serif; font-size: 10pt; 
     background-color: #1f1f1f;
 }
 
 a  {
     color: var(--color-link); 
-    font-family: Tahoma, Geneva, sans-serif; font-size:16px;
-    padding-left:20px;
-    margin-bottom: 2px;
-    text-decoration:none;
-    display: inline-block;
 }
 
 a:hover {
@@ -63,7 +60,7 @@ a:active {
 h2 {
     color: var(--color-text); 
     font-family: Tahoma, Geneva, sans-serif; font-size:30px;
-    padding-left:15px;
+    /*padding-left:15px;*/
 }
 
 h3 {
@@ -91,9 +88,16 @@ ul {
 }
 
 li {
-    margin: 0;
-    padding-bottom: 2px;
+    margin-bottom: 4px;
+    padding-left: 8px;
+    padding-bottom: 3px;
 }
+
+/*
+.rss-feeds {
+    font-family: 'Times', sans-serif; font-size: 12px;
+}*/
+
 
 /* CSS below taken from https://www.w3schools.com/howto/howto_js_treeview.asp */
 .caret {
@@ -130,21 +134,6 @@ li {
     margin: 0;
     padding: 0;
 }
-/*
-#toolBox0 { background-color: var(--dkgrey-color); }
-#toolBox1 { background-color: var(--dkgrey-color); }
-#toolBox2 { background-color: var(--dkgrey-color); }
-#toolBox3 { background-color: var(--dkgrey-color); }
-#toolBox4 { background-color: var(--dkgrey-color); }
-#toolBox5 { background-color: var(--dkgrey-color); }
-
-#linkBox0 { background-color: var(--red-color); }
-#linkBox1 { background-color: var(--ltgreen-color); }
-#linkBox2 { background-color: var(--purple-color); }
-#linkBox3 { background-color: var(--pinkish-color); }
-#linkBox4 { background-color: var(--ltorange-color); }
-#linkBox5 { background-color: var(--purpleish-color); }
-*/
 
 #status {
     padding-left:8px; padding-bottom:16px; margin: 8px;
@@ -222,15 +211,15 @@ li {
 }
 
 .toolBox-container {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 .toolBox {
     background-color: var(--color-toolbox-body);
     position: relative;
-    flex-basis: calc(30% - 10px);
+    /*flex-basis: calc(30% - 10px);*/
     margin-top: 12px; margin-right: 20px; margin-bottom: 12px; margin-left: 20px;
     border: 1px solid;
     box-sizing: border-box;
@@ -252,15 +241,15 @@ li {
 }
 
 .linkBox-container {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 .linkBox {
     background-color: var(--color-linkbox-body);
     position: relative;
-    flex-basis: calc(30% - 10px);
+    /*flex-basis: calc(30% - 10px);*/
     margin-top: 12px; margin-right: 20px; margin-bottom: 12px; margin-left: 20px;
     border: 1px solid;
     box-sizing: border-box;
@@ -269,16 +258,18 @@ li {
     overflow-y: auto;
     overflow-x: auto;
 }
-
+/*
 .linkBox::before {
     content: '';
     display: block;
     padding-top: 100%;
 }
-
+*/
 .linkBox .content {
-    position: absolute;
+    position: relative;
     top: 0; left: 0;
+  /*  position: absolute;
+    top: 0; left: 0; */
     height: 100%;
     width: 100%;
 }

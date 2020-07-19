@@ -30,7 +30,6 @@
 let linksDB; // Store links and link groups
 let configDB; // Store general page config 
 
-
 window.onload = initializePage;
 
 function initializePage() {
@@ -52,7 +51,10 @@ function initializePage() {
 //        document.getElementById(linkBox).style.backgroundColor = greyColor;
     }
 
-    notifyMe();
+    loadRSS("https://www.techdirt.com/techdirt_rss.xml", "linkBox4List0")
+    loadRSS("https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml", "linkBox5List0")
+
+    //notifyMe();
     showNotification();
 
     keepTime();

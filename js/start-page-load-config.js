@@ -262,17 +262,12 @@ function addLinkGroupToPage(linkGroup, linkBoxList) {
 
 
 function addLinkToList(linkText, linkRef, list, isNested) {
-    //var newDiv = document.createElement("div");
     var newLI = document.createElement("li");
     var newContent = document.createElement("a");
     newContent.href = linkRef;
     newContent.innerHTML = linkText;
     newContent.setAttribute('target', '_blank');
-    //if (isNested === true) {
-    //    newContent.setAttribute('padding-left', '0px');
-    //}
     newLI.appendChild(newContent);
-
     list.appendChild(newLI);
 }
 
