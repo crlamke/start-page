@@ -1,7 +1,6 @@
 # Start Page
-This is a web start page with links and search engine options loaded from a user-config.txt file. 
-I'm not a JavaScript or web programmer and I'm using this project to learn basic
-techniques.
+This is a web start page with links and search engine options loaded from a user-config.json file. 
+I'm using this project to learn basic JavaScript techniques.
 
 # Credits
 I've taken and modified code or gotten inspiration from the following sources for the components in this repo.
