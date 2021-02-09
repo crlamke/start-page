@@ -1,5 +1,5 @@
 # Start Page
-This is a web start page with links and search engine options loaded from a user-config.json file. 
+This is a web start page with links and search engine options loaded from a user-config.js file. 
 I'm using this project to learn basic JavaScript techniques.
 
 # Credits
