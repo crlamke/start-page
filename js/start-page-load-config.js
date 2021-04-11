@@ -50,11 +50,24 @@ var linkGroups = []; // Array to hold all LinkGroup objects
 
 function loadUserConfigFromJSON() {
     //alert(userConfig['linkGroups'][0].name);
+	//setElementVisibility();
     loadSearchSettings();
     loadLinks();
     loadToolboxes();
     addLinksToPage();
     addListToggle();
+    var linkboxContainer = document.getElementById('linkBox-container0');
+    console.log("linkboxContainer classlist = " + linkboxContainer.classList);
+    var linkBox1 = document.getElementById('linkBox1');
+    console.log("linkBox1 = " + linkBox1.id);
+    addLinkBox(linkboxContainer, "test6", 6);
+}
+
+// Set the visibility of page elements
+function setElementVisibility() {
+	var elem = document.getElementById('toolbox4');
+	//let toolboxdiv = document.getElementById("toolbox4");
+	elem.style.display='none';
 }
 
 // Populate the search control based on the settings
