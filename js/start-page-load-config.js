@@ -40,6 +40,8 @@ class LinkGroup {
         this.position = position;
         this.children = new Array();
         this.links = new Array();
+        this.linkBoxID = null;
+        this.linkBoxContentUL = null;
     }
 
 }
@@ -52,6 +54,10 @@ function loadUserConfigFromJSON() {
     //alert(userConfig['linkGroups'][0].name);
 	//setElementVisibility();
     loadSearchSettings();
+    var toolboxContainer = document.getElementById('toolBox-container0');
+    toolboxContainer.style.visibility='hidden';
+    toolboxContainer = document.getElementById('toolBox-container1');
+    toolboxContainer.style.visibility='hidden';
     loadLinks();
     loadToolboxes();
     addLinksToPage();
@@ -60,7 +66,7 @@ function loadUserConfigFromJSON() {
     console.log("linkboxContainer classlist = " + linkboxContainer.classList);
     var linkBox1 = document.getElementById('linkBox1');
     console.log("linkBox1 = " + linkBox1.id);
-    addLinkBox(linkboxContainer, "test6", 6);
+    addLinkBox(linkboxContainer, "test6", 6, "red");
 }
 
 // Set the visibility of page elements

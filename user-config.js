@@ -1,7 +1,7 @@
 /* 
  * The MIT License
  *
- * Copyright 2020 Chris Lamke <https://chris.lamke.org>.
+ * Copyright 2021 Chris Lamke <https://chris.lamke.org>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -86,8 +86,8 @@ var userConfig =
                     "visibility": "Shown",
                     "links": [
                         {
-                            "name": "Twitter",
-                            "link": "https://twitter.com/"
+                            "name": "Lobsters",
+                            "link": "https://lobste.rs/"
                         },
                         {
                             "name": "Hacker News",
@@ -104,9 +104,30 @@ var userConfig =
                     ]
                 },
                 {
-                    "name": "Multimedia",
+                    "name": "Social",
                     "parent": "None",
                     "order": "2",
+                    "color": "Red",
+                    "visibility": "Shown",
+                    "links": [
+                        {
+                            "name": "Twitter",
+                            "link": "https://twitter.com/"
+                        },
+                        {
+                            "name": "imgur",
+                            "link": "https://imgur.com/"
+                        },
+                        {
+                            "name": "reddit",
+                            "link": "https://www.reddit.com/"
+                        }
+                    ]
+                },
+                {
+                    "name": "Multimedia",
+                    "parent": "None",
+                    "order": "3",
                     "color": "Orchid",
                     "visibility": "Shown",
                     "links": [
@@ -127,7 +148,7 @@ var userConfig =
                 {
                     "name": "Podcasts",
                     "parent": "Multimedia",
-                    "order": "0",
+                    "order": "3",
                     "color": "Orchid",
                     "visibility": "Shown",
                     "links": [
@@ -156,7 +177,7 @@ var userConfig =
                 {
                     "name": "Dev",
                     "parent": "None",
-                    "order": "3",
+                    "order": "4",
                     "color": "Blue",
                     "visibility": "Shown",
                     "links": [
@@ -177,7 +198,7 @@ var userConfig =
                 {
                     "name": "Work",
                     "parent": "None",
-                    "order": "4",
+                    "order": "5",
                     "color": "Green",
                     "visibility": "Shown",
                     "links": [

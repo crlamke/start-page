@@ -23,11 +23,12 @@
  */
 
 // Add a link box to the linkbox-container
-function addLinkBox(addLocation, linkBoxTitle, itemNumber) {
+function addLinkBox(addLocation, linkBoxTitle, itemNumber, bgColor) {
 
     var newLinkbox = document.createElement('div');
     newLinkbox.className = "linkBox";
     newLinkbox.id = "linkBox" + itemNumber;
+    newLinkbox.style.backgroundColor = bgColor;
     var newContent = document.createElement('div');
     newContent.className = "content";
     var newTitle = document.createElement('h3');
