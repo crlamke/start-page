@@ -247,6 +247,7 @@ li {
 }
 
 .linkBox {
+    draggable: true;
     background-color: var(--color-linkbox-body);
     position: relative;
     /*flex-basis: calc(30% - 10px);*/

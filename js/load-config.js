@@ -66,7 +66,13 @@ function loadUserConfigFromJSON() {
     console.log("linkboxContainer classlist = " + linkboxContainer.classList);
     var linkBox1 = document.getElementById('linkBox1');
     console.log("linkBox1 = " + linkBox1.id);
-    addLinkBox(linkboxContainer, "test6", 6, "red");
+    var newLinkBox = createLinkBox("test6", 6, "red");
+    console.log("newLinkBox = " + newLinkBox.id);
+    linkboxContainer.appendChild(newLinkBox);
+    var weatherBox = new WeatherBox("Weather 1", "Blue", 
+        38.84, -77.429, "metric");
+    wbox1 = createWeatherBox(weatherBox, 1);
+    linkboxContainer.appendChild(wbox1);
 }
 
 // Set the visibility of page elements
@@ -104,8 +110,7 @@ function loadLinks(rows) {
     }
 }
 
-// Populate the search control based on the settings
-// defined in user-config.js.
+
 function loadToolboxes() {
     for (var i = 0; i < userConfig['toolboxes'].length; i++) {
         setToolboxState(userConfig['toolboxes'][i].name,

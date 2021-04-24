@@ -1,25 +1,6 @@
 /* 
- * The MIT License
- *
- * Copyright 2021 Chris Lamke <https://chris.lamke.org>.
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * The MIT License - See LICENSE file in project root for details
+ * Copyright 2021 Chris Lamke <https://chris.lamke.org>
  */
 
 /*
@@ -43,31 +24,29 @@ var userConfig =
                     "link": "https://www.bing.com/"
                 }
             ],
-
-            "toolboxes": [
+            "weatherPreferences": [
                 {
-                    "name": "PageSettings",
-                    "color": "Gray",
-                    "visibility": "Hidden"
+                    "locationName": "Home",
+                    "lat": "38.84",
+                    "lon": "-77.429",
+                    "unit": "metric"
                 },
+                {
+                    "locationName": "Work",
+                    "lat": "38.84",
+                    "lon": "-77.429",
+                    "unit": "metric"
+                }
+            ],
+            "toolboxes": [
                 {
                     "name": "Etc",
                     "color": "Gray",
                     "visibility": "Hidden"
                 },
                 {
-                    "name": "ThemeSelector",
-                    "color": "Gray",
-                    "visibility": "Hidden"
-                },
-                {
                     "name": "Timer",
                     "color": "MidnightBlue",
-                    "visibility": "Shown"
-                },
-                {
-                    "name": "Timer",
-                    "color": "DeepSkyBlue",
                     "visibility": "Shown"
                 },
                 {
@@ -85,14 +64,6 @@ var userConfig =
                     "color": "Crimson",
                     "visibility": "Shown",
                     "links": [
-                        {
-                            "name": "Lobsters",
-                            "link": "https://lobste.rs/"
-                        },
-                        {
-                            "name": "Hacker News",
-                            "link": "https://news.ycombinator.com/"
-                        },
                         {
                             "name": "BBC News",
                             "link": "https://www.bbc.com/news"
@@ -125,52 +96,35 @@ var userConfig =
                     ]
                 },
                 {
-                    "name": "Multimedia",
+                    "name": "Tech News",
                     "parent": "None",
                     "order": "3",
                     "color": "Orchid",
                     "visibility": "Shown",
                     "links": [
                         {
-                            "name": "Spotify",
-                            "link": "https://www.spotify.com/us/"
+                            "name": "Lobsters",
+                            "link": "https://lobste.rs/"
                         },
                         {
-                            "name": "Hulu",
-                            "link": "https://www.hulu.com/"
+                            "name": "Hacker News",
+                            "link": "https://news.ycombinator.com/"
                         },
                         {
-                            "name": "Netflix",
-                            "link": "https://www.netflix.com"
-                        }
-                    ]
-                },
-                {
-                    "name": "Podcasts",
-                    "parent": "Multimedia",
-                    "order": "3",
-                    "color": "Orchid",
-                    "visibility": "Shown",
-                    "links": [
-                        {
-                            "name": "PocketCasts",
-                            "link": "https://play.pocketcasts.com/web/podcasts"
+                            "name": "TechDirt",
+                            "link": "https://www.techdirt.com/"
                         },
                         {
-                            "name": "No Sleep",
-                            "link": "https://www.thenosleeppodcast.com/"
+                            "name": "MIT Tech Review",
+                            "link": "https://www.technologyreview.com/"
+                        },
+                                        {
+                            "name": "Ars Technica",
+                            "link": "http://arstechnica.com/"
                         },
                         {
-                            "name": "Alice Isn't Dead",
-                            "link": "https://www.nightvalepresents.com/aliceisntdead"
-                        },
-                        {
-                            "name": "Mission to Zyxx",
-                            "link": "https://www.missiontozyxx.space/"
-                        },
-                        {
-                            "name": "What A Time To Be Alive",
-                            "link": "https://soundcloud.com/whatatimepod"
+                            "name": "OpenSource.com",
+                            "link": "https://opensource.com/"
                         }
                     ]
                 },
@@ -217,7 +171,6 @@ var userConfig =
                     ]
                 }
             ],
-
             "rssFeeds": [
                 {
                     "name": "BBC News",
@@ -230,30 +183,6 @@ var userConfig =
                 {
                     "name": "The Verge",
                     "link": "http://www.theverge.com/rss/index.xml"
-                },
-                {
-                    "name": "Hacker News",
-                    "link": "https://news.ycombinator.com/rss"
-                },
-                {
-                    "name": "Lobsters",
-                    "link": "https://lobste.rs/rss"
-                },
-                {
-                    "name": "TechDirt",
-                    "link": "https://www.techdirt.com/techdirt_rss.xml"
-                },
-                {
-                    "name": "Tech Review",
-                    "link": "https://www.technologyreview.com/feed/"
-                },
-                                {
-                    "name": "Ars Technica",
-                    "link": "http://feeds.arstechnica.com/arstechnica/index/"
-                },
-                {
-                    "name": "Open Source",
-                    "link": "https://opensource.com/feed"
                 }
             ]
         };
