@@ -14,7 +14,7 @@ class RSSBox {
     }
 }
 
-// Create an RSS box
+
 function createRSSBox(rssBox) {
     rssBox.RSSBoxDiv = document.createElement('div');
     rssBox.RSSBoxDiv.className = "RSSBox";

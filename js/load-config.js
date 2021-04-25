@@ -63,12 +63,17 @@ function loadUserConfigFromJSON() {
     addLinksToPage();
     addListToggle();
     var linkboxContainer = document.getElementById('linkBox-container0');
-    var linkBox1 = document.getElementById('linkBox1');
-    var newLinkBox = createLinkBox("test6", 6, "red");
-    linkboxContainer.appendChild(newLinkBox);
+    //var linkBox1 = document.getElementById('linkBox1');
+
+    var linkBox1 = new LinkBox("Test Dude", "red", 7);
+    createLinkBox(linkBox1);
+    console.log("itemNumber = " + linkBox1.itemNumber);
+    console.log("bgcolor = " + linkBox1.linkBoxDiv.style.backgroundColor);
+    linkboxContainer.appendChild(linkBox1.linkBoxDiv);
+
     var weatherBox = new WeatherBox("Home Weather", "Blue", 
         38.84, -77.429, "metric");
-    wbox1 = createWeatherBox(weatherBox, 1);
+    var wbox1 = createWeatherBox(weatherBox, 1);
     linkboxContainer.appendChild(wbox1);
     updateWeather(weatherBox);
 
