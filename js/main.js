@@ -51,11 +51,8 @@ function initializePage() {
 //        document.getElementById(linkBox).style.backgroundColor = greyColor;
     }
 
-    loadRSS("https://www.techdirt.com/techdirt_rss.xml", "linkBox4List0")
-    loadRSS("https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml", "linkBox5List0")
-
     //notifyMe();
-    showNotification();
+    //showNotification();
 
     keepTime();
 }

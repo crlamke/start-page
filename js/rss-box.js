@@ -1,26 +1,43 @@
 /* 
- * The MIT License
- *
- * Copyright 2020 Chris Lamke <https://chris.lamke.org>.
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * The MIT License - See LICENSE file in project root for details
+ * Copyright 2021 Chris Lamke <https://chris.lamke.org>
  */
+
+class RSSBox {
+    constructor(title, bgColor, itemNumber) {
+        this.title = title;
+        this.bgColor = bgColor;
+        this.itemNumber = itemNumber;
+        this.RSSBoxDiv = "";
+        this.titleElement = "";
+        this.listElement = "";
+    }
+}
+
+// Create an RSS box
+function createRSSBox(rssBox) {
+    rssBox.RSSBoxDiv = document.createElement('div');
+    rssBox.RSSBoxDiv.className = "RSSBox";
+    rssBox.RSSBoxDiv.id = "RSSBox" + rssBox.itemNumber;
+    rssBox.RSSBoxDiv.style.backgroundColor = rssBox.bgColor;
+    var newContent = document.createElement('div');
+    newContent.className = "content";
+    rssBox.titleElement = document.createElement('h3');
+    rssBox.titleElement.id = "RSSBoxTitle" + rssBox.itemNumber;
+    rssBox.titleElement.textContent = rssBox.title;
+    newHR = document.createElement('hr');
+    var newRSSboxContent = document.createElement('div');
+    newRSSboxContent.id = "RSSBoxContent" + rssBox.itemNumber;
+    rssBox.listElement = document.createElement('ul');
+    rssBox.listElement.className = "RSSBoxList";
+    rssBox.listElement.id = "RSSBox" + rssBox.itemNumber + "List" + rssBox.itemNumber;
+    rssBox.RSSBoxDiv.appendChild(newContent);
+    newContent.appendChild(rssBox.titleElement);
+    newContent.appendChild(newHR);
+    newContent.appendChild(rssBox.listElement);
+    rssBox.RSSBoxDiv.draggable = true;
+}
+
 
 function loadRSS(rssString, element) {
     elementID = document.getElementById(element);

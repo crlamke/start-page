@@ -16,13 +16,18 @@ class WeatherBox {
         this.temperatureValueDiv = "";
         this.weatherDescriptionDiv = "";
         this.locationDiv = "";
+        this.currentTemperature = "";
+        this.currentWeatherDescription = "";
+        this.currentIcon = "";
+        this.currentCity = "";
+        this.currentCountry = "";
     }
 }
 
 function createWeatherBox(wbox, itemNumber) {
 
     var newWeatherbox = document.createElement('div');
-    newWeatherbox.className = "WeatherBox";
+    newWeatherbox.className = "linkBox";
     newWeatherbox.id = "WeatherBox" + itemNumber;
     newWeatherbox.style.backgroundColor = wbox.bgColor;
     var newContent = document.createElement('div');
@@ -52,43 +57,44 @@ function createWeatherBox(wbox, itemNumber) {
 
 // OpenWeather returns temp in Kelvin so we need base
 // Kelvin value (273.15 K = 0 C) for conversion to C or F values. 
-const KelvinBase = 273;
+const kelvinBase = 273;
 
-// API Key. Do not use this API Key. Create your own by following
-// directions at https://webdesign.tutsplus.com/tutorials/build-a-simple-weather-app-with-vanilla-javascript--cms-33893
+// API Key. Please do not use this API Key in your application. 
+// Create your own (it's free) by following directions at 
+// https://webdesign.tutsplus.com/tutorials/build-a-simple-weather-app-with-vanilla-javascript--cms-33893
 const apiKey = "52933ab99de28f41ba92abe338693782";
 
-function updateWeather() {
 
-}
-
-// GET WEATHER FROM API PROVIDER
-function getWeather(latitude, longitude){
-    let api = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}`;
+function updateWeather(wbox) {
+    var weatherAPICall = "http://api.openweathermap.org/data/2.5/weather?"
+        + "lat=" + wbox.lat + "&lon=" + wbox.lon + "&appid=" 
+        + apiKey;
     
-    fetch(api)
+    fetch(weatherAPICall)
         .then(function(response){
             let data = response.json();
             return data;
         })
         .then(function(data){
-            weather.temperature.value = Math.floor(data.main.temp - KELVIN);
-            weather.description = data.weather[0].description;
-            weather.iconId = data.weather[0].icon;
-            weather.city = data.name;
-            weather.country = data.sys.country;
+            wbox.currentTemperature = Math.floor(data.main.temp - kelvinBase);
+            wbox.currentWeatherDescription = data.weather[0].description;
+            wbox.currentIcon = data.weather[0].icon;
+            wbox.currentCity = data.name;
+            wbox.currentCountry = data.sys.country;
         })
         .then(function(){
-            displayWeather();
+            updateWeatherDisplay(wbox);
         });
 }
 
-// DISPLAY WEATHER TO UI
-function displayWeather(){
-    iconElement.innerHTML = `<img src="icons/${weather.iconId}.png"/>`;
-    tempElement.innerHTML = `${weather.temperature.value}°<span>C</span>`;
-    descElement.innerHTML = weather.description;
-    locationElement.innerHTML = `${weather.city}, ${weather.country}`;
+
+function updateWeatherDisplay(wbox){
+    wbox.weatherIconDiv.innerHTML = '<img src="icons/' +
+        wbox.currentIcon + '.png"/>';
+    wbox.temperatureValueDiv.innerHTML = wbox.currentTemperature +
+        "°<span>C</span>";
+    wbox.weatherDescriptionDiv.innerHTML = wbox.currentWeatherDescription;
+    wbox.locationDiv.innerHTML = wbox.currentCity + ", " + wbox.currentCountry;
 }
 
 // C to F conversion

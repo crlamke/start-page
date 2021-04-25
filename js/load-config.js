@@ -63,16 +63,26 @@ function loadUserConfigFromJSON() {
     addLinksToPage();
     addListToggle();
     var linkboxContainer = document.getElementById('linkBox-container0');
-    console.log("linkboxContainer classlist = " + linkboxContainer.classList);
     var linkBox1 = document.getElementById('linkBox1');
-    console.log("linkBox1 = " + linkBox1.id);
     var newLinkBox = createLinkBox("test6", 6, "red");
-    console.log("newLinkBox = " + newLinkBox.id);
     linkboxContainer.appendChild(newLinkBox);
-    var weatherBox = new WeatherBox("Weather 1", "Blue", 
+    var weatherBox = new WeatherBox("Home Weather", "Blue", 
         38.84, -77.429, "metric");
     wbox1 = createWeatherBox(weatherBox, 1);
     linkboxContainer.appendChild(wbox1);
+    updateWeather(weatherBox);
+
+    var rss1 = new RSSBox("techdirt", "brown", 1);
+    createRSSBox(rss1);
+    linkboxContainer.appendChild(rss1.RSSBoxDiv);
+    loadRSS("https://www.techdirt.com/techdirt_rss.xml", 
+        rss1.listElement.id);
+    var rss2 = new RSSBox("New York Times", "green", 2);
+    createRSSBox(rss2);
+    linkboxContainer.appendChild(rss2.RSSBoxDiv);
+    loadRSS("https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
+        rss2.listElement.id);
+
 }
 
 // Set the visibility of page elements
