@@ -33,16 +33,14 @@ let configDB; // Store general page config
 window.onload = initializePage;
 
 function initializePage() {
-    document.getElementById('alarmDisplay').innerHTML = alarmDisplayDefault;
-    document.getElementById('elapsedDisplay').innerHTML = elapsedDisplayDefault;
-    document.getElementById('splitDisplay').innerHTML = elapsedDisplayDefault;
-    //document.getElementById("statusDisplay").innerHTML = "Loading";
-    // document.getElementById("searchInput").focus();
-    //readTextFile("./user-config.txt");
+//    document.getElementById('alarmDisplay').innerHTML = alarmDisplayDefault;
+//    document.getElementById('elapsedDisplay').innerHTML = elapsedDisplayDefault;
+//    document.getElementById('splitDisplay').innerHTML = elapsedDisplayDefault;
+
 
     loadUserConfigFromJSON();
 
-    document.documentElement.setAttribute('theme', 'dark');
+//    document.documentElement.setAttribute('theme', 'dark');
 
     var bodyStyles = window.getComputedStyle(document.body);
     var greyColor = bodyStyles.getPropertyValue('--dkgrey-color');

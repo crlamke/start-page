@@ -77,6 +77,12 @@ function loadUserConfigFromJSON() {
     linkboxContainer.appendChild(wbox1);
     updateWeather(weatherBox);
 
+    var weatherBox2 = new WeatherBox("NCE Weather", "Blue", 
+    38.756, -77.195, "metric");
+    var wbox2 = createWeatherBox(weatherBox2, 2);
+    linkboxContainer.appendChild(wbox2);
+    updateWeather(weatherBox2);
+
     var rss1 = new RSSBox("techdirt", "brown", 1);
     createRSSBox(rss1);
     linkboxContainer.appendChild(rss1.RSSBoxDiv);
