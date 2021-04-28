@@ -65,8 +65,8 @@ h2 {
 
 h3 {
     color: var(--color-text);
-    margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px;
-    font-family: Tahoma, Geneva, sans-serif; font-size:18px; text-align: center;
+    margin-top: 8px; margin-right: 10px; margin-bottom: 8px; margin-left: 10px;
+    font-family: Tahoma, Geneva, sans-serif; font-size:16px; text-align: center;
 }
 
 p {
@@ -78,7 +78,7 @@ p {
 hr {
     color: var(--color-text);
     background-color: var(--color-text);
-    margin-top: 5px; margin-right: 10px; margin-bottom: 5px; margin-left: 10px;
+    margin-top: 5px; margin-right: 16px; margin-bottom: 5px; margin-left: 16px;
     height:1px;
     border:none;
 }
@@ -275,3 +275,56 @@ li {
 }
 
 
+/* Weather Box */
+
+.weatherBox {
+    background-color: var(--color-linkbox-body);
+    position: relative;
+    margin-top: 12px; margin-right: 20px; margin-bottom: 12px; margin-left: 20px;
+    border: 1px solid;
+    box-sizing: border-box;
+    width: 300px;
+    height: 150px;
+    overflow: hidden;
+}
+
+.weatherIcon {
+	margin-left: 16px;
+	width: 75px;
+    height: 32px;
+	display: inline-block;
+}
+
+.weatherIcon img {
+	margin-left: auto;
+	margin-right: auto;
+    width: 100%;
+    height: auto;
+}
+
+.weatherValues {
+	margin-left: 16px;
+	display: inline-block;
+	text-align: center;
+}
+
+.tempValue {
+	margin-left: 16px;
+	margin-top:8px;
+    font-family: 'Times', sans-serif; font-size: 18px;
+	color: #ffffff;
+}
+
+.weatherDescription {
+	margin-left: 16px;
+	margin-top:8px;
+    font-family: 'Times', sans-serif; font-size: 18px;
+	color: #ffffff;
+}
+
+.weatherLocation {
+	margin-left: 16px;
+	margin-top:12px;
+    font-family: 'Times', sans-serif; font-size: 12px;
+	color: #ffffff;
+}

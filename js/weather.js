@@ -27,7 +27,7 @@ class WeatherBox {
 function createWeatherBox(wbox, itemNumber) {
 
     var newWeatherbox = document.createElement('div');
-    newWeatherbox.className = "linkBox";
+    newWeatherbox.className = "weatherBox";
     newWeatherbox.id = "WeatherBox" + itemNumber;
     newWeatherbox.style.backgroundColor = wbox.bgColor;
     var newContent = document.createElement('div');
@@ -37,21 +37,24 @@ function createWeatherBox(wbox, itemNumber) {
     wbox.titleElement.textContent = wbox.title;
     newHR = document.createElement('hr');
     wbox.weatherIconDiv = document.createElement('div');
-    wbox.weatherIconDiv.className = "icon";
+    wbox.weatherIconDiv.className = "weatherIcon";
+	var weatherValuesDiv = document.createElement('div');
+	weatherValuesDiv.className = "weatherValues"; 
     wbox.temperatureValueDiv = document.createElement('div');
     wbox.temperatureValueDiv.className = "tempValue";
     wbox.weatherDescriptionDiv = document.createElement('div');
     wbox.weatherDescriptionDiv.className = "weatherDescription";
     wbox.locationDiv = document.createElement('div');
-    wbox.locationDiv.className = "weatherDescription";
+    wbox.locationDiv.className = "weatherLocation";
 
     newWeatherbox.appendChild(newContent);
     newContent.appendChild(wbox.titleElement);
     newContent.appendChild(newHR);
     newContent.appendChild(wbox.weatherIconDiv);
-    newContent.appendChild(wbox.temperatureValueDiv);
-    newContent.appendChild(wbox.weatherDescriptionDiv);
-    newContent.appendChild(wbox.locationDiv);
+	newContent.appendChild(weatherValuesDiv);
+    weatherValuesDiv.appendChild(wbox.temperatureValueDiv);
+    weatherValuesDiv.appendChild(wbox.weatherDescriptionDiv);
+    weatherValuesDiv.appendChild(wbox.locationDiv);
     return newWeatherbox;
 }
 
@@ -89,7 +92,7 @@ function updateWeather(wbox) {
 
 
 function updateWeatherDisplay(wbox){
-    wbox.weatherIconDiv.innerHTML = '<img src="icons/' +
+    wbox.weatherIconDiv.innerHTML = '<img src="img/weather-icons/' +
         wbox.currentIcon + '.png"/>';
     wbox.temperatureValueDiv.innerHTML = wbox.currentTemperature +
         "°<span>C</span>";
