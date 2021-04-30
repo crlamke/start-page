@@ -42,6 +42,7 @@ class LinkGroup {
         this.links = new Array();
         this.linkBoxID = null;
         this.linkBoxContentUL = null;
+        this.linkBoxObj = null;
     }
 
 }
@@ -60,16 +61,12 @@ function loadUserConfigFromJSON() {
     toolboxContainer.style.visibility='hidden';
     loadLinks();
     loadToolboxes();
-    addLinksToPage();
-    addListToggle();
+    //addLinksToPage();
     var linkboxContainer = document.getElementById('linkBox-container0');
-    //var linkBox1 = document.getElementById('linkBox1');
+    addLinkBoxes(linkboxContainer);
+    addListToggle();
 
-    var linkBox1 = new LinkBox("Test Dude", "red", 7);
-    createLinkBox(linkBox1);
-    console.log("itemNumber = " + linkBox1.itemNumber);
-    console.log("bgcolor = " + linkBox1.linkBoxDiv.style.backgroundColor);
-    linkboxContainer.appendChild(linkBox1.linkBoxDiv);
+    //var linkBox1 = document.getElementById('linkBox1');
 
     var weatherBox = new WeatherBox("Home Weather", "Blue", 
         38.84, -77.429, "metric");
@@ -167,8 +164,7 @@ function addLinkGroup(groupNameIn, parentNameIn, groupColorIn, groupPositionIn) 
 
     let newGroup = new LinkGroup(groupName, parentName, groupColor, groupPosition);
     linkGroups.push(newGroup);
-    //console.log("Group '" + groupName + "' created. Parent name is \'"
-    //        + parentName + "'");
+
     if (parentName !== "None") {
         // Find parent link group and add this group as a child
         let parentFound = false;
@@ -208,42 +204,36 @@ function addLinkItem(linkTextIn, linkRefIn, linkGroupIn) {
     }
 }
 
-function printLinksToConsole() {
-    console.log("Begin printing links.");
+
+
+
+function addLinkBoxes(linkboxContainer) {
     for (var i = 0; i < linkGroups.length; i++) {
-        // Link subgroups will be printed when their top level groups are
-        // printed and top level children are iterated through.
-        console.log("Found link group '" + linkGroups[i].name + "'");
+        console.log("In addLinkBoxes() - i = " + i);
+        // When we find a top level group, we want to add its contents,
+        // both links and sub groups, to the current link box.
         if (linkGroups[i].parent === "None") {
-            printLinkGroupToConsole(linkGroups[i]);
+            // Create LinkBox object and LinkBoxHTML structure
+            linkGroups[i].linkBoxObj = new LinkBox(
+                linkGroups[i].name, linkGroups[i].color, linkGroups[i].position);
+            createLinkBox(linkGroups[i].linkBoxObj);
+            //console.log("itemNumber = " + linkBox1.itemNumber);
+            //console.log("bgcolor = " + linkBox1.linkBoxDiv.style.backgroundColor);
+            linkboxContainer.appendChild(linkGroups[i].linkBoxObj.linkBoxDiv);
+            addLinkGroupToPage(linkGroups[i], linkGroups[i].linkBoxObj.listElement);
         }
     }
-
-    console.log("End printing links.");
-}
-
-function printLinkGroupToConsole(linkGroup) {
-    console.log("Begin printing link group - " + linkGroup.name);
-    if (linkGroup.children.length > 0) {
-        for (var j = 0; j < linkGroup.children.length; j++) {
-            printLinkGroupToConsole(linkGroup.children[j]);
-        }
-    }
-    // Print the links in this link group
-    for (var i = 0; i < linkGroup.links.length; i++) {
-        console.log("  Link - " + linkGroup.links[i].displayName
-                + " - " + linkGroup.links[i].linkHref);
-    }
-    console.log("End printing link group - " + linkGroup.name);
+    
 }
 
 
-function addLinksToPage(linkText, linkRef, listDiv) {
+function addLinksToPage() {
 
     var linkBoxCurrent = 0; // Current link box we're adding links to
     const linkBoxTotal = 6; // Number of link boxes on web page
 
     for (var i = 0; i < linkGroups.length; i++) {
+        console.log("In addLinksToPage() - i = " + i);
         // When we find a top level group, we want to add its contents,
         // both links and sub groups, to the current link box.
         if (linkGroups[i].parent === "None") {
@@ -292,9 +282,9 @@ function addLinkGroupToPage(linkGroup, linkBoxList) {
                     newUL, true);
         }
     } else {
-        let linkBoxDiv = document.getElementById(
-                "linkBox" + (linkGroup.position - 1));
-        linkBoxDiv.style.backgroundColor = linkGroup.color;
+    //    let linkBoxDiv = document.getElementById(
+    //            "linkBox" + (linkGroup.position - 1));
+    //    linkBoxDiv.style.backgroundColor = linkGroup.color;
 
         // Add the links in this link group
         for (var i = 0; i < linkGroup.links.length; i++) {
@@ -340,4 +330,33 @@ function setToolboxState(name, color, visibility) {
             this.classList.toggle("caret-down");
         });
     }
+}
+
+function printLinksToConsole() {
+    console.log("Begin printing links.");
+    for (var i = 0; i < linkGroups.length; i++) {
+        // Link subgroups will be printed when their top level groups are
+        // printed and top level children are iterated through.
+        console.log("Found link group '" + linkGroups[i].name + "'");
+        if (linkGroups[i].parent === "None") {
+            printLinkGroupToConsole(linkGroups[i]);
+        }
+    }
+
+    console.log("End printing links.");
+}
+
+function printLinkGroupToConsole(linkGroup) {
+    console.log("Begin printing link group - " + linkGroup.name);
+    if (linkGroup.children.length > 0) {
+        for (var j = 0; j < linkGroup.children.length; j++) {
+            printLinkGroupToConsole(linkGroup.children[j]);
+        }
+    }
+    // Print the links in this link group
+    for (var i = 0; i < linkGroup.links.length; i++) {
+        console.log("  Link - " + linkGroup.links[i].displayName
+                + " - " + linkGroup.links[i].linkHref);
+    }
+    console.log("End printing link group - " + linkGroup.name);
 }
