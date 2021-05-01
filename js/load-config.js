@@ -55,10 +55,6 @@ function loadUserConfigFromJSON() {
     //alert(userConfig['linkGroups'][0].name);
 	//setElementVisibility();
     loadSearchSettings();
-    var toolboxContainer = document.getElementById('toolBox-container0');
-    toolboxContainer.style.visibility='hidden';
-    toolboxContainer = document.getElementById('toolBox-container1');
-    toolboxContainer.style.visibility='hidden';
     loadLinks();
     loadToolboxes();
     //addLinksToPage();
