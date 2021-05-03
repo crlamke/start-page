@@ -40,11 +40,6 @@ var userConfig =
             ],
             "toolboxes": [
                 {
-                    "name": "Etc",
-                    "color": "Gray",
-                    "visibility": "Hidden"
-                },
-                {
                     "name": "Timer",
                     "color": "MidnightBlue",
                     "visibility": "Shown"
@@ -55,7 +50,6 @@ var userConfig =
                     "visibility": "Shown"
                 }
             ],
-
             "linkGroups": [
                 {
                     "name": "News",
@@ -144,8 +138,20 @@ var userConfig =
                             "link": "https://www.codechef.com/ide"
                         },
                         {
-                            "name": "HTML Style Guide",
-                            "link": "https://google.github.io/styleguide/htmlcssguide.html"
+                            "name": "Python PEP 8 Style Guide",
+                            "link": "https://www.python.org/dev/peps/pep-0008/"
+                        },
+                        {
+                            "name": "RegExr",
+                            "link": "https://regexr.com/"
+                        },
+                        {
+                            "name": "RegEx 101",
+                            "link": "https://regex101.com/"
+                        },
+                        {
+                            "name": "OpenJDK",
+                            "link": "https://openjdk.java.net/"
                         }
                     ]
                 },
