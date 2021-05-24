@@ -3,6 +3,44 @@
  * Copyright 2021 Chris Lamke <https://chris.lamke.org>
  */
 
+// Timer state
+var TimerState = {
+    STOPPED: 0,
+    RUNNING: 1
+};
+var timerState = TimerState.STOPPED;
+var elapsedTime = 0;
+var splitTime = 0;
+var elapsedDisplayDefault = "00:00:00";
+
+function startTimer() {
+    if (timerState === TimerState.STOPPED) {
+        timerState = TimerState.RUNNING;
+    }
+}
+
+function markTimerSplit() {
+    if (timerState === TimerState.RUNNING) {
+        let currentTimeFormatted = formatTimeHMS(currentTime, true);
+        document.getElementById('splitDisplay').innerHTML = currentTimeFormatted;
+    }
+}
+
+function stopTimer() {
+    if (timerState === TimerState.RUNNING) {
+        timerState = TimerState.STOPPED;
+    }
+}
+
+function resetTimer() {
+    timerState = TimerState.STOPPED;
+    document.getElementById('elapsedDisplay').innerHTML = elapsedDisplayDefault;
+    document.getElementById('splitDisplay').innerHTML = elapsedDisplayDefault;
+}
+
+function updateTimer(currentTime, currentTimeFormatted) {
+    document.getElementById('elapsedDisplay').innerHTML = currentTimeFormatted;
+}
 
 
 /*

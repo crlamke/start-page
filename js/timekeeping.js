@@ -1,32 +1,80 @@
 /* 
  * The MIT License - See LICENSE file in project root for details
  * Copyright 2021 Chris Lamke <https://chris.lamke.org>
+ * H/T to https://www.construct.net/en/tutorials/js-create-timer-class-code-2261
  */
+
+
+// TimeKeeper manages time and all timers for the application
+class TimeKeeper
+{
+	constructor(runtime) {
+		this.timers = new Map();
+		this.runtime = runtime;
+	}
+
+	Tick() {
+		this.timers.forEach((value, key, map)=>{
+			if (!value.paused) {
+				value.current += (this.runtime.dt * 1000.0);
+
+				if (value.current>=value.threshold) {
+					value.func(...value.params);
+
+					value.current = 0;
+
+					if (value.oneTime) {
+						map.delete(key);
+					}
+				}
+			}
+		});
+	}
+
+	Pause(tag, flag) {
+		const item = this.timers.get(tag);
+
+		if (item) {
+			item.paused = flag;
+		}
+	}
+
+	PauseAll(flag) {
+		this.timers.forEach((value, key, map)=>{
+			value.paused = flag;
+		});
+	}
+
+	ClearTimer(tag) {
+		if (this.timers.has(tag)) {
+			this.timers.delete(tag);
+		}
+	}
+
+	ClearAllTimers() {
+		this.CleanUp();
+	}
+
+	CleanUp() {
+		this.timers.clear();
+	}
+
+	CreateTimer(tag, func, params, milliseconds, oneTime=true) {
+		let item = this.timers.get(tag);
+
+		if (item) {
+			console.info(`Can not create a timer since ${tag} already exists.`);
+		}
+		else {
+			item = new TimerInfo(func, params, milliseconds, oneTime);
+			this.timers.set(tag, item);
+		}
+	}
+}
+
 
 // Timekeeping state
 var currentTime;
-
-// Alarm state
-var AlarmState = {
-    UNSET: 0,
-    SET: 1
-};
-var alarmState = AlarmState.UNSET;
-var alarmDisplayDefault = "Not Set";
-var alarmSetHour = 0;
-var alarmSetMinute = 0;
-var alarmTimeIsValid = false;
-var alarms = new Array();
-
-// Timer state
-var TimerState = {
-    STOPPED: 0,
-    RUNNING: 1
-};
-var timerState = TimerState.STOPPED;
-var elapsedTime = 0;
-var splitTime = 0;
-var elapsedDisplayDefault = "00:00:00";
 
 function keepTime() {
     currentTime = new Date();
@@ -37,18 +85,19 @@ function keepTime() {
     // and then call all the update functions from here. 
     // A register/callback mechanism would be better.
     updateClock(currentTimeFormatted);
-    if (alarmState === AlarmState.SET) {
+    /*if (alarmState === AlarmState.SET) {
         //console.log("delta = " + (alarms[0] - currentTime));
         if (alarms[0] - currentTime <= 0) {
             alert("Alarm.\nPress Okay to dismiss.");
             alarmState = AlarmState.UNSET;
         }
     }
-
+   
     if (timerState === TimerState.RUNNING) {
         updateTimer(currentTime, currentTimeFormatted);
     }
-
+    */
+   
     // Use a 1 second (1000 millisecond) tick, good enough for our needs.
     var t = setTimeout(keepTime, 1000);
 }
@@ -81,67 +130,6 @@ function formatTimeHMS(timeIn, withSeconds) {
     return hmsTime;
 }
 
-function startTimer() {
-    if (timerState === TimerState.STOPPED) {
-        timerState = TimerState.RUNNING;
-    }
-}
 
-function markTimerSplit() {
-    if (timerState === TimerState.RUNNING) {
-        let currentTimeFormatted = formatTimeHMS(currentTime, true);
-        document.getElementById('splitDisplay').innerHTML = currentTimeFormatted;
-    }
-}
 
-function stopTimer() {
-    if (timerState === TimerState.RUNNING) {
-        timerState = TimerState.STOPPED;
-    }
-}
-
-function resetTimer() {
-    timerState = TimerState.STOPPED;
-    document.getElementById('elapsedDisplay').innerHTML = elapsedDisplayDefault;
-    document.getElementById('splitDisplay').innerHTML = elapsedDisplayDefault;
-}
-
-function updateTimer(currentTime, currentTimeFormatted) {
-    document.getElementById('elapsedDisplay').innerHTML = currentTimeFormatted;
-}
-
-function alarmTimeUpdate(newValue) {
-    var timeRegExp = /([01]?\d|2[0-3]):([0-5]\d)/;
-    if (timeRegExp.test(newValue) === true) {
-        var timeParts = newValue.split(":");
-        alarmSetHour = timeParts[0];
-        alarmSetMinute = timeParts[1];
-        alarmTimeIsValid = true;
-    } else {
-        alert(newValue + " is not a valid time. Format is HH:MM in 24 hour format, e.g. 21:12");
-        document.getElementById("alarmSetTimeInput").value = "";
-        alarmTimeIsValid = false;
-    }
-}
-
-function setAlarm() {
-    if (alarmTimeIsValid === true) {
-        var date = new Date();
-        date.setHours(alarmSetHour);
-        date.setMinutes(alarmSetMinute);
-        var alarmTimeFormatted = formatTimeHMS(date, false);
-        alarms[alarms.length] = date;
-        document.getElementById('alarmDisplay').innerHTML = alarmTimeFormatted;
-        document.getElementById('alarmSetTimeInput').innerHTML = "";
-        alarmState = AlarmState.SET;
-    } else {
-        alert("Please enter a valid alarm time first.");
-    }
-}
-
-function clearAlarm() {
-    alarms.pop();
-    document.getElementById('alarmDisplay').innerHTML = "";
-    alarmState = AlarmState.UNSET;
-}
 
