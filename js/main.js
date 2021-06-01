@@ -14,6 +14,7 @@ let configDB; // Store general page config
 window.onload = initializePage;
 
 function initializePage() {
+    createBasicLayout();
 
     loadUserConfigFromJSON();
     applyUserConfig();
@@ -26,4 +27,12 @@ function initializePage() {
 
 function updateClock(newTime) {
     //document.getElementById('timeDisplay').innerHTML = newTime;
+}
+
+function createBasicLayout() {
+    var pageBody = document.body;
+    var newBoxContainer0 = document.createElement('div');
+    newBoxContainer0.className = "linkBox-container";
+    newBoxContainer0.id = 'linkBox-container0';
+    pageBody.appendChild(newBoxContainer0);
 }

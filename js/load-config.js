@@ -39,7 +39,6 @@ function loadUserConfigFromJSON() {
 }
 
 function applyUserConfig() {
-    //addLinksToPage();
     var linkboxContainer = document.getElementById('linkBox-container0');
     addLinkBoxes(linkboxContainer);
     addListToggle();
@@ -52,11 +51,17 @@ function applyUserConfig() {
     linkboxContainer.appendChild(wbox1);
     updateWeather(weatherBox);
 
-    var weatherBox2 = new WeatherBox("NCE Weather", "Blue", 
-    38.756, -77.195, "metric");
+    var weatherBox2 = new WeatherBox("Herndon Weather", "Blue", 
+    38.956, -77.424, "metric");
     var wbox2 = createWeatherBox(weatherBox2, 2);
     linkboxContainer.appendChild(wbox2);
     updateWeather(weatherBox2);
+
+    var weatherBox3 = new WeatherBox("Denise's Home", "Blue", 
+    38.918, -77.204, "metric");
+    var wbox3 = createWeatherBox(weatherBox3, 3);
+    linkboxContainer.appendChild(wbox3);
+    updateWeather(weatherBox3);
 
     var rss1 = new RSSBox("techdirt", "brown", 1);
     createRSSBox(rss1);
