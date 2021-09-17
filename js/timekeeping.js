@@ -129,7 +129,3 @@ function formatTimeHMS(timeIn, withSeconds) {
 
     return hmsTime;
 }
-
-
-
-
