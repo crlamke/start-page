@@ -104,7 +104,7 @@ function updateWeather(wbox) {
             updateWeatherDisplay(wbox);
         });
 }
-  
+
 
 function updateWeatherDisplay(wbox){
     wbox.weatherIconDiv.innerHTML = '<img src="img/weather-icons/' +

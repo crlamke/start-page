@@ -3,22 +3,18 @@
  * Copyright 2021 Chris Lamke <https://chris.lamke.org>
  */
 
- 
 class SearchBox {
-
     constructor(title, bgColor, searchEngine) {
-        this.title = title;
+		this.title = title;
         this.bgColor = bgColor;
+        this.itemNumber = itemNumber;
+        this.searchBoxDiv = "";
         this.titleElement = "";
-        this.SearchIconDiv = "";
-        this.temperatureValueDiv = "";
-        this.SearchDescriptionDiv = "";
-        this.locationDiv = "";
+        this.listElement = "";
     }
 }
 
 class searchProvider {
-
     constructor(displayName, searchCommand) {
         this.displayName = displayName;
         this.searchCommand = searchCommand;
@@ -32,29 +28,44 @@ var SearchTargetOption = {
 };
 
 function createSearchBox(sbox, itemNumber) {
-
-    var newSearchbox = document.createElement('div');
-    newSearchbox.className = "SearchBox";
-    newSearchbox.id = "SearchBox" + itemNumber;
-    newSearchbox.style.backgroundColor = sbox.bgColor;
+/*
+    sbox.searchBoxDiv = document.createElement('div');
+    sbox.searchBoxDiv.className = "SearchBox";
+    sbox.searchBoxDiv.id = "SearchBox" + itemNumber;
+    sbox.searchBoxDiv.style.backgroundColor = sbox.bgColor;
     var newContent = document.createElement('div');
     newContent.className = "content";
     sbox.titleElement = document.createElement('h3');
     sbox.titleElement.id = "SearchBoxTitle" + itemNumber;
     sbox.titleElement.textContent = sbox.title;
     newHR = document.createElement('hr');
-    sbox.SearchIconDiv = document.createElement('div');
-    sbox.SearchIconDiv.className = "SearchIcon";
-	var SearchValuesDiv = document.createElement('div');
-	SearchValuesDiv.className = "SearchValues"; 
-    sbox.temperatureValueDiv = document.createElement('div');
-    sbox.temperatureValueDiv.className = "tempValue";
-    sbox.SearchDescriptionDiv = document.createElement('div');
-    sbox.SearchDescriptionDiv.className = "SearchDescription";
-    sbox.locationDiv = document.createElement('div');
-    sbox.locationDiv.className = "SearchLocation";
-
-    newSearchbox.appendChild(newContent);
+    	
+	sbox.SearchForm = document.createElement('form');
+	sbox.SearchForm.role='search';
+	sbox.SearchForm.id="search" + itemNumber;
+	sbox.SearchForm.target="_blank";
+	sbox.SearchForm.action="https://www.duckduckgo.com/?q";
+	sbox.SearchForm.method="get";
+    searchInput = document.createElement('div');
+	searchInput.id = "searchInput";
+	searchInput.input = document.createElement("input");
+	searchInput.input.type="search";
+	searchInput.input.name = "q";
+	searchInput.input.placeholder = "Search ...";
+	searchInput.input.aria-label = "Search ...";
+	searchInput.button = document.createElement("button");
+	searchInput.button.label = "Search";
+	
+	
+	<div id="searchTarget" >
+                        <div class="statusDisplay"><span class="searchOptionDisplayLabel">Search Engine: </span>
+                            <select id="search-target-select" onchange="searchTargetSelect(this.options[this.selectedIndex].value)">
+                                <option value="optDuckDuckGo" selected>DuckDuckGo</option>
+                                <option value="optGoogle">Google</option>
+                                <option value="optBing">Bing</option>
+                            </select>
+                        </div>
+                    </div>
     newContent.appendChild(sbox.titleElement);
     newContent.appendChild(newHR);
     newContent.appendChild(sbox.SearchIconDiv);
@@ -63,6 +74,7 @@ function createSearchBox(sbox, itemNumber) {
     SearchValuesDiv.appendChild(sbox.SearchDescriptionDiv);
     SearchValuesDiv.appendChild(sbox.locationDiv);
     return newSearchbox;
+*/
 }
 /*
             <div class="toolBox" class="Search" id="toolBox1">
@@ -75,15 +87,7 @@ function createSearchBox(sbox, itemNumber) {
                             <button>Search</button>
                         </div>
                     </form>
-                    <div id="searchTarget" >
-                        <div class="statusDisplay"><span class="searchOptionDisplayLabel">Search Engine: </span>
-                            <select id="search-target-select" onchange="searchTargetSelect(this.options[this.selectedIndex].value)">
-                                <option value="optDuckDuckGo" selected>DuckDuckGo</option>
-                                <option value="optGoogle">Google</option>
-                                <option value="optBing">Bing</option>
-                            </select>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
 */
