@@ -213,6 +213,11 @@ li {
     font-size:12px; 
 }
 
+#searchBtn {
+    float: right;
+    margin-left: 20px;
+}
+
 #searchTarget {
     padding-left:0px; padding-bottom:8px; padding-top:8px;
     margin-left: 0px;

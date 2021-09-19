@@ -88,6 +88,8 @@ function updateWeather(wbox) {
         + "lat=" + wbox.lat + "&lon=" + wbox.lon + "&appid=" 
         + apiKey;
     
+    //console.log("Updating weather for " + wbox.title);
+
     fetch(weatherAPICall)
         .then(function(response){
             let data = response.json();

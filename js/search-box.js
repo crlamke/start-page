@@ -56,6 +56,7 @@ function createSearchBox(sbox) {
 	searchInput.input.placeholder = "Search ...";
 	searchInput.button = document.createElement("button");
 	searchInput.button.label = "Search";
+    searchInput.button.id = "searchBtn";
     sbox.SearchForm.appendChild(searchInput.button);
 	searchTarget = document.createElement('div');
     searchTarget.id = "searchTarget";
