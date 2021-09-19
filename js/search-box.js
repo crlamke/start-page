@@ -7,7 +7,6 @@ class SearchBox {
     constructor(title, bgColor, searchEngine) {
 		this.title = title;
         this.bgColor = bgColor;
-        this.itemNumber = itemNumber;
         this.searchBoxDiv = "";
         this.titleElement = "";
         this.listElement = "";
@@ -27,70 +26,69 @@ var SearchTargetOption = {
     BING: 2
 };
 
-function createSearchBox(sbox, itemNumber) {
-/*
+function createSearchBox(sbox) {
+
     sbox.searchBoxDiv = document.createElement('div');
-    sbox.searchBoxDiv.className = "SearchBox";
-    sbox.searchBoxDiv.id = "SearchBox" + itemNumber;
+    sbox.searchBoxDiv.className = "searchBox";
+    sbox.searchBoxDiv.id = "searchBox";
     sbox.searchBoxDiv.style.backgroundColor = sbox.bgColor;
     var newContent = document.createElement('div');
     newContent.className = "content";
     sbox.titleElement = document.createElement('h3');
-    sbox.titleElement.id = "SearchBoxTitle" + itemNumber;
+    sbox.titleElement.id = "searchBoxTitle";
     sbox.titleElement.textContent = sbox.title;
     newHR = document.createElement('hr');
-    	
+    
+    //var newSearchFormContent = document.createElement("div");
+    //newSearchFormContent.id = "searchFormContent";
 	sbox.SearchForm = document.createElement('form');
-	sbox.SearchForm.role='search';
-	sbox.SearchForm.id="search" + itemNumber;
+    sbox.SearchForm.role='search';
+	sbox.SearchForm.id="search";
 	sbox.SearchForm.target="_blank";
 	sbox.SearchForm.action="https://www.duckduckgo.com/?q";
 	sbox.SearchForm.method="get";
     searchInput = document.createElement('div');
 	searchInput.id = "searchInput";
 	searchInput.input = document.createElement("input");
+    sbox.SearchForm.appendChild(searchInput.input);
 	searchInput.input.type="search";
 	searchInput.input.name = "q";
 	searchInput.input.placeholder = "Search ...";
-	searchInput.input.aria-label = "Search ...";
 	searchInput.button = document.createElement("button");
 	searchInput.button.label = "Search";
-	
-	
-	<div id="searchTarget" >
-                        <div class="statusDisplay"><span class="searchOptionDisplayLabel">Search Engine: </span>
-                            <select id="search-target-select" onchange="searchTargetSelect(this.options[this.selectedIndex].value)">
-                                <option value="optDuckDuckGo" selected>DuckDuckGo</option>
-                                <option value="optGoogle">Google</option>
-                                <option value="optBing">Bing</option>
-                            </select>
-                        </div>
-                    </div>
+    sbox.SearchForm.appendChild(searchInput.button);
+	searchTarget = document.createElement('div');
+    searchTarget.id = "searchTarget";
+    sbox.SearchForm.appendChild(searchTarget);
+    searchTargetLabel = document.createElement('span');
+    searchTargetLabel.textContent = "Search Engine:"; 
+    searchTarget.appendChild(searchTargetLabel);
+    var selectList = document.createElement("select");
+    selectList.id = "searchSelectList";
+    var option = document.createElement("option");
+    option.value = searchTargetOption.DUCKDUCKGO;
+    option.text = "DuckDuckGo";
+    selectList.appendChild(option);
+    var option2 = document.createElement("option");
+    option2.value = searchTargetOption.GOOGLE;
+    option2.text = "Google";
+    selectList.appendChild(option2);
+    var option3 = document.createElement("option");
+    option3.value = searchTargetOption.BING;
+    option3.text = "Bing";
+    selectList.appendChild(option3);
+    selectList.addEventListener('change', searchTargetSelect);
+
+    statusDisplay = document.createElement('div');
+
+    sbox.searchBoxDiv.appendChild(newContent);
     newContent.appendChild(sbox.titleElement);
     newContent.appendChild(newHR);
-    newContent.appendChild(sbox.SearchIconDiv);
-	newContent.appendChild(SearchValuesDiv);
-    SearchValuesDiv.appendChild(sbox.temperatureValueDiv);
-    SearchValuesDiv.appendChild(sbox.SearchDescriptionDiv);
-    SearchValuesDiv.appendChild(sbox.locationDiv);
-    return newSearchbox;
-*/
+    newContent.appendChild(sbox.SearchForm);
+	newContent.appendChild(searchInput);
+    newContent.appendChild(selectList);
+    return sbox.searchBoxDiv;
 }
-/*
-            <div class="toolBox" class="Search" id="toolBox1">
-                <div class="content">
-                    <h3>Search</h3>
-                    <hr>
-                    <form id="searchForm" role="search" action="https://www.duckduckgo.com/?q" method="get" target="_blank">
-                        <div id="searchInput" >
-                            <input type="search" name="q" placeholder="Search ..." aria-label="Search ...">
-                            <button>Search</button>
-                        </div>
-                    </form>
-                    
-                </div>
-            </div>
-*/
 
 // Search state
 var searchTargetOption = SearchTargetOption.DUCKDUCKGO;
@@ -100,6 +98,8 @@ function addSearchProvider(providerName, providerLink) {
 }
 
 function searchTargetSelect(selectedValue) {
+    var e = document.getElementById("searchSelectList");
+    alert(e.selectedValue); 
     if (selectedValue === "optDuckDuckGo") {
         searchTargetOption = SearchTargetOption.DUCKDUCKGO;
         let searchForm = document.getElementById('searchForm');

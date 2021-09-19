@@ -26,8 +26,6 @@ function createLinkBox(linkBoxObj) {
     linkBoxObj.titleElement.id = "linkBoxTitle" + linkBoxObj.itemNumber;
     linkBoxObj.titleElement.textContent = linkBoxObj.title;
     newHR = document.createElement('hr');
-    var newlinkboxContent = document.createElement('div');
-    newlinkboxContent.id = "linkBoxContent" + linkBoxObj.itemNumber;
     linkBoxObj.listElement = document.createElement('ul');
     linkBoxObj.listElement.className = "linkBoxList";
     linkBoxObj.listElement.id = "linkBox" + linkBoxObj.itemNumber + "List" + linkBoxObj.itemNumber;

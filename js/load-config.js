@@ -68,12 +68,16 @@ function applyUserConfig() {
     linkboxContainer.appendChild(rss1.RSSBoxDiv);
     loadRSS("https://www.techdirt.com/techdirt_rss.xml", 
         rss1.listElement.id);
-    var rss2 = new RSSBox("New York Times", "green", 2);
+    
+    var rss2 = new RSSBox("Washington Post", "green", 2);
     createRSSBox(rss2);
     linkboxContainer.appendChild(rss2.RSSBoxDiv);
-    loadRSS("https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
+    loadRSS("http://feeds.washingtonpost.com/rss/world",
         rss2.listElement.id);
 
+    var search = new SearchBox("Search", "blue", searchTargetOption.DUCKDUCKGO);
+    createSearchBox(search)
+    linkboxContainer.appendChild(search.searchBoxDiv);
 }
 
 // Set the visibility of page elements
