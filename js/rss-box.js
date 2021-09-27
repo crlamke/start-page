@@ -11,6 +11,7 @@ class RSSBox {
         this.RSSBoxDiv = "";
         this.titleElement = "";
         this.listElement = "";
+        this.listArea = "";
     }
 }
 
@@ -20,26 +21,44 @@ function createRSSBox(rssBox) {
     rssBox.RSSBoxDiv.className = "RSSBox";
     rssBox.RSSBoxDiv.id = "RSSBox" + rssBox.itemNumber;
     rssBox.RSSBoxDiv.style.backgroundColor = rssBox.bgColor;
-    var newContent = document.createElement('div');
-    newContent.className = "content";
     rssBox.titleElement = document.createElement('h3');
     rssBox.titleElement.id = "RSSBoxTitle" + rssBox.itemNumber;
     rssBox.titleElement.textContent = rssBox.title;
     newHR = document.createElement('hr');
-    var newRSSboxContent = document.createElement('div');
-    newRSSboxContent.id = "RSSBoxContent" + rssBox.itemNumber;
+    rssBox.RSSBoxDiv.appendChild(rssBox.titleElement);
+    rssBox.RSSBoxDiv.appendChild(newHR);
+
+    rssBox.listArea = document.createElement('div');
+    rssBox.listArea.className = "listArea";
+    rssBox.RSSBoxDiv.appendChild(rssBox.listArea);
     rssBox.listElement = document.createElement('ul');
-    rssBox.listElement.className = "RSSBoxList";
-    rssBox.listElement.id = "RSSBox" + rssBox.itemNumber + "List" + rssBox.itemNumber;
-    rssBox.RSSBoxDiv.appendChild(newContent);
-    newContent.appendChild(rssBox.titleElement);
-    newContent.appendChild(newHR);
-    newContent.appendChild(rssBox.listElement);
+    rssBox.listElement.className = "rssBoxList";
+    rssBox.listElement.id = "rssBox" + rssBox.itemNumber + "List" + rssBox.itemNumber;
+    rssBox.listArea.appendChild(rssBox.listElement);
     rssBox.RSSBoxDiv.draggable = true;
 }
 
+function loadRSS(rssBox)  {
+    const RSS_URL = `https://codepen.io/picks/feed/`;
 
-function loadRSS(rssString, element) {
+    fetch(RSS_URL,{mode:'cors'})
+    .then(response => response.text())
+    .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+    .then(data => {
+      console.log(data);
+      const items = data.querySelectorAll("item");
+      let html = ``;
+      items.forEach(el => {
+          let link =  ${el.querySelector("link").innerHTML};
+          let title =  ${el.querySelector("title").innerHTML};
+        // html += `<article><h4><a href="${el.querySelector("link").innerHTML}" target="_blank">${el.querySelector("title").innerHTML}</a></h4></article>`;
+        html += `<article><h4><a href="${el.querySelector("link").innerHTML}" target="_blank">${el.querySelector("title").innerHTML}</a></h4></article>`;
+      });
+      document.body.insertAdjacentHTML("beforeend", html);
+    });
+}
+
+function loadRSSOld(rssString, element) {
     elementID = document.getElementById(element);
     $(elementID).rss(rssString,
             {

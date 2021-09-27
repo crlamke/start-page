@@ -66,7 +66,7 @@ function applyUserConfig() {
     updateWeather(weatherBox3);
     setInterval(updateWeather, 600000, weatherBox3);
 
-    var rss1 = new RSSBox("techdirt", "brown", 1);
+    var rss1 = new RSSBox("techdirt", "gray", 1);
     createRSSBox(rss1);
     linkboxContainer.appendChild(rss1.RSSBoxDiv);
     loadRSS("https://www.techdirt.com/techdirt_rss.xml", 

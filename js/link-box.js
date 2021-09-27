@@ -10,6 +10,7 @@ class LinkBox {
         this.itemNumber = itemNumber;
         this.linkBoxDiv = "";
         this.titleElement = "";
+        this.listArea = "";
         this.listElement = "";
     }
 }
@@ -20,19 +21,20 @@ function createLinkBox(linkBoxObj) {
     linkBoxObj.linkBoxDiv.className = "linkBox";
     linkBoxObj.linkBoxDiv.id = "linkBox" + linkBoxObj.itemNumber;
     linkBoxObj.linkBoxDiv.style.backgroundColor = linkBoxObj.bgColor;
-    var newContent = document.createElement('div');
-    newContent.className = "content";
     linkBoxObj.titleElement = document.createElement('h3');
     linkBoxObj.titleElement.id = "linkBoxTitle" + linkBoxObj.itemNumber;
     linkBoxObj.titleElement.textContent = linkBoxObj.title;
     newHR = document.createElement('hr');
+    linkBoxObj.linkBoxDiv.appendChild(linkBoxObj.titleElement);
+    linkBoxObj.linkBoxDiv.appendChild(newHR);
+ 
+    linkBoxObj.listArea = document.createElement('div');
+    linkBoxObj.listArea.className = "listArea";
+    linkBoxObj.linkBoxDiv.appendChild(linkBoxObj.listArea);
     linkBoxObj.listElement = document.createElement('ul');
     linkBoxObj.listElement.className = "linkBoxList";
     linkBoxObj.listElement.id = "linkBox" + linkBoxObj.itemNumber + "List" + linkBoxObj.itemNumber;
-    linkBoxObj.linkBoxDiv.appendChild(newContent);
-    newContent.appendChild(linkBoxObj.titleElement);
-    newContent.appendChild(newHR);
-    newContent.appendChild(linkBoxObj.listElement);
+    linkBoxObj.listArea.appendChild(linkBoxObj.listElement);
     linkBoxObj.linkBoxDiv.draggable = true;
 }
 

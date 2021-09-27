@@ -93,11 +93,6 @@ li {
     padding-bottom: 3px;
 }
 
-/*
-.rss-feeds {
-    font-family: 'Times', sans-serif; font-size: 12px;
-}*/
-
 
 /* CSS below taken from https://www.w3schools.com/howto/howto_js_treeview.asp */
 .caret {
@@ -128,11 +123,6 @@ li {
 
 .active {
     display: block;
-}
-
-.linkBoxList {
-    margin: 0;
-    padding: 0;
 }
 
 #status {
@@ -250,14 +240,8 @@ li {
     width: 300px;
     height: 150px;
 }
-/*
-.toolBox::before {
-    content: '';
-    display: block;
-    padding-top: 100%;
-}
-*/
-.toolBox .content {
+
+.toolBox .listArea {
     position: absolute;
     top: 0; left: 0;
     height: 100%;
@@ -270,24 +254,63 @@ li {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
-.linkBox, .RSSBox {
+/* Link Box */
+
+.linkBox {
     background-color: var(--color-linkbox-body);
     position: relative;
-    /*flex-basis: calc(30% - 10px);*/
     margin-top: 12px; margin-right: 20px; margin-bottom: 12px; margin-left: 20px;
     border: 1px solid;
     box-sizing: border-box;
     width: 300px;
     height: 150px;
+}
+
+.linkBox .listArea {
+    position: relative;
+    top: 0; left: 0;
+    height: 110px;
+    width: 300px;
     overflow-y: auto;
     overflow-x: auto;
 }
 
-.linkBox .content {
+.linkBoxList {
+    margin: 0;
+    padding: 0;
+
+}
+
+/* RSS Box */
+
+.RSSBox {
+    background-color: var(--color-linkbox-body);
+    position: relative;
+    margin-top: 12px; margin-right: 20px; margin-bottom: 12px; margin-left: 20px;
+    border: 1px solid;
+    box-sizing: border-box;
+    width: 300px;
+    height: 150px;
+}
+
+.RSSBox .listArea {
     position: relative;
     top: 0; left: 0;
-    height: 100%;
-    width: 100%;
+    height: 110px;
+    width: 300px;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.RSSBox .listElement {
+    margin: 0;
+    padding: -50;
+}
+
+
+.RSSBoxList {
+    margin: 0;
+    padding: 0;
 }
 
 
