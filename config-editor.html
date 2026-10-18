@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Settings editor for the Start Page">
+    <meta name="author" content="Chris Lamke">
+    <meta name="license" content="MIT">
+    <title>Start Page Settings</title>
+    <link rel="icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="css/config-editor.css">
+    <script src="snd/sounds.js" defer></script>
+    <script src="js/config-editor.js" defer></script>
+</head>
+<body>
+    <header class="topbar">
+        <div class="titleblock">
+            <h1>Start Page Settings</h1>
+            <div id="status" class="status" role="status" aria-live="polite">Loading…</div>
+        </div>
+        <div class="actions">
+            <button type="button" id="openBtn" title="Open a settings file (user-config.js)">Open…</button>
+            <button type="button" id="exampleBtn" title="Start again from user-config.example.js">Start from example</button>
+            <button type="button" id="saveBtn" class="primary" title="Save (Ctrl+S)">Save</button>
+            <button type="button" id="saveAsBtn" title="Save to a new file">Save as…</button>
+            <input type="file" id="fileInput" accept=".js,text/javascript" hidden>
+        </div>
+    </header>
+
+    <div class="layout">
+        <nav class="sidenav" aria-label="Sections">
+            <a href="#sec-layout">Page layout</a>
+            <a href="#sec-links">Link boxes <span class="count" id="count-links"></span></a>
+            <a href="#sec-search">Search</a>
+            <a href="#sec-weather">Weather <span class="count" id="count-weather"></span></a>
+            <a href="#sec-rss">RSS feeds <span class="count" id="count-rss"></span></a>
+            <a href="#sec-notepad">Notepad</a>
+            <a href="#sec-clock">Alarm clock &amp; timer</a>
+            <a href="#sec-file">File preview</a>
+            <div id="problems" class="problems" aria-live="polite"></div>
+        </nav>
+
+        <main id="editor">
+            <section id="sec-layout" class="section">
+                <h2>Page layout</h2>
+                <p class="hint">The order of the boxes on the start page. Drag a box to a new
+                    place, or use its ← → buttons. Click a box's name to edit it. The start page
+                    fits as many boxes in a row as the window allows; here they are shown four
+                    to a row.</p>
+                <div class="layoutbar">
+                    <button type="button" id="groupByTypeBtn"
+                        title="Links first, then weather, RSS and search">Group boxes by type</button>
+                </div>
+                <ol id="layoutGrid" class="layoutgrid" aria-label="Boxes in page order"></ol>
+            </section>
+
+            <section id="sec-links" class="section">
+                <h2>Link boxes</h2>
+                <p class="hint">Each group is a box on the page, listed here in page order; ↑ ↓
+                    move a box earlier or later on the page. Set a group's <em>Shown inside</em>
+                    to another group to make it a collapsible list inside that box instead.</p>
+                <div id="linkGroups"></div>
+                <button type="button" class="add" data-add="linkGroup">+ Add link group</button>
+            </section>
+
+            <section id="sec-search" class="section">
+                <h2>Search</h2>
+                <div id="searchGeneral" class="card"></div>
+                <h3>Search engines</h3>
+                <p class="hint">The search URL is everything up to the search words, for example
+                    <code>https://duckduckgo.com/?q=</code>. The first engine is the default.</p>
+                <div id="searchProviders"></div>
+                <button type="button" class="add" data-add="searchProvider">+ Add search engine</button>
+            </section>
+
+            <section id="sec-weather" class="section">
+                <h2>Weather</h2>
+                <p class="hint">Needs an OpenWeather API key in <code>secrets.js</code>.
+                    To find coordinates, right-click a place in Google Maps or OpenStreetMap
+                    and copy the latitude and longitude.</p>
+                <div id="weatherGeneral" class="card"></div>
+                <div id="weatherPreferences"></div>
+                <button type="button" class="add" data-add="weather">+ Add weather location</button>
+            </section>
+
+            <section id="sec-rss" class="section">
+                <h2>RSS feeds</h2>
+                <p class="hint">RSS and Atom feeds both work. If a feed's box says it could not be
+                    loaded, the site doesn't let pages read its feed; a CORS proxy (below) gets
+                    around that.</p>
+                <div id="rssGeneral" class="card"></div>
+                <div id="rssFeeds"></div>
+                <button type="button" class="add" data-add="rss">+ Add feed</button>
+            </section>
+
+            <section id="sec-notepad" class="section">
+                <h2>Notepad</h2>
+                <p class="hint">A box for quick notes, with New, Open, Save and Save as for text
+                    files. What you type is also kept as a draft in the browser, so a reload
+                    doesn't lose it. In Chrome and Edge, Save writes back to the file you opened;
+                    in other browsers it downloads the file.</p>
+                <div id="notepadGeneral" class="card"></div>
+            </section>
+
+            <section id="sec-clock" class="section">
+                <h2>Alarm clock &amp; timer</h2>
+                <p class="hint">Alarms and timers are set on the start page itself and kept in the
+                    browser. When one rings the page flashes and beeps, with Dismiss and Snooze.
+                    When the start page isn't in front, the tab title and icon flash and you get a
+                    desktop notification, or the browser's own OK/Cancel dialog.</p>
+                <h3>Alarm clock</h3>
+                <div id="clockGeneral" class="card"></div>
+                <h3>Timer</h3>
+                <div id="timerGeneral" class="card"></div>
+                <h3>How alarms ring</h3>
+                <div id="alertsGeneral" class="card"></div>
+            </section>
+
+            <section id="sec-file" class="section">
+                <h2>File preview</h2>
+                <p class="hint">This is exactly what Save writes to <code>user-config.js</code>.
+                    Settings this editor doesn't show (such as <code>toolboxes</code>) are kept
+                    as they are.</p>
+                <div class="previewbar">
+                    <button type="button" id="copyBtn">Copy to clipboard</button>
+                    <button type="button" id="downloadBtn">Download</button>
+                </div>
+                <pre id="preview" class="preview" tabindex="0"></pre>
+            </section>
+        </main>
+    </div>
+
+    <datalist id="cssColors"></datalist>
+    <span id="colorProbe" hidden></span>
+    <noscript>This settings editor needs JavaScript turned on.</noscript>
+</body>
+</html>

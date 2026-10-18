@@ -1,0 +1,569 @@
+/*
+    Created on : Jan 10, 2020, 10:38:14 AM
+    Author     : Chris Lamke <https://chris.lamke.org>
+    License    : MIT License
+*/
+
+:root {
+    /* Some of my favorite UI colors defined for convenience */
+    --black-color: #000000;
+    --red-color: #f44336;
+    --purple-color: #9c27b0;
+    --pinkish-color: #e91e63;
+    --ltblue-color: #00bcd4;
+    --ltgreen-color: #4caf50;
+    --ltorange-color: #ff9800;
+    --purpleish-color: #9999ff;
+    --darkgrey-color: #303030;
+    --mediumdarkgrey-color: #404040;
+    --mediumgrey-color: #808080;
+    --ltgrey-color: #e0e0e0;
+    --blackish-color: #1c0000;
+    --white-color: #ffffff;
+    --whitish-color: #fcf9ff;
+
+    /* Theme color definitions and default colors */
+    --color-background: #1f1f1f;
+    --color-text: #ffffff;
+    --color-link: #fcf9ff;
+    --color-link-hover: #ffe680;   /* readable on every box color */
+    --color-focus: #ffe680;
+    --color-list-toggle: #fcf9ff;
+    --color-box-body: #404040;     /* boxes without a configured color */
+    /* Darkens every box color a little so white text stays readable
+       (WCAG 4.5:1 for colors like Orchid, Red and Gray). */
+    --box-shade: rgba(0, 0, 0, 0.25);
+
+    --box-width: 300px;
+}
+
+body {
+    margin: 0;
+    padding: 12px 0;
+    min-height: 100vh;
+    box-sizing: border-box;
+    background-color: var(--color-background);
+    background-image: url('../img/MoonlitAsteroid.png');
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    font-size: 10pt;
+    color: var(--color-text);
+}
+
+/* Elements with the hidden attribute stay hidden even when a rule below
+   gives them a display value (e.g. the weather row while a message shows). */
+[hidden] {
+    display: none !important;
+}
+
+a {
+    color: var(--color-link);
+}
+
+a:hover,
+a:active {
+    color: var(--color-link-hover);
+    text-decoration: underline;
+}
+
+a:focus-visible,
+button:focus-visible,
+select:focus-visible,
+input:focus-visible,
+.caret:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+}
+
+h3 {
+    margin: 6px 10px;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    text-align: center;
+}
+
+hr {
+    background-color: var(--color-text);
+    margin: 5px 16px;
+    height: 1px;
+    border: none;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 4px;
+    padding-left: 8px;
+    padding-bottom: 3px;
+}
+
+/* ---------------------------------------------------------------- layout */
+
+.box-container {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(calc(var(--box-width) + 40px), 1fr));
+    align-items: start;
+}
+
+/* Every box (links, weather, RSS, search) shares this frame. */
+.box {
+    background-color: var(--color-box-body);
+    background-image: linear-gradient(var(--box-shade), var(--box-shade));
+    margin: 12px 20px;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    width: var(--box-width);
+    max-width: calc(100vw - 40px);
+    min-height: 150px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+.boxContent {
+    padding: 0 8px 8px 8px;
+}
+
+.boxMessage {
+    padding: 8px;
+    line-height: 1.4;
+}
+
+/* Link boxes grow to fit all their links. */
+
+/* RSS boxes can hold many items: scroll inside the box. */
+.RSSBox .boxContent {
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.rssBoxList li {
+    line-height: 1.3;
+}
+
+/* ---------------------------------------------------------------- link tree
+   (from https://www.w3schools.com/howto/howto_js_treeview.asp) */
+
+.caret {
+    color: var(--color-list-toggle);
+    cursor: pointer;
+    user-select: none;
+}
+
+.caret::before {
+    content: "\25B6";
+    color: var(--color-list-toggle);
+    display: inline-block;
+    margin-right: 6px;
+}
+
+.caret-down::before {
+    transform: rotate(90deg);
+}
+
+.nested {
+    display: none;
+    padding-left: 8px;
+}
+
+.nested.active {
+    display: block;
+}
+
+/* ---------------------------------------------------------------- search */
+
+.searchForm {
+    padding: 8px;
+}
+
+.searchRow {
+    display: flex;
+    gap: 8px;
+}
+
+.searchRow input {
+    flex: 1;
+    min-width: 0;
+}
+
+.searchTarget {
+    display: block;
+    margin-top: 12px;
+}
+
+/* ---------------------------------------------------------------- notepad */
+
+.notepadToolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding-top: 4px;
+}
+
+.notepadToolbar button {
+    font-size: 12px;
+    padding: 2px 8px;
+}
+
+.notepadToolbar button.armed {
+    background-color: #8b2a24;
+    color: #ffffff;
+    border-color: #ff7b72;
+}
+
+.notepadText {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 150px;
+    height: 190px;
+    margin-top: 6px;
+    padding: 6px;
+    resize: vertical;              /* drag the corner to make it taller */
+    background-color: rgba(0, 0, 0, 0.35);
+    color: var(--color-text);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 3px;
+    font: 13px/1.4 Consolas, "DejaVu Sans Mono", Menlo, monospace;
+    text-shadow: none;
+}
+
+.notepadText::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.notepadText:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 1px;
+}
+
+.notepadStatus {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 4px;
+    font-size: 11px;
+}
+
+.notepadFile {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.notepadInfo {
+    flex: none;
+    opacity: 0.85;
+}
+
+/* ---------------------------------------------------------------- clock and timer */
+
+.clockBox input,
+.timerBox input {
+    font: inherit;
+    min-width: 0;
+    padding: 2px 4px;
+}
+
+.clockTime,
+.timerDisplay {
+    font: bold 34px/1.1 "Segoe UI", Arial, sans-serif;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+    margin-top: 2px;
+}
+
+.clockDate,
+.timerLabel {
+    text-align: center;
+    font-size: 12px;
+    min-height: 1.3em;
+    opacity: 0.9;
+}
+
+.alarmForm,
+.timerForm {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.alarmForm input[type=time] { width: 96px; }
+.alarmForm input[type=text] { flex: 1; width: 60px; }
+.timerForm input { flex: 1; width: 70px; }
+
+.soundRow {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: 100%;
+}
+
+.soundPick {
+    flex: 1;
+    min-width: 0;
+    font-size: 12px;
+}
+
+.soundRow button[type=submit] {
+    margin-left: auto;
+}
+
+.soundLabel {
+    font-size: 12px;
+}
+
+.timerBox .soundRow {
+    margin-top: 6px;
+}
+
+.alarmDaily {
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.alarmItems {
+    margin-top: 6px;
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+.alarmItem {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 1px 0;
+    margin: 0;
+}
+
+.alarmItem.off .alarmWhen,
+.alarmItem.off .alarmWhat { opacity: 0.6; }
+
+.alarmWhen {
+    font-weight: bold;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.alarmWhat {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.alarmKind {
+    font-size: 11px;
+    opacity: 0.85;
+}
+
+.clockNext,
+.clockAlerts,
+.timerNote {
+    font-size: 11px;
+    margin-top: 6px;
+    opacity: 0.95;
+}
+
+.iconbtn {
+    font-size: 11px;
+    padding: 0 6px;
+    line-height: 1.5;
+}
+
+.linkbtn {
+    all: unset;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.linkbtn:disabled {
+    cursor: default;
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+.linkbtn:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+}
+
+.timerDisplay.done {
+    color: #ffd166;
+}
+
+.timerBar {
+    height: 6px;
+    margin: 6px 0 4px 0;
+    background-color: rgba(0, 0, 0, 0.35);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.timerFill {
+    height: 100%;
+    width: 0;
+    background-color: #ffffff;
+    transition: width 0.4s linear;
+}
+
+.timerPresets,
+.timerControls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 6px;
+}
+
+.timerControls {
+    width: 100%;
+}
+
+.timerPresets button,
+.timerControls button {
+    font-size: 12px;
+    padding: 2px 8px;
+}
+
+/* ---------------------------------------------------------------- alarm overlay */
+
+/* Covers the page while an alarm rings. Flashes once a second (well under
+   the 3 flashes a second that can trigger seizures); steady if the system
+   asks for reduced motion. */
+.alarmOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    padding: 16px;
+    background-color: rgba(150, 20, 20, 0.88);
+}
+
+.alarmOverlay.flashing {
+    animation: alarm-flash 1s steps(1, end) infinite;
+}
+
+@keyframes alarm-flash {
+    0%   { background-color: rgba(190, 24, 24, 0.9); }
+    50%  { background-color: rgba(20, 20, 20, 0.9); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .alarmOverlay.flashing { animation: none; }
+}
+
+.alarmPanel {
+    background-color: #1f1f1f;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    padding: 24px 32px;
+    max-width: min(460px, 100%);
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+.alarmBell {
+    font-size: 48px;
+    line-height: 1;
+}
+
+.alarmPanel h2 {
+    margin: 10px 0 6px 0;
+    font: bold 26px/1.2 Tahoma, Geneva, sans-serif;
+    overflow-wrap: anywhere;
+}
+
+.alarmList {
+    margin: 0 0 18px 0;
+    font-size: 15px;
+}
+
+.alarmList li {
+    padding: 2px 0;
+    overflow-wrap: anywhere;
+}
+
+.alarmButtons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.alarmButtons button {
+    font: bold 16px Arial, sans-serif;
+    padding: 10px 22px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.alarmDismiss {
+    background-color: #ffffff;
+    color: #111111;
+    border: 2px solid #ffffff;
+}
+
+.alarmSnooze {
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+}
+
+.alarmButtons button:focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 3px;
+}
+
+/* ---------------------------------------------------------------- weather */
+
+.weatherRow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px;
+}
+
+/* The icons are dark line art: give them a light disc so they show on any box color. */
+.weatherIcon {
+    width: 56px;
+    height: 56px;
+    padding: 4px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.85);
+}
+
+.weatherValues {
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.tempValue {
+    font: inherit;
+    font-size: 22px;
+    color: inherit;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-shadow: inherit;
+}
+
+.weatherDescription {
+    margin-top: 6px;
+    font-size: 16px;
+}
+
+.weatherLocation {
+    margin-top: 10px;
+    font-size: 12px;
+}

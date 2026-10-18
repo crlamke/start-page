@@ -1,0 +1,1 @@
+The weather icons are taken from the project at https://github.com/CodeExplainedRepo/Weather-App-JavaScript, which is under the MIT license. The icons were created by graphic designer Ashley Jager and are available at https://github.com/manifestinteractive/weather-underground-icons.
