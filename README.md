@@ -4,6 +4,8 @@ A browser start page with link boxes, weather, RSS feeds and a search box,
 all set up from one config file. It is meant to be opened straight from
 disk (`file://`), because I often don't have access to a web server.
 
+This was originally written by Chris Lamke, partly to learn aspects of JavaScript, and was recently updated with assistance from Claude noreply@anthropic.com.
+
 ![Start Page screenshot](readme/start-page.png?raw=true "Start Page Screenshot")
 
 ## Setup
