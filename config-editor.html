@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/config-editor.css">
     <script src="snd/sounds.js" defer></script>
     <script src="js/config-editor.js" defer></script>
+    <script src="js/bookmark-import.js" defer></script>
 </head>
 <body>
     <header class="topbar">
@@ -59,8 +60,12 @@
                 <p class="hint">Each group is a box on the page, listed here in page order; ↑ ↓
                     move a box earlier or later on the page. Set a group's <em>Shown inside</em>
                     to another group to make it a collapsible list inside that box instead.</p>
+                <div id="importBar" class="importbar" role="status" hidden></div>
                 <div id="linkGroups"></div>
-                <button type="button" class="add" data-add="linkGroup">+ Add link group</button>
+                <div class="addrow">
+                    <button type="button" class="add" data-add="linkGroup">+ Add link group</button>
+                    <button type="button" class="add" id="importBookmarksBtn">Import bookmarks…</button>
+                </div>
             </section>
 
             <section id="sec-search" class="section">
@@ -129,6 +134,59 @@
             </section>
         </main>
     </div>
+
+    <dialog id="bookmarkDialog" class="bmdialog" aria-labelledby="bmTitle">
+        <h2 id="bmTitle">Import bookmarks</h2>
+        <p class="hint">Web pages can't read the browser's bookmarks directly, so export them to a
+            file first, then open that file here. Each bookmark folder becomes a link group.</p>
+        <details class="bmhow">
+            <summary>How to export bookmarks</summary>
+            <ul>
+                <li><strong>Chrome / Edge:</strong> open the bookmark manager (Ctrl+Shift+O), click
+                    the ⋮ menu (Edge: …) and choose <em>Export bookmarks</em>.</li>
+                <li><strong>Firefox:</strong> Bookmarks → Manage bookmarks (Ctrl+Shift+O) →
+                    <em>Import and Backup</em> → <em>Export Bookmarks to HTML…</em></li>
+                <li><strong>Safari:</strong> File → Export → <em>Bookmarks…</em></li>
+                <li>You can also open Chrome's or Edge's own <code>Bookmarks</code> file from the
+                    browser profile folder, or a Firefox JSON backup.</li>
+            </ul>
+        </details>
+        <div id="bmChoose" class="bmchoose">
+            <button type="button" id="bmPick" class="primary">Choose bookmarks file…</button>
+            <span id="bmFileName" class="bmfilename">No file chosen</span>
+            <input type="file" id="bmFile" hidden>
+        </div>
+        <div id="bmError" class="bmerror" role="alert"></div>
+        <div id="bmTreeArea" hidden>
+            <div class="bmtreebar">
+                <strong>Folders to import</strong>
+                <span><button type="button" class="linkish" id="bmAll">All</button> ·
+                    <button type="button" class="linkish" id="bmNone">None</button></span>
+            </div>
+            <ul id="bmTree" class="bmtree"></ul>
+            <fieldset>
+                <legend>Arrange as</legend>
+                <label><input type="radio" name="bmLayout" value="boxes" checked>
+                    Each top folder as its own box, with its folders inside it</label>
+                <label><input type="radio" name="bmLayout" value="onebox">
+                    One box with all folders inside it, called
+                    <input type="text" id="bmOneBoxName" value="Bookmarks" maxlength="60"
+                        aria-label="Name of the box"></label>
+            </fieldset>
+            <fieldset>
+                <legend>A folder with the same name as one of your groups</legend>
+                <label><input type="radio" name="bmSameName" value="merge" checked>
+                    Add its links to that group (skipping links already there)</label>
+                <label><input type="radio" name="bmSameName" value="rename">
+                    Import it as a new group with a different name</label>
+            </fieldset>
+            <p id="bmSummary" class="bmsummary" aria-live="polite"></p>
+        </div>
+        <div class="bmbuttons">
+            <button type="button" id="bmCancel">Cancel</button>
+            <button type="button" id="bmImport" class="primary" disabled>Import</button>
+        </div>
+    </dialog>
 
     <datalist id="cssColors"></datalist>
     <span id="colorProbe" hidden></span>
