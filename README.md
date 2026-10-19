@@ -4,8 +4,6 @@ A browser start page with link boxes, weather, RSS feeds and a search box,
 all set up from one config file. It is meant to be opened straight from
 disk (`file://`), because I often don't have access to a web server.
 
-This was originally written by Chris Lamke, partly to learn aspects of JavaScript, and was recently updated with assistance from Claude noreply@anthropic.com.
-
 ![Start Page screenshot](readme/start-page.png?raw=true "Start Page Screenshot")
 
 ## Setup
@@ -112,6 +110,27 @@ Then reload the start page. Settings the editor doesn't show (such as
 `toolboxes`) are kept unchanged, and a hand-edited file with comments or
 trailing commas still opens. The editor never touches `secrets.js`.
 
+### Importing bookmarks
+
+Click **Import bookmarks…** under Link boxes to turn your browser's
+bookmarks into link groups. A web page can't read the browser's bookmarks
+directly, so export them to a file first:
+
+- **Chrome / Edge:** bookmark manager (Ctrl+Shift+O) → ⋮ (Edge: …) →
+  *Export bookmarks*.
+- **Firefox:** Bookmarks → Manage bookmarks → *Import and Backup* →
+  *Export Bookmarks to HTML…*
+- **Safari:** File → Export → *Bookmarks…*
+
+Chrome's or Edge's own `Bookmarks` file (in the browser profile folder) and
+Firefox JSON backups work too. Choose the folders to bring in; each one
+becomes a link group. Top folders become boxes and folders inside them
+become collapsible lists, or put everything in one box. A folder with the
+same name as one of your groups adds its links to that group (or imports
+as a renamed group, if you prefer). Links you already have, bookmarklets
+and other non-web links are skipped, so importing the same file again adds
+nothing new. **Undo import** reverses it until you save.
+
 ## Configuration
 
 `user-config.example.js` explains every setting at the top. In short:
@@ -166,6 +185,7 @@ snd/                     alarm sounds, sounds.js (the list of them), make_sounds
 js/load-config.js        reads user-config.js and builds the page
 js/main.js               start-up
 js/config-editor.js      settings editor logic (css/config-editor.css)
+js/bookmark-import.js    Import bookmarks in the settings editor
 js/in-development/       planned features, not loaded yet (see its README)
 img/                     background images, favicon, weather icons
 doc/                     requirements notes
